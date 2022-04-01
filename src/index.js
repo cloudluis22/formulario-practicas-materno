@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Form } from './views/Form';
+import { MainForm } from './views/MainForm';
+import './index.css';
 
-ReactDOM.render(<Form />, document.getElementById('root'));
+ReactDOM.render(<MainForm />, document.getElementById('root'));
