@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import axios from 'axios';
+import uniqid from 'uniqid';
+import Swal from 'sweetalert2';
 
 export const MainForm = () => {
   return (
@@ -37,9 +40,32 @@ export const MainForm = () => {
           }
           return errors;
         }}
-        onSubmit={(values, { resetForm }) => {
-          console.log('Form submitted successfully.');
-          resetForm();
+        onSubmit={async (values, { resetForm }) => {
+          const movieId = uniqid();
+          await axios
+            .post('http://localhost:3001/api/v1/insert', {
+              id: movieId,
+              name: values.name,
+              year: values.year,
+              review: values.review,
+              genre: values.genre,
+              mature: values.mature,
+            })
+            .then((response) => {
+              Swal.fire(
+                'Cool!',
+                'Movie information uploaded successfully',
+                'success'
+              );
+            })
+            .catch((error) => {
+              console.log(error);
+              Swal.fire(
+                'Oops!',
+                'Movie information could not be uploaded successfully, try again later.',
+                'error'
+              );
+            });
         }}>
         {({ errors, touched }) => (
           <Form className='card px-5' style={{ width: '480px' }}>
@@ -208,7 +234,7 @@ export const MainForm = () => {
                 <label className='form-check-label'>
                   <Field
                     type='checkbox'
-                    name='toggle'
+                    name='mature'
                     className='form-check-input'
                   />
                   This movie is rated +18 for audiences.
