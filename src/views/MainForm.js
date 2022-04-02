@@ -241,6 +241,14 @@ export const MainForm = () => {
                 </label>
               </div>
 
+              <Field
+                type='date'
+                className='form-control'
+                id='date'
+                name='date'
+              />
+              <br />
+
               <button className='btn btn-primary' type='submit'>
                 Submit Movie Info
               </button>
