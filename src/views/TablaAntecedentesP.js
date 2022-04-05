@@ -7,7 +7,14 @@ import Swal from 'sweetalert2';
 export const TablaAntecedentes = () => {
   const [LblRealizaDeporte, setLblRealizaDeporte] = useState(false)
   const [LblAlergiasMedAlim, setLblAlergiasMedAlim] = useState(false)
-
+  const [LblTrastornoMentalEmocional, setLblTrastornoMentalEmocional] = useState(false)
+  const [LblChupaLabioDedos, setLblChupaLabioDedos] = useState(false)
+  const [LblTomaMedicamentos, setLblTomaMedicamentos] = useState(false)
+  const [LblMadreMedicamentoEmbarazo, setLblMadreMedicamentoEmbarazo] = useState(false)
+  const [LblDificultadNacimiento, setLblDificultadNacimiento] = useState(false)
+  const [LblAnomaliaCongenitaNacimiento, setLblAnomaliaCongenitaNacimiento] = useState(false)
+  const [LblReaccionAnestesia, setLblReaccionAnestesia] = useState(false)
+  
   return (
     <div className='bcg-color d-flex justify-content-center flex-column align-items-center'>
       <h1 className='display-2 text-light'> Tabla Antecedentes </h1>
@@ -20,11 +27,13 @@ export const TablaAntecedentes = () => {
           LblRealizaDeporte: '',
           AlergiasMedAlim: '',
           LblAlergiasMedAlim: '',
-          TranstornoMentalEmocional: '',
+          TrastornoMentalEmocional: '',
+          LblTrastornoMentalEmocional: '',
           DificultadesEscolares: '',
           RespiraPorBoca: '',
           ApneaRoncar: '',
           ChupaLabioDedos: '',
+          LblChupaLabioDedos: '',
           Asma: '',
           Sarampion: '',
           FiebreReumatica: '',
@@ -49,13 +58,18 @@ export const TablaAntecedentes = () => {
           Otros: '',
           TratamientosActivos: '',
           TomaMedicamentos: '',
+          LblTomaMedicamentos: '',
           MadreMedicamentoEmbarazo: '',
+          LblMadreMedicamentoEmbarazo: '',
           AccidentesEmbarazo: '',
           TipoParto: '',
           DificultadNacimiento: '',
+          LblDificultadNacimiento: '',
           AnomaliaCongenitaNacimiento: '',
-          HaSidoAnesteciado: '',
-          ReaccionAnestecia: '',
+          LblAnomaliaCongenitaNacimiento: '',
+          HaSidoAnestesiado: '',
+          ReaccionAnestesia: '',
+          LblReaccionAnestesia: '',
         }}
         validate={(values) => {
           let errors = {};
@@ -82,21 +96,77 @@ export const TablaAntecedentes = () => {
               setLblAlergiasMedAlim(false)
             }
 
-            if(values.RealizaDeporte == "Si"){
-              setLblRealizaDeporte(true)
-              if(!values.LblRealizaDeporte){
-                errors.LblRealizaDeporte = "Usted tiene que llenar este campo"
+            if(values.TrastornoMentalEmocional == "Si"){
+              setLblTrastornoMentalEmocional(true)
+              if(!values.LblTrastornoMentalEmocional){
+                errors.LblTrastornoMentalEmocional = "Usted tiene que llenar este campo"
               }
             }else{
-              setLblRealizaDeporte(false)
+              setLblTrastornoMentalEmocional(false)
             }
             
+            if(values.ChupaLabioDedos == "Si"){
+              setLblChupaLabioDedos(true)
+              if(!values.LblChupaLabioDedos){
+                errors.LblChupaLabioDedos = "Usted tiene que llenar este campo"
+              }
+            }else{
+              setLblChupaLabioDedos(false)
+            }
+
+            
+            if(values.TomaMedicamentos == "Si"){
+              setLblTomaMedicamentos(true)
+              if(!values.LblTomaMedicamentos){
+                errors.LblTomaMedicamentos = "Usted tiene que llenar este campo"
+              }
+            }else{
+              setLblTomaMedicamentos(false)
+            }
+
+            
+            if(values.MadreMedicamentoEmbarazo == "Si"){
+              setLblMadreMedicamentoEmbarazo(true)
+              if(!values.LblMadreMedicamentoEmbarazo){
+                errors.LblMadreMedicamentoEmbarazo = "Usted tiene que llenar este campo"
+              }
+            }else{
+              setLblMadreMedicamentoEmbarazo(false)
+            }
+
+            
+            if(values.DificultadNacimiento == "Si"){
+              setLblDificultadNacimiento(true)
+              if(!values.LblDificultadNacimiento){
+                errors.LblDificultadNacimiento = "Usted tiene que llenar este campo"
+              }
+            }else{
+              setLblDificultadNacimiento(false)
+            }
+
+            if(values.AnomaliaCongenitaNacimiento == "Si"){
+              setLblAnomaliaCongenitaNacimiento(true)
+              if(!values.LblAnomaliaCongenitaNacimiento){
+                errors.LblAnomaliaCongenitaNacimiento = "Usted tiene que llenar este campo"
+              }
+            }else{
+              setLblAnomaliaCongenitaNacimiento(false)
+            }
+
+            
+            if(values.ReaccionAnestesia == "Si"){
+              setLblReaccionAnestesia(true)
+              if(!values.LblReaccionAnestesia){
+                errors.LblReaccionAnestesia = "Usted tiene que llenar este campo"
+              }
+            }else{
+              setLblReaccionAnestesia(false)
+            }
 
             if(!values.Otros){
               errors.Otros = 'En caso de no añadir otra condición, escriba "No aplica"'
             }
 
-          
 
           return errors;
         }}
@@ -110,11 +180,12 @@ export const TablaAntecedentes = () => {
               RealizaDeporte: values.RealizaDeporte,
               AlergiasMedAlim: values.AlergiasMedAlim,
               LblAlergiasMedAlim: values.LblAlergiasMedAlim,
-              TranstornoMentalEmocional: values.TranstornoMentalEmocional ,
+              TrastornoMentalEmocional: values.TrastornoMentalEmocional ,
               DificultadesEscolares: values.DificultadesEscolares ,
               RespiraPorBoca: values.RespiraPorBoca ,
               ApneaRoncar: values.ApneaRoncar,
               ChupaLabioDedos: values.ChupaLabioDedos,
+              LblChupaLabioDedos: values.LblChupaLabioDedos,
               Asma: values.Asma,
               Sarampion: values.Sarampion,
               FiebreReumatica: values.FiebreReumatica,
@@ -139,13 +210,18 @@ export const TablaAntecedentes = () => {
               Otros: values.Otros,
               TratamientosActivos: values.TratamientosActivos,
               TomaMedicamentos: values.TomaMedicamentos,
+              LblTomaMedicamentos: values.LblTomaMedicamentos,
               MadreMedicamentoEmbarazo: values.MadreMedicamentoEmbarazo,
+              LblMadreMedicamentoEmbarazo: values.LblMadreMedicamentoEmbarazo,
               AccidentesEmbarazo: values.AccidentesEmbarazo,
               TipoParto: values.TipoParto,
               DificultadNacimiento: values.DificultadNacimiento,
+              LblDificultadNacimiento: values.LblDificultadNacimiento,
               AnomaliaCongenitaNacimiento: values.AnomaliaCongenitaNacimiento,
-              HaSidoAnesteciado: values.HaSidoAnesteciado,
-              ReaccionAnestecia: values.ReaccionAnestecia,
+              LblAnomaliaCongenitaNacimiento: values.LblAnomaliaCongenitaNacimiento,
+              HaSidoAnestesiado: values.HaSidoAnestesiado,
+              ReaccionAnestesia: values.ReaccionAnestesia,
+              LblReaccionAnestesia: values.LblReaccionAnestesia,
 
             })
 
@@ -290,20 +366,51 @@ export const TablaAntecedentes = () => {
                 />
               </div>}
 
+                
+
             <div className='mb-4 mt-2'>
             <div id="my-radio-group">¿Tiene o ha tenido su hijo algún trastorno emocional o mental? </div>
           <div role="group" aria-labelledby="my-radio-group">
             <label>
-              <Field type="radio" className='form-check-input mx-2'  name="TranstornoMentalEmocional" id="TranstornoMentalEmocional" value="Si" />
+              <Field type="radio" className='form-check-input mx-2'  name="TrastornoMentalEmocional" id="TrastornoMentalEmocional" value="Si" />
                 Si
             </label>
             <br></br>
             <label>
-              <Field type="radio" className='form-check-input mx-2'  name="TranstornoMentalEmocional" id="TranstornoMentalEmocional" value="No" />
+              <Field type="radio" className='form-check-input mx-2'  name="TrastornoMentalEmocional" id="TrastornoMentalEmocional" value="No" />
                 No
             </label>
           </div>
             </div>
+
+                  {/*LblTrastornoMentalEmocional */ }
+
+                  {LblTrastornoMentalEmocional && <div className='mb-3'>
+                <label htmlFor='LblTrastornoMentalEmocional' className='form-label'>
+                Especifique
+                </label>
+                <Field
+                  type='text'
+                  id='LblTrastornoMentalEmocional'
+                  name='LblTrastornoMentalEmocional'
+                  className={
+                    !touched.LblTrastornoMentalEmocional
+                      ? 'form-control'
+                      : errors.LblTrastornoMentalEmocional
+                      ? 'form-control is-invalid'
+                      : 'form-control is-valid'
+                  }
+                  placeholder='Especifique'
+                />
+                <ErrorMessage
+                  name='LblTrastornoMentalEmocional'
+                  component={() => (
+                    <div className='invalid-feedback'>{errors.LblTrastornoMentalEmocional}</div>
+                  )}
+                />
+              </div>}
+
+
 
             <div className='mb-4 mt-2'>
             <div id="my-radio-group">¿Tiene dificultades en la escuela? </div>
@@ -349,6 +456,33 @@ export const TablaAntecedentes = () => {
             </label>
           </div>
             </div>
+
+                    {/*LblChupaLabioDedos*/}
+
+                    {LblChupaLabioDedos && <div className='mb-3'>
+                <label htmlFor='LblChupaLabioDedos' className='form-label'>
+                ¿Con que frecuencia?
+                </label>
+                <Field
+                  type='text'
+                  id='LblChupaLabioDedos'
+                  name='LblChupaLabioDedos'
+                  className={
+                    !touched.LblChupaLabioDedos
+                      ? 'form-control'
+                      : errors.LblChupaLabioDedos
+                      ? 'form-control is-invalid'
+                      : 'form-control is-valid'
+                  }
+                  placeholder='frecuencia'
+                />
+                <ErrorMessage
+                  name='LblChupaLabioDedos'
+                  component={() => (
+                    <div className='invalid-feedback'>{errors.LblChupaLabioDedos}</div>
+                  )}
+                />
+              </div>}
 
             <label>¿Su hijo padece o ha padecido alguna de las siguientes enfermedades?</label>
 
@@ -397,20 +531,7 @@ export const TablaAntecedentes = () => {
           </div>
             </div>
 
-            <div className='mb-4 mt-2'>
-            <div id="my-radio-group">Paladar Hendido </div>
-          <div role="group" aria-labelledby="my-radio-group">
-            <label>
-              <Field type="radio" className='form-check-input mx-2'  name="PaladarHendido" id="PaladarHendido" value="Si" />
-                Si
-            </label>
-            <br></br>
-            <label>
-              <Field type="radio" className='form-check-input mx-2'  name="PaladarHendido" id="PaladarHendido" value="No" />
-                No
-            </label>
-          </div>
-            </div>
+            
 
             <div className='mb-4 mt-2'>
             <div id="my-radio-group">Paladar Hendido </div>
@@ -549,21 +670,6 @@ export const TablaAntecedentes = () => {
           </div>
             </div>
 
-            <div className='mb-4 mt-2'>
-            <div id="my-radio-group">Paperas </div>
-          <div role="group" aria-labelledby="my-radio-group">
-            <label>
-              <Field type="radio" className='form-check-input mx-2'  name="Paperas" id="Paperas" value="Si" />
-                Si
-            </label>
-            <br></br>
-            <label>
-              <Field type="radio" className='form-check-input mx-2'  name="Paperas" id="Paperas" value="No" />
-                No
-            </label>
-          </div>
-            </div>
-
 
             <div className='mb-4 mt-2'>
             <div id="my-radio-group">Hepatitis </div>
@@ -579,21 +685,6 @@ export const TablaAntecedentes = () => {
             </label>
           </div>
             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
             <div className='mb-4 mt-2'>
@@ -760,20 +851,6 @@ export const TablaAntecedentes = () => {
           </div>
             </div>
 
-            <div className='mb-4 mt-2'>
-            <div id="my-radio-group">¿Toma su hijo algún medicamento actualmente?</div>
-          <div role="group" aria-labelledby="my-radio-group">
-            <label>
-              <Field type="radio" className='form-check-input mx-2'  name="TomaMedicamentos" id="TomaMedicamentos" value="Si" />
-                Si
-            </label>
-            <br></br>
-            <label>
-              <Field type="radio" className='form-check-input mx-2'  name="TomaMedicamentos" id="TomaMedicamentos" value="No" />
-              No
-            </label>
-          </div>
-            </div>
 
             <div className='mb-4 mt-2'>
             <div id="my-radio-group">¿Toma su hijo algún medicamento actualmente?</div>
@@ -789,6 +866,33 @@ export const TablaAntecedentes = () => {
             </label>
           </div>
             </div>
+
+              {/*LblTomaMedicamentos */}
+
+              {LblTomaMedicamentos && <div className='mb-3'>
+                <label htmlFor='LblTomaMedicamentos' className='form-label'>
+                ¿Cuáles?
+                </label>
+                <Field
+                  type='text'
+                  id='LblTomaMedicamentos'
+                  name='LblTomaMedicamentos'
+                  className={
+                    !touched.LblTomaMedicamentos
+                      ? 'form-control'
+                      : errors.LblTomaMedicamentos
+                      ? 'form-control is-invalid'
+                      : 'form-control is-valid'
+                  }
+                  placeholder='Nombre de los medicamentos'
+                />
+                <ErrorMessage
+                  name='LblTomaMedicamentos'
+                  component={() => (
+                    <div className='invalid-feedback'>{errors.LblTomaMedicamentos}</div>
+                  )}
+                />
+              </div>}
 
             <div className='mb-4 mt-2'>
             <div id="my-radio-group">¿La madre tomó medicamentos durante el embarazo?</div>
@@ -804,6 +908,34 @@ export const TablaAntecedentes = () => {
             </label>
           </div>
             </div>
+
+            {/*MadreMedicamentoEmbarazo*/}
+            {LblMadreMedicamentoEmbarazo && <div className='mb-3'>
+                <label htmlFor='LblMadreMedicamentoEmbarazo' className='form-label'>
+                ¿Cuáles?
+                </label>
+                <Field
+                  type='text'
+                  id='LblMadreMedicamentoEmbarazo'
+                  name='LblMadreMedicamentoEmbarazo'
+                  className={
+                    !touched.LblMadreMedicamentoEmbarazo
+                      ? 'form-control'
+                      : errors.LblMadreMedicamentoEmbarazo
+                      ? 'form-control is-invalid'
+                      : 'form-control is-valid'
+                  }
+                  placeholder='Nombre de los medicamentos'
+                />
+                <ErrorMessage
+                  name='LblMadreMedicamentoEmbarazo'
+                  component={() => (
+                    <div className='invalid-feedback'>{errors.LblMadreMedicamentoEmbarazo}</div>
+                  )}
+                />
+              </div>}
+
+
 
             <div className='mb-4 mt-2'>
             <div id="my-radio-group">¿La madre sufrió algún accidente durante el embarazo?</div>
@@ -857,6 +989,32 @@ export const TablaAntecedentes = () => {
           </div>
             </div>
 
+                    {/*DificultadNacimiento*/}
+                    {LblDificultadNacimiento && <div className='mb-3'>
+                <label htmlFor='LblDificultadNacimiento' className='form-label'>
+                ¿Cuáles?
+                </label>
+                <Field
+                  type='text'
+                  id='LblDificultadNacimiento'
+                  name='LblDificultadNacimiento'
+                  className={
+                    !touched.LblDificultadNacimiento
+                      ? 'form-control'
+                      : errors.LblDificultadNacimiento
+                      ? 'form-control is-invalid'
+                      : 'form-control is-valid'
+                  }
+                  placeholder='Especifique'
+                />
+                <ErrorMessage
+                  name='LblDificultadNacimiento'
+                  component={() => (
+                    <div className='invalid-feedback'>{errors.LblDificultadNacimiento}</div>
+                  )}
+                />
+              </div>}
+
             <div className='mb-4 mt-2'>
             <div id="my-radio-group">¿Presentó alguna anomalía congénita (de nacimiento)?</div>
           <div role="group" aria-labelledby="my-radio-group">
@@ -871,17 +1029,42 @@ export const TablaAntecedentes = () => {
             </label>
           </div>
             </div>
+                    {/*AnomaliaCongenitaNacimiento*/}
+                    {LblAnomaliaCongenitaNacimiento && <div className='mb-3'>
+                <label htmlFor='LblAnomaliaCongenitaNacimiento' className='form-label'>
+                ¿Cuáles?
+                </label>
+                <Field
+                  type='text'
+                  id='LblAnomaliaCongenitaNacimiento'
+                  name='LblAnomaliaCongenitaNacimiento'
+                  className={
+                    !touched.LblAnomaliaCongenitaNacimiento
+                      ? 'form-control'
+                      : errors.LblAnomaliaCongenitaNacimiento
+                      ? 'form-control is-invalid'
+                      : 'form-control is-valid'
+                  }
+                  placeholder='Especifique'
+                />
+                <ErrorMessage
+                  name='LblAnomaliaCongenitaNacimiento'
+                  component={() => (
+                    <div className='invalid-feedback'>{errors.LblAnomaliaCongenitaNacimiento}</div>
+                  )}
+                />
+              </div>}
 
             <div className='mb-4 mt-2'>
             <div id="my-radio-group">¿Su hijo ha sido anestesiado anteriormente?</div>
           <div role="group" aria-labelledby="my-radio-group">
             <label>
-              <Field type="radio" className='form-check-input mx-2'  name="HaSidoAnesteciado" id="HaSidoAnesteciado" value="Si" />
+              <Field type="radio" className='form-check-input mx-2'  name="HaSidoAnestesiado" id="HaSidoAnestesiado" value="Si" />
                 Si
             </label>
             <br></br>
             <label>
-              <Field type="radio" className='form-check-input mx-2'  name="HaSidoAnesteciado" id="HaSidoAnesteciado" value="No" />
+              <Field type="radio" className='form-check-input mx-2'  name="HaSidoAnestesiado" id="HaSidoAnestesiado" value="No" />
               No
             </label>
           </div>
@@ -891,16 +1074,42 @@ export const TablaAntecedentes = () => {
             <div id="my-radio-group">¿Tuvo alguna reacción adversa?</div>
           <div role="group" aria-labelledby="my-radio-group">
             <label>
-              <Field type="radio" className='form-check-input mx-2'  name="ReaccionAnestecia" id="ReaccionAnestecia" value="Si" />
+              <Field type="radio" className='form-check-input mx-2'  name="ReaccionAnestesia" id="ReaccionAnestesia" value="Si" />
                 Si
             </label>
             <br></br>
             <label>
-              <Field type="radio" className='form-check-input mx-2'  name="ReaccionAnestecia" id="ReaccionAnestecia" value="No" />
+              <Field type="radio" className='form-check-input mx-2'  name="ReaccionAnestesia" id="ReaccionAnestesia" value="No" />
               No
             </label>
           </div>
             </div>
+
+            {/*ReaccionAnestesia */}
+            {LblReaccionAnestesia && <div className='mb-3'>
+                <label htmlFor='LblReaccionAnestesia' className='form-label'>
+                Especifique
+                </label>
+                <Field
+                  type='text'
+                  id='LblReaccionAnestesia'
+                  name='LblReaccionAnestesia'
+                  className={
+                    !touched.LblReaccionAnestesia
+                      ? 'form-control'
+                      : errors.LblReaccionAnestesia
+                      ? 'form-control is-invalid'
+                      : 'form-control is-valid'
+                  }
+                  placeholder='Especifique'
+                />
+                <ErrorMessage
+                  name='LblReaccionAnestesia'
+                  component={() => (
+                    <div className='invalid-feedback'>{errors.LblReaccionAnestesia}</div>
+                  )}
+                />
+              </div>}
 
 
             <button className='btn btn-primary' type='submit'>
