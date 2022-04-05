@@ -38,12 +38,19 @@ export const TablaAmamantacion = () => {
           await axios
             .post('http://localhost:3001/api/v1/insert', {
               id: IdPaciente,
-              EncargadoCepillado: values.EncargadoCepillado,
-              CepilladosDiaros: values.CepilladosDiaros,
-              MarcaPastaDental: values.MarcaPastaDental,
-              CepilladoDiarioDormir: values.CepilladoDiarioDormir,
-              EnjuagueBucal: values.EnjuagueBucal,
-              HiloDental: values.HiloDental,
+              TomaPechoEdad: values.TomaPechoEdad,
+              FrecuenciaAlimentacionPecho: values.FrecuenciaAlimentacionPecho,
+              TipoAlimentacion: values.TipoAlimentacion,
+              UsabaBiberon: values.UsabaBiberon,
+              ContenidoBiberon: values.ContenidoBiberon, 
+              EdadYaNoTomaBiberon: values.EdadYaNoTomaBiberon,
+              UsabaChupon: values.UsabaChupon,
+              ContenidoChupon: values.ContenidoChupon,
+              EdadYaNoUsaChupon: values. EdadYaNoTomaBiberon,
+              AlimentacionNocturna: values.AlimentacionNocturna,
+              LimpiaSuBoquita: values.LimpiaSuBoquita,
+              BebeConsuemSolidos: values.BebeConsuemSolidos,
+              MasticaOMolidos: values.MasticaOMolidos,
             })
             .then((response) => {
               Swal.fire(

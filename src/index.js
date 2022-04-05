@@ -7,4 +7,4 @@ import { TablaAmamantacion } from './views/TablaAmamantacion';
 import { TablaAntecedentes } from './views/TablaAntecedentesP';
 import { TablaHabitos } from './views/TablaHabitosH';
 
-ReactDOM.render(<TablaHabitos />, document.getElementById('root'));
+ReactDOM.render(<TablaAntecedentes />, document.getElementById('root'));

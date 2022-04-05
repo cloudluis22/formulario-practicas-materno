@@ -5,6 +5,9 @@ import uniqid from 'uniqid';
 import Swal from 'sweetalert2';
 
 export const TablaAntecedentes = () => {
+  const [LblRealizaDeporte, setLblRealizaDeporte] = useState(false)
+  const [LblAlergiasMedAlim, setLblAlergiasMedAlim] = useState(false)
+
   return (
     <div className='bcg-color d-flex justify-content-center flex-column align-items-center'>
       <h1 className='display-2 text-light'> Tabla Antecedentes </h1>
@@ -14,7 +17,9 @@ export const TablaAntecedentes = () => {
           BuenaSalud: '',
           Hospitalizado: '',
           RealizaDeporte: '',
+          LblRealizaDeporte: '',
           AlergiasMedAlim: '',
+          LblAlergiasMedAlim: '',
           TranstornoMentalEmocional: '',
           DificultadesEscolares: '',
           RespiraPorBoca: '',
@@ -59,12 +64,39 @@ export const TablaAntecedentes = () => {
                 errors.BuenaSalud = 'Debe de seleccionar este campo'
             }
 
+            if(values.RealizaDeporte == "Si"){
+              setLblRealizaDeporte(true)
+              if(!values.LblRealizaDeporte){
+                errors.LblRealizaDeporte = "Usted tiene que llenar este campo"
+              }
+            }else{
+              setLblRealizaDeporte(false)
+            }
+            
+            if(values.AlergiasMedAlim == "Si"){
+              setLblAlergiasMedAlim(true)
+              if(!values.LblAlergiasMedAlim){
+                errors.LblAlergiasMedAlim = "Usted tiene que llenar este campo"
+              }
+            }else{
+              setLblAlergiasMedAlim(false)
+            }
+
+            if(values.RealizaDeporte == "Si"){
+              setLblRealizaDeporte(true)
+              if(!values.LblRealizaDeporte){
+                errors.LblRealizaDeporte = "Usted tiene que llenar este campo"
+              }
+            }else{
+              setLblRealizaDeporte(false)
+            }
+            
+
             if(!values.Otros){
               errors.Otros = 'En caso de no añadir otra condición, escriba "No aplica"'
             }
 
-            console.log(values.BuenaSalud)
-            console.log(values.Hospitalizado)
+          
 
           return errors;
         }}
@@ -77,6 +109,7 @@ export const TablaAntecedentes = () => {
               Hospitalizado: values.Hospitalizado,
               RealizaDeporte: values.RealizaDeporte,
               AlergiasMedAlim: values.AlergiasMedAlim,
+              LblAlergiasMedAlim: values.LblAlergiasMedAlim,
               TranstornoMentalEmocional: values.TranstornoMentalEmocional ,
               DificultadesEscolares: values.DificultadesEscolares ,
               RespiraPorBoca: values.RespiraPorBoca ,
@@ -189,8 +222,34 @@ export const TablaAntecedentes = () => {
             </div>
 
 
+            {LblRealizaDeporte && <div className='mb-3'>
+                <label htmlFor='LblRealizaDeporte' className='form-label'>
+                  Nombre del deporte
+                </label>
+                <Field
+                  type='text'
+                  id='LblRealizaDeporte'
+                  name='LblRealizaDeporte'
+                  className={
+                    !touched.LblRealizaDeporte
+                      ? 'form-control'
+                      : errors.LblRealizaDeporte
+                      ? 'form-control is-invalid'
+                      : 'form-control is-valid'
+                  }
+                  placeholder='Nombre del deporte'
+                />
+                <ErrorMessage
+                  name='LblRealizaDeporte'
+                  component={() => (
+                    <div className='invalid-feedback'>{errors.LblRealizaDeporte}</div>
+                  )}
+                />
+              </div>}
+
+
             <div className='mb-4 mt-2'>
-            <div id="my-radio-group">¿Es alérgico a algún medicamento ó alimento?</div>
+            <div id="my-radio-group">¿Es alérgico a algún medicamento o alimento?</div>
           <div role="group" aria-labelledby="my-radio-group">
             <label>
               <Field type="radio" className='form-check-input mx-2'  name="AlergiasMedAlim" id="AlergiasMedAlim" value="Si" />
@@ -204,6 +263,32 @@ export const TablaAntecedentes = () => {
           </div>
             </div>
 
+                    {/*LblAlergiasMedAlim*/}
+
+                    {LblAlergiasMedAlim && <div className='mb-3'>
+                <label htmlFor='LblAlergiasMedAlim' className='form-label'>
+                ¿A qué le tiene alergia?
+                </label>
+                <Field
+                  type='text'
+                  id='LblAlergiasMedAlim'
+                  name='LblAlergiasMedAlim'
+                  className={
+                    !touched.LblAlergiasMedAlim
+                      ? 'form-control'
+                      : errors.LblAlergiasMedAlim
+                      ? 'form-control is-invalid'
+                      : 'form-control is-valid'
+                  }
+                  placeholder='Detonante de la alergia'
+                />
+                <ErrorMessage
+                  name='LblAlergiasMedAlim'
+                  component={() => (
+                    <div className='invalid-feedback'>{errors.LblAlergiasMedAlim}</div>
+                  )}
+                />
+              </div>}
 
             <div className='mb-4 mt-2'>
             <div id="my-radio-group">¿Tiene o ha tenido su hijo algún trastorno emocional o mental? </div>
