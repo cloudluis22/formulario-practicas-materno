@@ -8,5 +8,6 @@ import { TablaAntecedentes } from './views/TablaAntecedentesP';
 import { TablaHabitos } from './views/TablaHabitosH';
 import { TablaAntecedentesFamiliares } from './views/TablaAntecedentesFamiliares'
 import { TablaOclusion } from './views/TablaOclusion'
+import { TablaTejidos } from './views/TablaTejidos'
 
-ReactDOM.render(<TablaOclusion />, document.getElementById('root'));
+ReactDOM.render(<TablaTejidos />, document.getElementById('root'));
