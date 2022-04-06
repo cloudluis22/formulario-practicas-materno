@@ -6,5 +6,6 @@ import { TablaAlimentacion } from './views/TablaAlimentacion';
 import { TablaAmamantacion } from './views/TablaAmamantacion';
 import { TablaAntecedentes } from './views/TablaAntecedentesP';
 import { TablaHabitos } from './views/TablaHabitosH';
+import { TablaAntecedentesFamiliares } from './views/TablaAntecedentesFamiliares'
 
-ReactDOM.render(<TablaAntecedentes />, document.getElementById('root'));
+ReactDOM.render(<TablaAmamantacion />, document.getElementById('root'));
