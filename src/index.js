@@ -7,5 +7,6 @@ import { TablaAmamantacion } from './views/TablaAmamantacion';
 import { TablaAntecedentes } from './views/TablaAntecedentesP';
 import { TablaHabitos } from './views/TablaHabitosH';
 import { TablaAntecedentesFamiliares } from './views/TablaAntecedentesFamiliares'
+import { TablaOclusion } from './views/TablaOclusion'
 
-ReactDOM.render(<TablaAmamantacion />, document.getElementById('root'));
+ReactDOM.render(<TablaOclusion />, document.getElementById('root'));

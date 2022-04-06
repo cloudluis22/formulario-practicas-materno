@@ -4,35 +4,70 @@ import axios from 'axios';
 import uniqid from 'uniqid';
 import Swal from 'sweetalert2';
 
-export const TablaHabitos = () => {
+export const TablaOclusion = () => {
   return (
     <div className='bcg-color d-flex justify-content-center flex-column align-items-center'>
-      <h1 className='display-2 text-light'> Tabla Alimentacion </h1>
+      <h1 className='display-2 text-light'> OCLUSIÓN Y ALINEAMIENTO
+ </h1>
       <Formik
         initialValues={{
-          EncargadoCepillado: '',
-          CepilladosDiaros: '',
-          MarcaPastaDental: '',
-          CepilladoDiarioDormir: '',
-          EnjuagueBucal: '',
-          HiloDental: '',
+          LineaMedia: '',
+          PlanoTerminal: '',
+          ClaseMolar: '',
+          EspaciosPrimates: '',
+          EspaciosFisiologicos: '',
+          Traslape: '',
+          Sobremordida:'',
+          MordidaAbierta:'',
+          MordidaProfunda:'',
+          MalposicionDentaria:'',
+          Diastema:'',
         }}
         validate={(values) => {
           let errors = {};
 
-          if (!values.EncargadoCepillado) {
-            errors.EncargadoCepillado =
-              'Por favor ingrese la persona la cual se encarga del cepillado de dientes del paciente.';
+          if (!values.LineaMedia){
+            errors.LineaMedia = "Debe seleccionar este campo"
           }
 
-          if (!values.CepilladosDiaros) {
-            errors.CepilladosDiaros =
-              'Por favor ingrese el no. de veces que se cepilla los dientes al día.';
+          if (!values.PlanoTerminal){
+            errors.PlanoTerminal = "Debe seleccionar este campo"
           }
 
-          if (!values.MarcaPastaDental) {
-            errors.MarcaPastaDental =
-              'Por favor ingrese la marca de la pasta dental.';
+          if (!values.ClaseMolar){
+            errors.ClaseMolar = "Debe seleccionar este campo"
+          }
+
+          if (!values.EspaciosPrimates){
+            errors.EspaciosPrimates = "Debe seleccionar este campo"
+          }
+
+          if (!values.EspaciosFisiologicos){
+            errors.EspaciosFisiologicos = "Debe seleccionar este campo"
+          }
+
+          if (!values.Traslape){
+            errors.Traslape = "Debe seleccionar este campo"
+          }
+
+          if (!values.Sobremordida){
+            errors.Sobremordida = "Debe seleccionar este campo"
+          }
+
+          if (!values.MordidaAbierta){
+            errors.MordidaAbierta = "Debe seleccionar este campo"
+          }
+
+          if (!values.MordidaProfunda){
+            errors.MordidaProfunda = "Debe seleccionar este campo"
+          }
+
+          if (!values.MalposicionDentaria){
+            errors.MalposicionDentaria = "Debe seleccionar este campo"
+          }
+
+          if (!values.Diastema){
+            errors.Diastema = "Debe seleccionar este campo"
           }
 
           console.log('errores');
@@ -43,12 +78,17 @@ export const TablaHabitos = () => {
           await axios
             .post('http://localhost:3001/api/v1/insert', {
               id: IdPaciente,
-              EncargadoCepillado: values.EncargadoCepillado,
-              CepilladosDiaros: values.CepilladosDiaros,
-              MarcaPastaDental: values.MarcaPastaDental,
-              CepilladoDiarioDormir: values.CepilladoDiarioDormir,
-              EnjuagueBucal: values.EnjuagueBucal,
-              HiloDental: values.HiloDental,
+              LineaMedia: values.LineaMedia,
+              PlanoTerminal: values.PlanoTerminal ,
+              ClaseMolar: values.ClaseMolar ,
+              EspaciosPrimates: values.EspaciosPrimates ,
+              EspaciosFisiologicos: values.EspaciosFisiologicos ,
+              Traslape: values.Traslape,
+              Sobremordida: values.Sobremordida,
+              MordidaAbierta: values.MordidaAbierta,
+              MordidaProfunda: values.MordidaProfunda,
+              MalposicionDentaria: values.MalposicionDentaria,
+              Diastema: values.Diastema,
             })
             .then((response) => {
               Swal.fire(
@@ -68,189 +108,203 @@ export const TablaHabitos = () => {
         }}>
         {({ errors, touched }) => (
           <Form className='card px-5' style={{ width: '550px' }}>
+            
+
             <div className='mb-4 mt-2'>
-              <label htmlFor='EncargadoCepillado' className='form-label'>
-                Quien se encarga de lavar los dientes del paciente?
-              </label>
-              <Field
-                type='Text'
-                id='EncargadoCepillado'
-                name='EncargadoCepillado'
-                className={
-                  !touched.EncargadoCepillado
-                    ? 'form-control'
-                    : errors.EncargadoCepillado
-                    ? 'form-control is-invalid'
-                    : 'form-control is-valid'
-                }
-                placeholder='Nombre del encargado.'
-              />
-              <ErrorMessage
-                name='EncargadoCepillado'
-                component={() => (
-                  <div className='invalid-feedback'>
-                    {errors.EncargadoCepillado}
-                  </div>
-                )}
-              />
-              <div id='EncargadoCepilladoHelp' className='form-text'></div>
-            </div>
-
-            <br></br>
-
-            {/*Cepillados Diarios */}
-            <label htmlFor='CepilladosDiaros' className='form-label'>
-              ¿Cuántas veces al día se cepilla los dientes?
+            <div id="my-radio-group">Linea Media</div>
+          <div role="group" aria-labelledby="my-radio-group">
+            <label>
+              <Field type="radio" className='form-check-input mx-2'  name="LineaMedia" id="LineaMedia" value="Normal" />
+                Normal
             </label>
-            <Field
-              type='text'
-              id='CepilladosDiaros'
-              name='CepilladosDiaros'
-              className={
-                !touched.CepilladosDiaros
-                  ? 'form-control'
-                  : errors.CepilladosDiaros
-                  ? 'form-control is-invalid'
-                  : 'form-control is-valid'
-              }
-              placeholder='No. de veces al día que se cepilla los dientes.'
-            />
-            <ErrorMessage
-              name='CepilladosDiaros'
-              component={() => (
-                <div className='invalid-feedback'>
-                  {errors.CepilladosDiaros}
-                </div>
-              )}
-            />
-            <div id='CepilladosDiarosHelp' className='form-text'>
-              se debe ingresar el no. de veces al dia que se cepilla los dientes
-            </div>
-
             <br></br>
-
-            {/*MarcaPastaDental*/}
-            <label htmlFor='MarcaPastaDental' className='form-label'>
-              ¿Cómo se llama la marca de pasta que utilizan?
+            <label>
+              <Field type="radio" className='form-check-input mx-2'  name="LineaMedia" id="LineaMedia" value="DesviadaDerecha" />
+                Desviada a la derecha
             </label>
-            <Field
-              type='text'
-              id='MarcaPastaDental'
-              name='MarcaPastaDental'
-              className={
-                !touched.MarcaPastaDental
-                  ? 'form-control'
-                  : errors.MarcaPastaDental
-                  ? 'form-control is-invalid'
-                  : 'form-control is-valid'
-              }
-              placeholder='Marca de pasta deltal.'
-            />
-            <ErrorMessage
-              name='MarcaPastaDental'
-              component={() => (
-                <div className='invalid-feedback'>
-                  {errors.MarcaPastaDental}
-                </div>
-              )}
-            />
-            <div id='MarcaPastaDentalHelp' className='form-text'>
-              se debe ingresar la marca de la pasta dental
-            </div>
-
             <br></br>
-
-            {/*CepilladoDiarioDormir */}
-            <label htmlFor='MarcaPastaDental' className='form-label'>
-              ¿Se cepilla los dientes antes de dormir sin falta?
+            <label>
+              <Field type="radio" className='form-check-input mx-2'  name="LineaMedia" id="LineaMedia" value="DesviadaIzquierda" />
+                Desviada a la izquierda
             </label>
-            <Field
-              type='text'
-              id='CepilladoDiarioDormir'
-              name='CepilladoDiarioDormir'
-              className={
-                !touched.CepilladoDiarioDormir
-                  ? 'form-control'
-                  : errors.CepilladoDiarioDormir
-                  ? 'form-control is-invalid'
-                  : 'form-control is-valid'
-              }
-              placeholder='si/no , siempre / casi siempre / a veces'
-            />
-            <ErrorMessage
-              name='CepilladoDiarioDormir'
-              component={() => (
-                <div className='invalid-feedback'>
-                  {errors.CepilladoDiarioDormir}
-                </div>
-              )}
-            />
-            <div id='CepilladoDiarioDormirHelp' className='form-text'>
-              se debe contestar si o no si cepilla los dientes antes de dormir
-              sin falta y con que fecuencia siempre / casi siempre / a veces
+          </div>
             </div>
 
-            <br></br>
-
-            {/*EnjuagueBucal */}
-            <label htmlFor='MarcaPastaDental' className='form-label'>
-              ¿Utiliza enjuague bucal?
+            <div className='mb-4 mt-2'>
+            <div id="my-radio-group">Plano Terminal</div>
+          <div role="group" aria-labelledby="my-radio-group">
+            <label>
+              <Field type="radio" className='form-check-input mx-2'  name="PlanoTerminal" id="PlanoTerminal" value="Recto" />
+                Recto
             </label>
-            <Field
-              type='text'
-              id='EnjuagueBucal'
-              name='EnjuagueBucal'
-              className={
-                !touched.EnjuagueBucal
-                  ? 'form-control'
-                  : errors.EnjuagueBucal
-                  ? 'form-control is-invalid'
-                  : 'form-control is-valid'
-              }
-              placeholder='si/no , siempre / casi siempre / a veces'
-            />
-            <ErrorMessage
-              name='EnjuagueBucal'
-              component={() => (
-                <div className='invalid-feedback'>{errors.EnjuagueBucal}</div>
-              )}
-            />
-            <div id='EnjuagueBucalHelp' className='form-text'>
-              se debe contestar si o no utiliza enguaje bucal y con que
-              fecuencia siempre / casi siempre / a veces
-            </div>
-
             <br></br>
-
-            {/*HiloDental */}
-            <label htmlFor='MarcaPastaDental' className='form-label'>
-              ¿Utiliza hilo dental?
+            <label>
+              <Field type="radio" className='form-check-input mx-2'  name="PlanoTerminal" id="PlanoTerminal" value="Mesia" />
+                Mesia
             </label>
-            <Field
-              type='text'
-              id='HiloDental'
-              name='HiloDental'
-              className={
-                !touched.HiloDental
-                  ? 'form-control'
-                  : errors.HiloDental
-                  ? 'form-control is-invalid'
-                  : 'form-control is-valid'
-              }
-              placeholder='si/no , siempre / casi siempre / a veces'
-            />
-            <ErrorMessage
-              name='HiloDental'
-              component={() => (
-                <div className='invalid-feedback'>{errors.HiloDental}</div>
-              )}
-            />
-            <div id='HiloDentalHelp' className='form-text'>
-              se debe contestar si o no utiliza hilo dental y con que fecuencia
-              siempre / casi siempre / a veces
+            <br></br>
+            <label>
+              <Field type="radio" className='form-check-input mx-2'  name="PlanoTerminal" id="PlanoTerminal" value="Distal" />
+              Distal
+            </label>
+          </div>
             </div>
 
+            <div className='mb-4 mt-2'>
+            <div id="my-radio-group">Clase Molar</div>
+          <div role="group" aria-labelledby="my-radio-group">
+            <label>
+              <Field type="radio" className='form-check-input mx-2'  name="ClaseMolar" id="ClaseMolar" value="ClaseI" />
+                Clase I
+            </label>
             <br></br>
+            <label>
+              <Field type="radio" className='form-check-input mx-2'  name="ClaseMolar" id="ClaseMolar" value="ClaseII" />
+              Clase II
+            </label>
+            <br></br>
+            <label>
+              <Field type="radio" className='form-check-input mx-2'  name="ClaseMolar" id="ClaseMolar" value="ClaseIII" />
+              Clase III
+            </label>
+          </div>
+            </div>
+
+            <div className='mb-4 mt-2'>
+            <div id="my-radio-group">Espacios primates</div>
+          <div role="group" aria-labelledby="my-radio-group">
+            <label>
+              <Field type="radio" className='form-check-input mx-2'  name="EspaciosPrimates" id="EspaciosPrimates" value="Sup" />
+                Sup
+            </label>
+            <br></br>
+            <label>
+              <Field type="radio" className='form-check-input mx-2'  name="EspaciosPrimates" id="EspaciosPrimates" value="Inf" />
+              Inf
+            </label>
+            <br></br>
+            <label>
+              <Field type="radio" className='form-check-input mx-2'  name="EspaciosPrimates" id="EspaciosPrimates" value="Ninguno" />
+              Ninguno
+            </label>
+          </div>
+            </div>
+
+            <div className='mb-4 mt-2'>
+            <div id="my-radio-group"> Espacios fisiológicos</div>
+          <div role="group" aria-labelledby="my-radio-group">
+            <label>
+              <Field type="radio" className='form-check-input mx-2'  name="EspaciosFisiologicos" id="EspaciosFisiologicos" value="Sup" />
+                Sup
+            </label>
+            <br></br>
+            <label>
+              <Field type="radio" className='form-check-input mx-2'  name="EspaciosFisiologicos" id="EspaciosFisiologicos" value="Inf" />
+              Inf
+            </label>
+            <br></br>
+            <label>
+              <Field type="radio" className='form-check-input mx-2'  name="EspaciosFisiologicos" id="EspaciosFisiologicos" value="Ninguno" />
+              Ninguno
+            </label>
+          </div>
+            </div>
+
+            <div className='mb-4 mt-2'>
+            <div id="my-radio-group"> Traslape</div>
+          <div role="group" aria-labelledby="my-radio-group">
+            <label>
+              <Field type="radio" className='form-check-input mx-2'  name="Traslape" id="Traslape" value="Normal" />
+                Normal
+            </label>
+            <br></br>
+            <label>
+              <Field type="radio" className='form-check-input mx-2'  name="Traslape" id="Traslape" value="Exagerado" />
+              Exagerado
+            </label>
+            <br></br>
+            <label>
+              <Field type="radio" className='form-check-input mx-2'  name="Traslape" id="Traslape" value="No" />
+              No
+            </label>
+          </div>
+            </div>
+
+            <div className='mb-4 mt-2'>
+            <div id="my-radio-group"> Sobremordida</div>
+          <div role="group" aria-labelledby="my-radio-group">
+            <label>
+              <Field type="radio" className='form-check-input mx-2'  name="Sobremordida" id="Sobremordida" value="Normal" />
+                Normal
+            </label>
+            <br></br>
+            <label>
+              <Field type="radio" className='form-check-input mx-2'  name="Sobremordida" id="Sobremordida" value="No" />
+              No
+            </label>
+          </div>
+            </div>
+
+            <div className='mb-4 mt-2'>
+            <div id="my-radio-group">Mordida abierta</div>
+          <div role="group" aria-labelledby="my-radio-group">
+            <label>
+              <Field type="radio" className='form-check-input mx-2'  name="MordidaAbierta" id="MordidaAbierta" value="Si" />
+                Si
+            </label>
+            <br></br>
+            <label>
+              <Field type="radio" className='form-check-input mx-2'  name="MordidaAbierta" id="MordidaAbierta" value="No" />
+              No
+            </label>
+          </div>
+            </div>
+
+            <div className='mb-4 mt-2'>
+            <div id="my-radio-group">Mordida profunda</div>
+          <div role="group" aria-labelledby="my-radio-group">
+            <label>
+              <Field type="radio" className='form-check-input mx-2'  name="MordidaProfunda" id="MordidaProfunda" value="Si" />
+                Si
+            </label>
+            <br></br>
+            <label>
+              <Field type="radio" className='form-check-input mx-2'  name="MordidaProfunda" id="MordidaProfunda" value="No" />
+              No
+            </label>
+          </div>
+            </div>
+
+            <div className='mb-4 mt-2'>
+            <div id="my-radio-group"> Malposición dentaria</div>
+          <div role="group" aria-labelledby="my-radio-group">
+            <label>
+              <Field type="radio" className='form-check-input mx-2'  name="MalposicionDentaria" id="MalposicionDentaria" value="Si" />
+                Si
+            </label>
+            <br></br>
+            <label>
+              <Field type="radio" className='form-check-input mx-2'  name="MalposicionDentaria" id="MalposicionDentaria" value="No" />
+              No
+            </label>
+          </div>
+            </div>
+
+            <div className='mb-4 mt-2'>
+            <div id="my-radio-group">  Diastema</div>
+          <div role="group" aria-labelledby="my-radio-group">
+            <label>
+              <Field type="radio" className='form-check-input mx-2'  name="Diastema" id="Diastema" value="Si" />
+                Si
+            </label>
+            <br></br>
+            <label>
+              <Field type="radio" className='form-check-input mx-2'  name="Diastema" id="Diastema" value="No" />
+              No
+            </label>
+          </div>
+            </div>
+
 
             <button className='btn btn-primary' type='submit'>
               Subir informacion del paciente
