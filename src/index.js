@@ -10,5 +10,7 @@ import { TablaAntecedentesFamiliares } from './views/TablaAntecedentesFamiliares
 import { TablaOclusion } from './views/TablaOclusion'
 import { TablaTejidos } from './views/TablaTejidos'
 import { TablaErupcion } from './views/TablaErupcion'
+import { TablaPerniciosos } from './views/TablaPerniciosos'
+import { TablaMedioBucalG } from './views/TablaMedioBucalG'
 
-ReactDOM.render(<TablaErupcion />, document.getElementById('root'));
+ReactDOM.render(<TablaPerniciosos />, document.getElementById('root'));

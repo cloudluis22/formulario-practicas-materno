@@ -4,10 +4,10 @@ import axios from 'axios';
 import uniqid from 'uniqid';
 import Swal from 'sweetalert2';
 
-export const TablaPerniciosos = () => {
+export const TablaMedioBucalG = () => {
   return (
     <div className='bcg-color d-flex justify-content-center flex-column align-items-center'>
-      <h1 className='display-2 text-light'> Habitos Perniciosos
+      <h1 className='display-2 text-light'> Medio Bucal General
  </h1>
       <Formik
         initialValues={{
