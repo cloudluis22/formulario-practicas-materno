@@ -13,4 +13,4 @@ import { TablaErupcion } from './views/TablaErupcion'
 import { TablaPerniciosos } from './views/TablaPerniciosos'
 import { TablaMedioBucalG } from './views/TablaMedioBucalG'
 
-ReactDOM.render(<TablaPerniciosos />, document.getElementById('root'));
+ReactDOM.render(<TablaMedioBucalG />, document.getElementById('root'));

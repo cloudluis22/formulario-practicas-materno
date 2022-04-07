@@ -27,47 +27,43 @@ export const TablaOclusion = () => {
           let errors = {};
 
           if (!values.LineaMedia){
-            errors.LineaMedia = "Debe seleccionar este campo"
+            errors.LineaMedia = "Debe seleccionar uno de esos campos"
           }
 
           if (!values.PlanoTerminal){
-            errors.PlanoTerminal = "Debe seleccionar este campo"
+            errors.PlanoTerminal = "Debe seleccionar uno de esos campos"
           }
 
           if (!values.ClaseMolar){
-            errors.ClaseMolar = "Debe seleccionar este campo"
+            errors.ClaseMolar = "Debe seleccionar uno de esos campos"
           }
 
           if (!values.EspaciosPrimates){
-            errors.EspaciosPrimates = "Debe seleccionar este campo"
-          }
-
-          if (!values.EspaciosFisiologicos){
-            errors.EspaciosFisiologicos = "Debe seleccionar este campo"
+            errors.EspaciosPrimates = "Debe seleccionar uno de esos campos"
           }
 
           if (!values.Traslape){
-            errors.Traslape = "Debe seleccionar este campo"
+            errors.Traslape = "Debe seleccionar uno de esos campos"
           }
 
           if (!values.Sobremordida){
-            errors.Sobremordida = "Debe seleccionar este campo"
+            errors.Sobremordida = "Debe seleccionar uno de esos campos"
           }
 
           if (!values.MordidaAbierta){
-            errors.MordidaAbierta = "Debe seleccionar este campo"
+            errors.MordidaAbierta = "Debe seleccionar uno de esos campos"
           }
 
           if (!values.MordidaProfunda){
-            errors.MordidaProfunda = "Debe seleccionar este campo"
+            errors.MordidaProfunda = "Debe seleccionar uno de esos campos"
           }
 
           if (!values.MalposicionDentaria){
-            errors.MalposicionDentaria = "Debe seleccionar este campo"
+            errors.MalposicionDentaria = "Debe seleccionar uno de esos campos"
           }
 
           if (!values.Diastema){
-            errors.Diastema = "Debe seleccionar este campo"
+            errors.Diastema = "Debe seleccionar uno de esos campos"
           }
 
           console.log('errores');
