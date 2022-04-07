@@ -9,5 +9,6 @@ import { TablaHabitos } from './views/TablaHabitosH';
 import { TablaAntecedentesFamiliares } from './views/TablaAntecedentesFamiliares'
 import { TablaOclusion } from './views/TablaOclusion'
 import { TablaTejidos } from './views/TablaTejidos'
+import { TablaErupcion } from './views/TablaErupcion'
 
-ReactDOM.render(<TablaTejidos />, document.getElementById('root'));
+ReactDOM.render(<TablaErupcion />, document.getElementById('root'));

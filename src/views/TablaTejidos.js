@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 export const TablaTejidos = () => {
   return (
     <div className='bcg-color d-flex justify-content-center flex-column align-items-center'>
-      <h1 className='display-2 text-light'> Tabla Alimentacion </h1>
+      <h1 className='display-2 text-light'> Tejidos Blandos </h1>
       <Formik
         initialValues={{
           Lengua: '',
