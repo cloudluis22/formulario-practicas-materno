@@ -3,8 +3,10 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import axios from 'axios';
 import uniqid from 'uniqid';
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
-export const MainForm = () => {
+export const RegistrarPaciente = () => {
+  let navigate = useNavigate();
   return (
     <div className='bcg-color d-flex justify-content-center flex-column align-items-center'>
       <h1 className='display-2 text-light'> Registro de Pacientes </h1>
@@ -44,25 +46,30 @@ export const MainForm = () => {
           }
 
           if (!values.GustosPersonales) {
-            errors.GustosPersonales = 'Por favor debe de ingresar los gustos del paciente.';
+            errors.GustosPersonales =
+              'Por favor debe de ingresar los gustos del paciente.';
           } else if (values.GustosPersonales.replace(/\s/g, '').length < 15) {
-            errors.GustosPersonales = 'Debe de agregar una descripcion de más de 15 carácteres.';
+            errors.GustosPersonales =
+              'Debe de agregar una descripcion de más de 15 carácteres.';
           }
 
-          if (!values.FechaDeNacimiento){
-            errors.FechaDeNacimiento = 'No ha agregado una fecha valida'
+          if (!values.FechaDeNacimiento) {
+            errors.FechaDeNacimiento = 'No ha agregado una fecha valida';
           }
 
           if (!values.LugarDeNacimiento) {
-            errors.LugarDeNacimiento = 'Por favor ingrese el lugar de nacimiento del paciente.';
+            errors.LugarDeNacimiento =
+              'Por favor ingrese el lugar de nacimiento del paciente.';
           }
 
           if (!values.PadreMadreTutor) {
-            errors.PadreMadreTutor = 'Por favor ingrese el Nombre del Padre / Madre / Tutor.';
+            errors.PadreMadreTutor =
+              'Por favor ingrese el Nombre del Padre / Madre / Tutor.';
           }
 
           if (!values.TutorEncargado) {
-            errors.TutorEncargado = 'Por favor ingrese el Nombre del Tutor encargado.';
+            errors.TutorEncargado =
+              'Por favor ingrese el Nombre del Tutor encargado.';
           }
 
           if (!values.Domicilio) {
@@ -71,33 +78,29 @@ export const MainForm = () => {
 
           if (!values.Telefono) {
             errors.Telefono = 'Por favor ingrese el Telefono.';
-          }else if (values.Telefono.toString().length > 13){
-            errors.Telefono = "El Telefono no debe pasar de 13 digitos"
+          } else if (values.Telefono.toString().length > 13) {
+            errors.Telefono = 'El Telefono no debe pasar de 13 digitos';
           }
-          
+
           if (!values.Celular) {
             errors.Celular = 'Por favor ingrese el Celular.';
-          }else if (values.Celular.toString().length > 13){
-            errors.Celular = "El Celular no debe pasar de 13 digitos"
+          } else if (values.Celular.toString().length > 13) {
+            errors.Celular = 'El Celular no debe pasar de 13 digitos';
           }
-          
+
           if (!values.OtroContacto) {
             errors.OtroContacto = 'Por favor ingrese el Otro Contacto.';
-          }else if (values.OtroContacto.toString().length > 13){
-            errors.OtroContacto = "El Otro Contacto no debe pasar de 13 digitos"
+          } else if (values.OtroContacto.toString().length > 13) {
+            errors.OtroContacto =
+              'El Otro Contacto no debe pasar de 13 digitos';
           }
-          
 
-          if (!values.genre) {
-            errors.genre = 'Please select a movie genre.';
-            console.log('hola');
-          }
           return errors;
         }}
         onSubmit={async (values, { resetForm }) => {
           const IdPaciente = uniqid();
           await axios
-            .post('http://localhost:3001/api/v1/insert', {
+            .post('http://localhost:3001/api/v1/registrar-paciente', {
               id: IdPaciente,
               NombrePaciente: values.NombrePaciente,
               NombrePreferido: values.NombrePreferido,
@@ -115,10 +118,12 @@ export const MainForm = () => {
             })
             .then((response) => {
               Swal.fire(
-                'Cool!',
-                'Informacion Subida correctamente.',
+                '¡Hecho!',
+                'Informacion Subida correctamente.\nTe redirigiremos a la pantalla principal para llenar el antecedente clínico del paciente.',
                 'success'
-              );
+              ).then(() => {
+                navigate('/pacientes');
+              });
             })
             .catch((error) => {
               console.log(error);
@@ -129,13 +134,8 @@ export const MainForm = () => {
               );
             });
         }}>
-
-
         {({ errors, touched }) => (
-
-
           <Form className='card px-5' style={{ width: '550px' }}>
-
             <br></br>
 
             <div className='mb-4 mt-2'>
@@ -153,21 +153,21 @@ export const MainForm = () => {
                     ? 'form-control is-invalid'
                     : 'form-control is-valid'
                 }
-                placeholder='Ingrese el Nombre' 
+                placeholder='Ingrese el Nombre'
               />
               <ErrorMessage
                 name='NombrePaciente'
                 component={() => (
-                  <div className='invalid-feedback'>{errors.NombrePaciente}</div>
+                  <div className='invalid-feedback'>
+                    {errors.NombrePaciente}
+                  </div>
                 )}
               />
               <div id='NombrePacienteHelp' className='form-text'>
                 Aqui debes de ingresar el nombre.
               </div>
 
-
-                  <br></br>
-
+              <br></br>
 
               <div className='mb-3'>
                 <label htmlFor='NombrePreferido' className='form-label'>
@@ -189,7 +189,9 @@ export const MainForm = () => {
                 <ErrorMessage
                   name='NombrePreferido'
                   component={() => (
-                    <div className='invalid-feedback'>{errors.NombrePreferido}</div>
+                    <div className='invalid-feedback'>
+                      {errors.NombrePreferido}
+                    </div>
                   )}
                 />
                 <div id='NombrePreferidoHelp' className='form-text'>
@@ -197,9 +199,9 @@ export const MainForm = () => {
                 </div>
               </div>
 
-                  <br></br>
+              <br></br>
 
-                  <div className='mb-3'>
+              <div className='mb-3'>
                 <label htmlFor='Edad' className='form-label'>
                   Edad del paciente
                 </label>
@@ -223,7 +225,8 @@ export const MainForm = () => {
                   )}
                 />
                 <div id='EdadHelp' className='form-text'>
-                  Ingrese la edad actual del paciente, especifique si es en años o semanas.
+                  Ingrese la edad actual del paciente, especifique si es en años
+                  o semanas.
                 </div>
               </div>
 
@@ -261,7 +264,7 @@ export const MainForm = () => {
 
               <div className='mb-3'>
                 <label htmlFor='GustosPersonales' className='form-label'>
-                Gustos personales del paciente
+                  Gustos personales del paciente
                 </label>
                 <Field
                   as='textarea'
@@ -281,7 +284,9 @@ export const MainForm = () => {
                 <ErrorMessage
                   name='GustosPersonales'
                   component={() => (
-                    <div className='invalid-feedback'>{errors.GustosPersonales}</div>
+                    <div className='invalid-feedback'>
+                      {errors.GustosPersonales}
+                    </div>
                   )}
                 />
                 <div id='GustosPersonales' className='form-text'>
@@ -290,8 +295,6 @@ export const MainForm = () => {
               </div>
 
               <br></br>
-
-              
 
               <div className='mb-3'>
                 <label htmlFor='FechaDeNacimiento' className='form-label'>
@@ -313,7 +316,9 @@ export const MainForm = () => {
                 <ErrorMessage
                   name='FechaDeNacimiento'
                   component={() => (
-                    <div className='invalid-feedback'>{errors.FechaDeNacimiento}</div>
+                    <div className='invalid-feedback'>
+                      {errors.FechaDeNacimiento}
+                    </div>
                   )}
                 />
                 <div id='FechaDeNacimientoHelp' className='form-text'>
@@ -343,7 +348,9 @@ export const MainForm = () => {
                 <ErrorMessage
                   name='LugarDeNacimiento'
                   component={() => (
-                    <div className='invalid-feedback'>{errors.LugarDeNacimiento}</div>
+                    <div className='invalid-feedback'>
+                      {errors.LugarDeNacimiento}
+                    </div>
                   )}
                 />
                 <div id='LugarDeNacimientoHelp' className='form-text'>
@@ -353,11 +360,7 @@ export const MainForm = () => {
 
               <br></br>
 
-
-
-
-            {/* Mi parte */}
-
+              {/* Mi parte */}
 
               <label htmlFor='PadreMadreTutor' className='form-label'>
                 Nombre del Padre o Madre
@@ -373,12 +376,14 @@ export const MainForm = () => {
                     ? 'form-control is-invalid'
                     : 'form-control is-valid'
                 }
-                placeholder='Ingrese el Nombre' 
+                placeholder='Ingrese el Nombre'
               />
               <ErrorMessage
                 name='PadreMadreTutor'
                 component={() => (
-                  <div className='invalid-feedback'>{errors.PadreMadreTutor}</div>
+                  <div className='invalid-feedback'>
+                    {errors.PadreMadreTutor}
+                  </div>
                 )}
               />
               <div id='PadreMadreTutorHelp' className='form-text'>
@@ -387,8 +392,7 @@ export const MainForm = () => {
 
               <br></br>
 
-
-               {/*tutor encargado */}
+              {/*tutor encargado */}
               <label htmlFor='TutorEncargado' className='form-label'>
                 Nombre del Tutor Encargado
               </label>
@@ -403,12 +407,14 @@ export const MainForm = () => {
                     ? 'form-control is-invalid'
                     : 'form-control is-valid'
                 }
-                placeholder='Ingrese el Nombre' 
+                placeholder='Ingrese el Nombre'
               />
               <ErrorMessage
                 name='TutorEncargado'
                 component={() => (
-                  <div className='invalid-feedback'>{errors.TutorEncargado}</div>
+                  <div className='invalid-feedback'>
+                    {errors.TutorEncargado}
+                  </div>
                 )}
               />
               <div id='TutorEncargadoHelp' className='form-text'>
@@ -417,8 +423,8 @@ export const MainForm = () => {
 
               <br></br>
 
-                {/*domicilio*/}
-               <label htmlFor='Domicilio' className='form-label'>
+              {/*domicilio*/}
+              <label htmlFor='Domicilio' className='form-label'>
                 Domicilio
               </label>
               <Field
@@ -432,7 +438,7 @@ export const MainForm = () => {
                     ? 'form-control is-invalid'
                     : 'form-control is-valid'
                 }
-                placeholder='Ingrese el Domicilio' 
+                placeholder='Ingrese el Domicilio'
               />
               <ErrorMessage
                 name='Domicilio'
@@ -446,9 +452,9 @@ export const MainForm = () => {
 
               <br></br>
 
-               {/*Telefono*/}
+              {/*Telefono*/}
               <label htmlFor='Telefono' className='form-label'>
-                      Telefono
+                Telefono
               </label>
               <Field
                 type='text'
@@ -461,7 +467,7 @@ export const MainForm = () => {
                     ? 'form-control is-invalid'
                     : 'form-control is-valid'
                 }
-                placeholder='Ingrese el Telefono' 
+                placeholder='Ingrese el Telefono'
               />
               <ErrorMessage
                 name='Telefono'
@@ -477,7 +483,7 @@ export const MainForm = () => {
 
               {/*Celular*/}
               <label htmlFor='Celular' className='form-label'>
-              Celular
+                Celular
               </label>
               <Field
                 type='text'
@@ -490,7 +496,7 @@ export const MainForm = () => {
                     ? 'form-control is-invalid'
                     : 'form-control is-valid'
                 }
-                placeholder='Ingrese el Celular' 
+                placeholder='Ingrese el Celular'
               />
               <ErrorMessage
                 name='Celular'
@@ -506,7 +512,7 @@ export const MainForm = () => {
 
               {/*OtroContacto*/}
               <label htmlFor='OtroContacto' className='form-label'>
-              OtroContacto
+                OtroContacto
               </label>
               <Field
                 type='text'
@@ -519,7 +525,7 @@ export const MainForm = () => {
                     ? 'form-control is-invalid'
                     : 'form-control is-valid'
                 }
-                placeholder='Ingrese el Otro Contacto' 
+                placeholder='Ingrese el Otro Contacto'
               />
               <ErrorMessage
                 name='OtroContacto'
@@ -532,11 +538,10 @@ export const MainForm = () => {
               </div>
 
               <br></br>
-              
+
               <button className='btn btn-primary' type='submit'>
                 Subir informacion del paciente
               </button>
-
             </div>
           </Form>
         )}
