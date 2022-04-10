@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import axios from 'axios';
 import uniqid from 'uniqid';
@@ -512,7 +511,7 @@ export const RegistrarPaciente = () => {
 
               {/*OtroContacto*/}
               <label htmlFor='OtroContacto' className='form-label'>
-                OtroContacto
+                Otro Contacto
               </label>
               <Field
                 type='text'

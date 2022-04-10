@@ -7,6 +7,7 @@ import {
   faTrashCan,
 } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 export const Pacientes = () => {
   let navigate = useNavigate();
@@ -36,6 +37,43 @@ export const Pacientes = () => {
         });
       });
   }, []);
+
+  const EliminarPaciente = (IdPaciente) => {
+    Swal.fire({
+      title:
+        '¿Desea eliminar a este paciente?\nSe borrará toda la información incluyendo el historial medico.',
+      showDenyButton: true,
+      confirmButtonText: 'Sí, deseo eliminar a este paciente',
+      denyButtonText: `No, conserva este paciente`,
+      icon: 'warning',
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        axios
+          .delete(
+            `http://localhost:3001/api/v1/eliminar-paciente/${IdPaciente}`,
+            {
+              id: IdPaciente,
+            }
+          )
+          .then(() => {
+            Swal.fire({
+              title: '¡Hecho!',
+              text: 'Paciente eliminado con éxito',
+              icon: 'success',
+            });
+          })
+          .catch((error) => {
+            console.error(error);
+            Swal.fire({
+              title: '¡Oops!',
+              text: 'El paciente no pudo ser eliminado',
+              icon: 'error',
+            });
+          });
+      }
+    });
+  };
 
   return (
     <div className='bcg-main-color'>
@@ -95,7 +133,11 @@ export const Pacientes = () => {
                           className='ms-1'
                         />
                       </button>
-                      <button className='btn btn-sm btn-danger'>
+                      <button
+                        className='btn btn-sm btn-danger'
+                        onClick={() => {
+                          EliminarPaciente(paciente.IdPaciente);
+                        }}>
                         Eliminar
                         <FontAwesomeIcon icon={faTrashCan} className='ms-1' />
                       </button>
