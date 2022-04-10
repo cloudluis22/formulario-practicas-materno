@@ -126,7 +126,11 @@ export const Pacientes = () => {
                     <td> {paciente.Genero} </td>
                     <td> {paciente.Celular} </td>
                     <td>
-                      <button className='btn btn-sm btn-success me-2'>
+                      <button
+                        className='btn btn-sm btn-success me-2'
+                        onClick={() => {
+                          navigate(`/edicion/${paciente.IdPaciente}`);
+                        }}>
                         Ver Info
                         <FontAwesomeIcon
                           icon={faPersonCircleQuestion}

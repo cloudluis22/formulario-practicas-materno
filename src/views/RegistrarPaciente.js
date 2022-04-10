@@ -134,7 +134,10 @@ export const RegistrarPaciente = () => {
             });
         }}>
         {({ errors, touched }) => (
-          <Form className='card px-5' style={{ width: '550px' }}>
+          <Form
+            className='card px-5 mb-3
+            '
+            style={{ width: '550px', overflow: 'auto' }}>
             <br></br>
 
             <div className='mb-4 mt-2'>
