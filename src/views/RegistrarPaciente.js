@@ -14,7 +14,7 @@ export const RegistrarPaciente = () => {
           NombrePaciente: '',
           NombrePreferido: '',
           Edad: '',
-          Genero: '',
+          Genero: 'Masculino',
           GustosPersonales: '',
           FechaDeNacimiento: '',
           LugarDeNacimiento: '',
