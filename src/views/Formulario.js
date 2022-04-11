@@ -2,6 +2,17 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { TablaSecciones } from '../forms/TablaSecciones';
+import { TablaEditarPaciente } from '../forms/TablaEditarPaciente';
+import { TablaAlimentacion } from '../forms/TablaAlimentacion';
+import { TablaHabitos } from '../forms/TablaHabitosH';
+import { TablaAntecedentesFamiliares } from '../forms/TablaAntecedentesFamiliares';
+import { TablaAntecedentes } from '../forms/TablaAntecedentesP';
+import { TablaOclusion } from '../forms/TablaOclusion';
+import { TablaTejidos } from '../forms/TablaTejidos';
+import { TablaPerniciosos } from '../forms/TablaPerniciosos';
+import { TablaErupcion } from '../forms/TablaErupcion';
+import { TablaMedioBucalG } from '../forms/TablaMedioBucalG';
+import { TablaAmamantacion } from '../forms/TablaAmamantacion';
 
 export const Formulario = () => {
   const { id } = useParams();
@@ -11,16 +22,6 @@ export const Formulario = () => {
     data: [],
     ok: false,
   });
-
-  const FormSelected = (index) => {
-    switch (index) {
-      case 0:
-        return <div> Hola </div>;
-
-      default:
-        return <p> Ningun formulario valido seleccionado </p>;
-    }
-  };
 
   useEffect(() => {
     setTimeout(() => {
@@ -73,8 +74,29 @@ export const Formulario = () => {
           <h3 className='text-white text-center mt-2'>
             ID: {Data.data.IdPaciente}
           </h3>
-          <div className='d-flex align-items-center justify-content-center mt-3'>
-            {formIndex === 0 && <TablaSecciones />}
+          {formIndex !== 0 && (
+            <button
+              className='btn btn-primary ms-5'
+              onClick={() => {
+                setFormIndex(0);
+              }}>
+              Volver
+            </button>
+          )}
+
+          <div className='d-flex align-items-center justify-content-center mt-3 pb-3'>
+            {formIndex === 0 && <TablaSecciones setFormIndex={setFormIndex} />}
+            {formIndex === 1 && <TablaEditarPaciente />}
+            {formIndex === 2 && <TablaAlimentacion />}
+            {formIndex === 3 && <TablaHabitos />}
+            {formIndex === 4 && <TablaAntecedentes />}
+            {formIndex === 5 && <TablaAntecedentesFamiliares />}
+            {formIndex === 6 && <TablaOclusion />}
+            {formIndex === 7 && <TablaTejidos />}
+            {formIndex === 8 && <TablaPerniciosos />}
+            {formIndex === 9 && <TablaErupcion />}
+            {formIndex === 10 && <TablaMedioBucalG />}
+            {formIndex === 11 && <TablaAmamantacion />}
           </div>
         </div>
       )}

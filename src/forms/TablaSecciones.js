@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const TablaSecciones = () => {
+export const TablaSecciones = ({ setFormIndex }) => {
   return (
     <div
       className='card px-4'
@@ -24,7 +24,11 @@ export const TablaSecciones = () => {
         <tr className='gy-5'>
           <td> Información</td>
           <td>
-            <button className='btn btn-outline-primary text-nowrap btn-sm me-2 ms-2 mb-4'>
+            <button
+              className='btn btn-outline-primary text-nowrap btn-sm me-2 ms-2 mb-4'
+              onClick={() => {
+                setFormIndex(1);
+              }}>
               {' '}
               Editar/Añadir Información{' '}
             </button>
@@ -40,7 +44,11 @@ export const TablaSecciones = () => {
         <tr>
           <td> Alimentación </td>
           <td>
-            <button className='btn btn-outline-primary text-nowrap btn-sm ms-2 mb-4'>
+            <button
+              className='btn btn-outline-primary text-nowrap btn-sm ms-2 mb-4'
+              onClick={() => {
+                setFormIndex(2);
+              }}>
               {' '}
               Editar/Añadir Información{' '}
             </button>
@@ -56,7 +64,11 @@ export const TablaSecciones = () => {
         <tr>
           <td> Hábitos de Higiene </td>
           <td>
-            <button className='btn btn-outline-primary text-nowrap btn-sm ms-2 mb-4'>
+            <button
+              className='btn btn-outline-primary text-nowrap btn-sm ms-2 mb-4'
+              onClick={() => {
+                setFormIndex(3);
+              }}>
               {' '}
               Editar/Añadir Información{' '}
             </button>
@@ -72,7 +84,11 @@ export const TablaSecciones = () => {
         <tr>
           <td> Antecedentes Personales </td>
           <td>
-            <button className='btn btn-outline-primary text-nowrap btn-sm ms-2 mb-4'>
+            <button
+              className='btn btn-outline-primary text-nowrap btn-sm ms-2 mb-4'
+              onClick={() => {
+                setFormIndex(4);
+              }}>
               {' '}
               Editar/Añadir Información{' '}
             </button>
@@ -88,7 +104,11 @@ export const TablaSecciones = () => {
         <tr>
           <td> Antecedentes Familiares </td>
           <td>
-            <button className='btn btn-outline-primary text-nowrap btn-sm ms-2 mb-4'>
+            <button
+              className='btn btn-outline-primary text-nowrap btn-sm ms-2 mb-4'
+              onClick={() => {
+                setFormIndex(5);
+              }}>
               {' '}
               Editar/Añadir Información{' '}
             </button>
@@ -104,7 +124,11 @@ export const TablaSecciones = () => {
         <tr>
           <td> Oclusión y Alineamiento </td>
           <td>
-            <button className='btn btn-outline-primary text-nowrap btn-sm ms-2 mb-4'>
+            <button
+              className='btn btn-outline-primary text-nowrap btn-sm ms-2 mb-4'
+              onClick={() => {
+                setFormIndex(6);
+              }}>
               {' '}
               Editar/Añadir Información{' '}
             </button>
@@ -120,7 +144,11 @@ export const TablaSecciones = () => {
         <tr>
           <td> Tejidos Blandos </td>
           <td>
-            <button className='btn btn-outline-primary text-nowrap btn-sm ms-2 mb-4'>
+            <button
+              className='btn btn-outline-primary text-nowrap btn-sm ms-2 mb-4'
+              onClick={() => {
+                setFormIndex(7);
+              }}>
               {' '}
               Editar/Añadir Información{' '}
             </button>
@@ -136,7 +164,11 @@ export const TablaSecciones = () => {
         <tr>
           <td> Habitos Perniciosos </td>
           <td>
-            <button className='btn btn-outline-primary text-nowrap btn-sm ms-2 mb-4'>
+            <button
+              className='btn btn-outline-primary text-nowrap btn-sm ms-2 mb-4'
+              onClick={() => {
+                setFormIndex(8);
+              }}>
               {' '}
               Editar/Añadir Información{' '}
             </button>
@@ -152,7 +184,11 @@ export const TablaSecciones = () => {
         <tr>
           <td> Erupción y Dentición </td>
           <td>
-            <button className='btn btn-outline-primary text-nowrap btn-sm ms-2 mb-4'>
+            <button
+              className='btn btn-outline-primary text-nowrap btn-sm ms-2 mb-4'
+              onClick={() => {
+                setFormIndex(9);
+              }}>
               {' '}
               Editar/Añadir Información{' '}
             </button>
@@ -168,7 +204,31 @@ export const TablaSecciones = () => {
         <tr>
           <td> Medio Bucal General </td>
           <td>
-            <button className='btn btn-outline-primary text-nowrap btn-sm ms-2 mb-4'>
+            <button
+              className='btn btn-outline-primary text-nowrap btn-sm ms-2 mb-4'
+              onClick={() => {
+                setFormIndex(10);
+              }}>
+              {' '}
+              Editar/Añadir Información{' '}
+            </button>
+          </td>
+          <td>
+            <button className='btn btn-outline-info text-nowrap btn-sm mb-4'>
+              {' '}
+              Ver Información{' '}
+            </button>
+          </td>
+        </tr>
+
+        <tr>
+          <td> Amamantación </td>
+          <td>
+            <button
+              className='btn btn-outline-primary text-nowrap btn-sm ms-2 mb-4'
+              onClick={() => {
+                setFormIndex(11);
+              }}>
               {' '}
               Editar/Añadir Información{' '}
             </button>
