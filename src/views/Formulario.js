@@ -43,7 +43,7 @@ export const Formulario = () => {
             ok: false,
           });
         });
-    }, 3500);
+    }, 1000);
   }, [id]);
 
   return (
@@ -86,7 +86,9 @@ export const Formulario = () => {
 
           <div className='d-flex align-items-center justify-content-center mt-3 pb-3'>
             {formIndex === 0 && <TablaSecciones setFormIndex={setFormIndex} />}
-            {formIndex === 1 && <TablaEditarPaciente />}
+            {formIndex === 1 && (
+              <TablaEditarPaciente IdPaciente={Data.data.IdPaciente} />
+            )}
             {formIndex === 2 && <TablaAlimentacion />}
             {formIndex === 3 && <TablaHabitos />}
             {formIndex === 4 && <TablaAntecedentes />}

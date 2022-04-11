@@ -37,7 +37,7 @@ export const TablaAmamantacion = () => {
       validate={(values) => {
         let errors = {};
 
-        if (values.TomaPechoEdad == 'Si') {
+        if (values.TomaPechoEdad === 'Si') {
           setLblTomaPechoEdad(true);
           setLblFrecuenciaAlimentacionPecho(true);
           if (
@@ -57,7 +57,7 @@ export const TablaAmamantacion = () => {
           errors.TipoAlimentacion = 'Debe de seleccionar este campo';
         }
 
-        if (values.UsabaBiberon == 'Si') {
+        if (values.UsabaBiberon === 'Si') {
           setLblUsabaBiberon(true);
           if (!values.LblUsabaBiberon) {
             errors.LblUsabaBiberon = 'Usted tiene que llenar este campo';
@@ -66,7 +66,7 @@ export const TablaAmamantacion = () => {
           setLblUsabaBiberon(false);
         }
 
-        if (values.AlimentacionNocturna == 'Si') {
+        if (values.AlimentacionNocturna === 'Si') {
           setLblAlimentacionNocturna(true);
           if (!values.LblAlimentacionNocturna) {
             errors.LblAlimentacionNocturna =
@@ -76,7 +76,7 @@ export const TablaAmamantacion = () => {
           setLblAlimentacionNocturna(false);
         }
 
-        if (values.UsabaChupon == 'Si') {
+        if (values.UsabaChupon === 'Si') {
           setLblUsabaChupon(true);
           if (!values.LblUsabaChupon) {
             errors.LblUsabaChupon = 'Usted tiene que llenar este campo';
@@ -94,7 +94,7 @@ export const TablaAmamantacion = () => {
           errors.ContenidoBiberon = 'Debe de llenar este campo';
         }
 
-        if (values.BebeConsumeSolidos == 'Si') {
+        if (values.BebeConsumeSolidos === 'Si') {
           setLblBebeConsumeSolidos(true);
           if (!values.LblBebeConsumeSolidos) {
             errors.LblBebeConsumeSolidos = 'Usted tiene que llenar este campo';
