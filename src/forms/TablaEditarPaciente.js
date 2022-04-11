@@ -266,33 +266,44 @@ export const TablaEditarPaciente = ({ IdPaciente }) => {
 
               <br></br>
 
-              <div className='mb-3'>
-                <label htmlFor='Genero' className='form-label'>
-                  Genero del paciente
-                </label>
+              {/*Radio Button Genero */}
+              <div className='mb-4 mt-2'>
+            <div id='my-radio-group'> Genero</div>
+            <div role='group' aria-labelledby='my-radio-group'>
+              <label>
                 <Field
-                  type='text'
+                  type='radio'
+                  className='form-check-input mx-2'
+                  name='Genero'
                   id='Genero'
-                  name='Genero'
-                  className={
-                    !touched.Genero
-                      ? 'form-control'
-                      : errors.Genero
-                      ? 'form-control is-invalid'
-                      : 'form-control is-valid'
-                  }
-                  placeholder='Genero'
+                  value='Masculino'
                 />
-                <ErrorMessage
+                Masculino
+              </label>
+              <br></br>
+              <label>
+                <Field
+                  type='radio'
+                  className='form-check-input mx-2'
                   name='Genero'
-                  component={() => (
-                    <div className='invalid-feedback'>{errors.Genero}</div>
-                  )}
+                  id='Genero'
+                  value='Femenino'
                 />
-                <div id='GeneroHelp' className='form-text'>
-                  Introduzca el genero del paciente, no abreviaturas.
-                </div>
-              </div>
+                Femenino
+              </label>
+              <br></br>
+              <label>
+                <Field
+                  type='radio'
+                  className='form-check-input mx-2'
+                  name='Genero'
+                  id='Genero'
+                  value='Otro'
+                />
+                Otro
+              </label>
+            </div>
+          </div>
 
               <br></br>
 
