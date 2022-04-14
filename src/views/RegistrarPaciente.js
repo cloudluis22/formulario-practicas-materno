@@ -3,6 +3,7 @@ import axios from 'axios';
 import uniqid from 'uniqid';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import  moment  from 'moment';
 
 export const RegistrarPaciente = () => {
   let navigate = useNavigate();
@@ -24,6 +25,7 @@ export const RegistrarPaciente = () => {
           Telefono: '',
           Celular: '',
           OtroContacto: '',
+
         }}
         validate={(values) => {
           let errors = {};
@@ -97,10 +99,15 @@ export const RegistrarPaciente = () => {
           return errors;
         }}
         onSubmit={async (values, { resetForm }) => {
+          
           const IdPaciente = uniqid();
+          const date = moment().format();
+          console.log(date)
+
           await axios
             .post('http://localhost:3001/api/v1/registrar-paciente', {
               id: IdPaciente,
+              Mydate: date,
               NombrePaciente: values.NombrePaciente,
               NombrePreferido: values.NombrePreferido,
               Edad: values.Edad,
