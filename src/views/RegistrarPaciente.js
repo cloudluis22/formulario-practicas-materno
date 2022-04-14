@@ -106,6 +106,7 @@ export const RegistrarPaciente = () => {
 
           await axios
             .post('http://localhost:3001/api/v1/registrar-paciente', {
+            
               id: IdPaciente,
               Mydate: date,
               NombrePaciente: values.NombrePaciente,
@@ -209,7 +210,7 @@ export const RegistrarPaciente = () => {
               </div>
 
               <br></br>
-
+                    {/* EdadPaciente */}
               <div className='mb-3'>
                 <label htmlFor='Edad' className='form-label'>
                   Edad del paciente
