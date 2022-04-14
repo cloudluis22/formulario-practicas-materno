@@ -22,7 +22,7 @@ export const TablaSecciones = ({ setFormIndex }) => {
       </p>
       <table className='table table-light table-borderless'>
         <tr className='gy-5'>
-          <td> Información</td>
+          <td className='text-light'> Información</td>
           <td>
             <button
               className='btn btn-outline-primary text-nowrap btn-sm me-2 ms-2 mb-4'
@@ -33,7 +33,7 @@ export const TablaSecciones = ({ setFormIndex }) => {
               Editar/Añadir Información{' '}
             </button>
           </td>
-          <td>
+          <td className='text-light'>
             <button className='btn btn-outline-info text-nowrap btn-sm mb-4'>
               {' '}
               Ver Información{' '}
@@ -42,7 +42,7 @@ export const TablaSecciones = ({ setFormIndex }) => {
         </tr>
 
         <tr>
-          <td> Alimentación </td>
+          <td className='text-light'> Alimentación </td>
           <td>
             <button
               className='btn btn-outline-primary text-nowrap btn-sm ms-2 mb-4'
@@ -62,7 +62,7 @@ export const TablaSecciones = ({ setFormIndex }) => {
         </tr>
 
         <tr>
-          <td> Hábitos de Higiene </td>
+          <td className='text-light'> Hábitos de Higiene </td>
           <td>
             <button
               className='btn btn-outline-primary text-nowrap btn-sm ms-2 mb-4'
@@ -82,7 +82,7 @@ export const TablaSecciones = ({ setFormIndex }) => {
         </tr>
 
         <tr>
-          <td> Antecedentes Personales </td>
+          <td className='text-light'> Antecedentes Personales </td>
           <td>
             <button
               className='btn btn-outline-primary text-nowrap btn-sm ms-2 mb-4'
@@ -102,7 +102,7 @@ export const TablaSecciones = ({ setFormIndex }) => {
         </tr>
 
         <tr>
-          <td> Antecedentes Familiares </td>
+          <td className='text-light'> Antecedentes Familiares </td>
           <td>
             <button
               className='btn btn-outline-primary text-nowrap btn-sm ms-2 mb-4'
@@ -122,7 +122,7 @@ export const TablaSecciones = ({ setFormIndex }) => {
         </tr>
 
         <tr>
-          <td> Oclusión y Alineamiento </td>
+          <td className='text-light'> Oclusión y Alineamiento </td>
           <td>
             <button
               className='btn btn-outline-primary text-nowrap btn-sm ms-2 mb-4'
@@ -142,7 +142,7 @@ export const TablaSecciones = ({ setFormIndex }) => {
         </tr>
 
         <tr>
-          <td> Tejidos Blandos </td>
+          <td className='text-light'> Tejidos Blandos </td>
           <td>
             <button
               className='btn btn-outline-primary text-nowrap btn-sm ms-2 mb-4'
@@ -162,7 +162,7 @@ export const TablaSecciones = ({ setFormIndex }) => {
         </tr>
 
         <tr>
-          <td> Habitos Perniciosos </td>
+          <td className='text-light'> Habitos Perniciosos </td>
           <td>
             <button
               className='btn btn-outline-primary text-nowrap btn-sm ms-2 mb-4'
@@ -182,7 +182,7 @@ export const TablaSecciones = ({ setFormIndex }) => {
         </tr>
 
         <tr>
-          <td> Erupción y Dentición </td>
+          <td className='text-light'> Erupción y Dentición </td>
           <td>
             <button
               className='btn btn-outline-primary text-nowrap btn-sm ms-2 mb-4'
@@ -202,7 +202,7 @@ export const TablaSecciones = ({ setFormIndex }) => {
         </tr>
 
         <tr>
-          <td> Medio Bucal General </td>
+          <td className='text-light'> Medio Bucal General </td>
           <td>
             <button
               className='btn btn-outline-primary text-nowrap btn-sm ms-2 mb-4'
@@ -222,7 +222,7 @@ export const TablaSecciones = ({ setFormIndex }) => {
         </tr>
 
         <tr>
-          <td> Amamantación </td>
+          <td className='text-light'> Amamantación </td>
           <td>
             <button
               className='btn btn-outline-primary text-nowrap btn-sm ms-2 mb-4'

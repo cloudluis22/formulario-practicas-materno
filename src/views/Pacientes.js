@@ -107,7 +107,7 @@ export const Pacientes = () => {
 
       {!Data.loading && Data.ok && (
         <div className='container-md'>
-          <table className='table table-info table-striped table-responsive'>
+          <table className='table table-striped table-responsive'>
             <thead>
               <tr>
                 <th className='col'> ID del Paciente </th>
@@ -127,7 +127,7 @@ export const Pacientes = () => {
                     <td> {paciente.Celular} </td>
                     <td>
                       <button
-                        className='btn btn-sm btn-success me-2'
+                        className='btn btn-sm me-2 btn-info-paciente'
                         onClick={() => {
                           navigate(`/edicion/${paciente.IdPaciente}`);
                         }}>

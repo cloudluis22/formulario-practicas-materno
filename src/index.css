@@ -12,8 +12,16 @@
   width: 100%;
   height: 100%;
   position: fixed;
-  background-color: #fbda61;
-  background-image: linear-gradient(45deg, #fbda61 0%, #ff5acd 100%);
+  background-color: #9cacff;
+  background-image: linear-gradient(43deg, #9cacff 2%, #d170ff 66%);
+}
+
+.btn-info-paciente {
+  background-color: #8ec5fc;
+}
+
+.btn-info-paciente:hover {
+  background-color: #3975b9;
 }
 
 .form-settings {
