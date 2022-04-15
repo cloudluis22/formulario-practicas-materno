@@ -4,12 +4,6 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 
 export const TablaAlimentacion = ({ IdPaciente }) => {
-  const [Data, setData] = useState({
-    loading: true,
-    data: [],
-    ok: false,
-  });
-
   let formValues = {
     ComidasDiarias: '',
     Carne: '',
@@ -32,39 +26,42 @@ export const TablaAlimentacion = ({ IdPaciente }) => {
     Te: '',
   };
 
+  const [Data, setData] = useState({
+    loading: true,
+    data: [],
+    ok: false,
+  });
+
   const [edit, setEdit] = useState(false);
 
   useEffect(() => {
-    setTimeout(() => {
-      axios
-        .get(`http://localhost:3001/api/v1/alimentacion/${IdPaciente}`)
-        .then((response) => {
-          setData({
-            loading: false,
-            data: response.data.alimentacion,
-            ok: true,
-          });
-
-          if (Data.data.length === 0) {
-            setEdit(false);
-          } else {
-            setEdit(true);
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-          setData({
-            loading: false,
-            data: [],
-            ok: false,
-          });
+    axios
+      .get(`http://localhost:3001/api/v1/alimentacion/${IdPaciente}`)
+      .then((response) => {
+        setData({
+          loading: false,
+          data: response.data.alimentacion,
+          ok: true,
         });
-    }, 1000);
+
+        if (Data.data.length === 0) {
+          setEdit(false);
+        } else {
+          setEdit(true);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        setData({
+          loading: false,
+          data: [],
+          ok: false,
+        });
+      });
   }, [IdPaciente, Data.data]);
 
   if (Data.data.length > 0) {
     formValues = Data.data[0];
-    console.log(formValues);
   }
 
   if (!Data.loading && Data.ok) {
@@ -242,7 +239,7 @@ export const TablaAlimentacion = ({ IdPaciente }) => {
                 Comidas Diarias del paciente
               </label>
               <Field
-                type='number'
+                type='tel'
                 id='ComidasDiarias'
                 name='ComidasDiarias'
                 className={
