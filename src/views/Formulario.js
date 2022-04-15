@@ -89,7 +89,9 @@ export const Formulario = () => {
             {formIndex === 1 && (
               <TablaEditarPaciente IdPaciente={Data.data.IdPaciente} />
             )}
-            {formIndex === 2 && <TablaAlimentacion />}
+            {formIndex === 2 && (
+              <TablaAlimentacion IdPaciente={Data.data.IdPaciente} />
+            )}
             {formIndex === 3 && <TablaHabitos />}
             {formIndex === 4 && <TablaAntecedentes />}
             {formIndex === 5 && <TablaAntecedentesFamiliares />}

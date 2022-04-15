@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 
 export const TablaEditarPaciente = ({ IdPaciente }) => {
   let navigate = useNavigate();
-  let emptyFormValues = {
+  let formValues = {
     NombrePaciente: '',
     NombrePreferido: '',
     Edad: '',
@@ -52,13 +52,13 @@ export const TablaEditarPaciente = ({ IdPaciente }) => {
   }, [IdPaciente]);
 
   if (Data.ok) {
-    emptyFormValues = Data.data;
+    formValues = Data.data;
   }
 
   if (!Data.loading && Data.ok) {
     return (
       <Formik
-        initialValues={emptyFormValues}
+        initialValues={formValues}
         validate={(values) => {
           let errors = {};
 
@@ -268,42 +268,42 @@ export const TablaEditarPaciente = ({ IdPaciente }) => {
 
               {/*Radio Button Genero */}
               <div className='mb-4 mt-2'>
-            <div id='my-radio-group'> Genero</div>
-            <div role='group' aria-labelledby='my-radio-group'>
-              <label>
-                <Field
-                  type='radio'
-                  className='form-check-input mx-2'
-                  name='Genero'
-                  id='Genero'
-                  value='Masculino'
-                />
-                Masculino
-              </label>
-              <br></br>
-              <label>
-                <Field
-                  type='radio'
-                  className='form-check-input mx-2'
-                  name='Genero'
-                  id='Genero'
-                  value='Femenino'
-                />
-                Femenino
-              </label>
-              <br></br>
-              <label>
-                <Field
-                  type='radio'
-                  className='form-check-input mx-2'
-                  name='Genero'
-                  id='Genero'
-                  value='Otro'
-                />
-                Otro
-              </label>
-            </div>
-          </div>
+                <div id='my-radio-group'> Genero</div>
+                <div role='group' aria-labelledby='my-radio-group'>
+                  <label>
+                    <Field
+                      type='radio'
+                      className='form-check-input mx-2'
+                      name='Genero'
+                      id='Genero'
+                      value='Masculino'
+                    />
+                    Masculino
+                  </label>
+                  <br></br>
+                  <label>
+                    <Field
+                      type='radio'
+                      className='form-check-input mx-2'
+                      name='Genero'
+                      id='Genero'
+                      value='Femenino'
+                    />
+                    Femenino
+                  </label>
+                  <br></br>
+                  <label>
+                    <Field
+                      type='radio'
+                      className='form-check-input mx-2'
+                      name='Genero'
+                      id='Genero'
+                      value='Otro'
+                    />
+                    Otro
+                  </label>
+                </div>
+              </div>
 
               <br></br>
 
