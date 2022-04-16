@@ -26,6 +26,7 @@
   flex-direction: column;
   z-index: 1;
   height: 750px;
+  overflow: auto;
 }
 
 .close-modal {

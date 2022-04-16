@@ -1,5 +1,5 @@
 import React from 'react';
 
-export const Amamantacion = () => {
+export const Amamantacion = ({ idPaciente }) => {
   return <div>Amamantacion</div>;
 };

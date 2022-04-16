@@ -1,5 +1,5 @@
 import React from 'react';
 
-export const ErupcionDenticion = () => {
+export const ErupcionDenticion = ({ idPaciente }) => {
   return <div>ErupcionDenticion</div>;
 };
