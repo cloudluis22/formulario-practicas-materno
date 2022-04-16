@@ -282,34 +282,8 @@ export const TablaPerniciosos = () => {
             </div>
           </div>
 
-          <div className='mb-4 mt-2'>
-            <div id='my-radio-group'>Otros</div>
-            <div role='group' aria-labelledby='my-radio-group'>
-              <label>
-                <Field
-                  type='radio'
-                  className='form-check-input mx-2'
-                  name='Otros'
-                  id='Otros'
-                  value='Si'
-                />
-                Si
-              </label>
-              <br></br>
-              <label>
-                <Field
-                  type='radio'
-                  className='form-check-input mx-2'
-                  name='Otros'
-                  id='Otros'
-                  value='No'
-                />
-                No
-              </label>
-            </div>
-          </div>
 
-          {LblOtros && (
+          
             <div className='mb-3'>
               <label htmlFor='LblOtros' className='form-label'>
                 Otros:
@@ -334,7 +308,7 @@ export const TablaPerniciosos = () => {
                 )}
               />
             </div>
-          )}
+          )
 
           <button className='btn btn-primary' type='submit'>
             Subir informacion del paciente

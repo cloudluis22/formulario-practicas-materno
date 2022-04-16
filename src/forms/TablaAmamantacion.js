@@ -68,7 +68,6 @@ export const TablaAmamantacion = ({ IdPaciente }) => {
 
   if (Data.data.length > 0) {
     formValues = Data.data[0];
-    console.log(formValues);
   }
 
   if (!Data.loading && Data.ok) {
