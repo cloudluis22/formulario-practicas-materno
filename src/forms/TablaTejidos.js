@@ -31,7 +31,7 @@ export const TablaTejidos = ({ IdPaciente }) => {
       .then((response) => {
         setData({
           loading: false,
-          data: response.data.alimentacion,
+          data: response.data.tejidosblandos,
           ok: true,
         });
 

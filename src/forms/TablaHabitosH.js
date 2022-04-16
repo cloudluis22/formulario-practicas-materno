@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 export const TablaHabitos = ({ IdPaciente }) => {
   let formValues = {
     EncargadoCepillado: '',
-    CepilladosDiaros: '',
+    CepilladosDiarios: '',
     MarcaPastaDental: '',
     CepilladoDiarioDormir: '',
     EnjuagueBucal: '',
@@ -23,11 +23,11 @@ export const TablaHabitos = ({ IdPaciente }) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/api/v1/alimentacion/${IdPaciente}`)
+      .get(`http://localhost:3001/api/v1/habitos-higiene/${IdPaciente}`)
       .then((response) => {
         setData({
           loading: false,
-          data: response.data.alimentacion,
+          data: response.data.habitoshigiene,
           ok: true,
         });
 
@@ -64,8 +64,8 @@ export const TablaHabitos = ({ IdPaciente }) => {
               'Por favor ingrese la persona la cual se encarga del cepillado de dientes del paciente.';
           }
 
-          if (!values.CepilladosDiaros) {
-            errors.CepilladosDiaros =
+          if (!values.CepilladosDiarios) {
+            errors.CepilladosDiarios =
               'Por favor ingrese el no. de veces que se cepilla los dientes al día.';
           }
 
@@ -81,7 +81,7 @@ export const TablaHabitos = ({ IdPaciente }) => {
           let submitValues = {
             id: IdPaciente,
             EncargadoCepillado: values.EncargadoCepillado,
-            CepilladosDiaros: values.CepilladosDiaros,
+            CepilladosDiarios: values.CepilladosDiarios,
             MarcaPastaDental: values.MarcaPastaDental,
             CepilladoDiarioDormir: values.CepilladoDiarioDormir,
             EnjuagueBucal: values.EnjuagueBucal,
@@ -91,7 +91,7 @@ export const TablaHabitos = ({ IdPaciente }) => {
           if (!edit) {
             await axios
               .post(
-                `http://localhost:3001/api/v1/alimentacion/${IdPaciente}`,
+                `http://localhost:3001/api/v1/habitos-higiene/${IdPaciente}`,
                 submitValues
               )
               .then((response) => {
@@ -112,7 +112,7 @@ export const TablaHabitos = ({ IdPaciente }) => {
           } else {
             await axios
               .put(
-                `http://localhost:3001/api/v1/alimentacion/${IdPaciente}`,
+                `http://localhost:3001/api/v1/habitos-higiene/${IdPaciente}`,
                 submitValues
               )
               .then((response) => {
@@ -172,8 +172,8 @@ export const TablaHabitos = ({ IdPaciente }) => {
             </label>
             <Field
               type='text'
-              id='CepilladosDiaros'
-              name='CepilladosDiaros'
+              id='CepilladosDiarios'
+              name='CepilladosDiarios'
               className={
                 !touched.CepilladosDiaros
                   ? 'form-control'
@@ -184,10 +184,10 @@ export const TablaHabitos = ({ IdPaciente }) => {
               placeholder='No. de veces al día que se cepilla los dientes.'
             />
             <ErrorMessage
-              name='CepilladosDiaros'
+              name='CepilladosDiarios'
               component={() => (
                 <div className='invalid-feedback'>
-                  {errors.CepilladosDiaros}
+                  {errors.CepilladosDiarios}
                 </div>
               )}
             />

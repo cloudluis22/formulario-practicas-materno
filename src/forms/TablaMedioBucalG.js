@@ -22,11 +22,11 @@ export const TablaMedioBucalG = ({ IdPaciente }) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/api/v1/alimentacion/${IdPaciente}`)
+      .get(`http://localhost:3001/api/v1/medio-bucal-general/${IdPaciente}`)
       .then((response) => {
         setData({
           loading: false,
-          data: response.data.alimentacion,
+          data: response.data.mediobucalgeneral,
           ok: true,
         });
 

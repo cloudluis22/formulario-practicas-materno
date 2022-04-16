@@ -12,7 +12,6 @@ export const TablaPerniciosos = ({ IdPaciente }) => {
     MorderseLabio: '',
     MorderseLasUnas: '',
     DeglucionAtipica: '',
-    Otros: '',
     LblOtros: '',
   };
 
@@ -30,7 +29,7 @@ export const TablaPerniciosos = ({ IdPaciente }) => {
       .then((response) => {
         setData({
           loading: false,
-          data: response.data.alimentacion,
+          data: response.data.habitosperniciosos,
           ok: true,
         });
 
@@ -88,11 +87,8 @@ export const TablaPerniciosos = ({ IdPaciente }) => {
             errors.DeglucionAtipica = 'Debe seleccionar este campo';
           }
 
-          if (values.Otros === 'Si') {
-            if (!values.LblOtros) {
-              errors.LblOtros = 'Usted tiene que llenar este campo';
-            }
-          } else {
+          if (!values.LblOtros) {
+            errors.LblOtros = 'Usted tiene que llenar este campo';
           }
 
           console.log('errores');
@@ -108,7 +104,6 @@ export const TablaPerniciosos = ({ IdPaciente }) => {
             MorderseLabio: values.MorderseLabio,
             MorderseLasUnas: values.MorderseLasUnas,
             DeglucionAtipica: values.DeglucionAtipica,
-            Otros: values.Otros,
             LblOtros: values.LblOtros,
           };
 
@@ -322,10 +317,6 @@ export const TablaPerniciosos = ({ IdPaciente }) => {
               </div>
             </div>
 
-<<<<<<< HEAD
-
-          
-=======
             <div className='mb-4 mt-2'>
               <div id='my-radio-group'>Deglucion Atipica</div>
               <div role='group' aria-labelledby='my-radio-group'>
@@ -353,7 +344,6 @@ export const TablaPerniciosos = ({ IdPaciente }) => {
               </div>
             </div>
 
->>>>>>> eeecb13f4ccd323c612598312455db0cfb85c64f
             <div className='mb-3'>
               <label htmlFor='LblOtros' className='form-label'>
                 Otros:
@@ -378,10 +368,6 @@ export const TablaPerniciosos = ({ IdPaciente }) => {
                 )}
               />
             </div>
-<<<<<<< HEAD
-          )
-=======
->>>>>>> eeecb13f4ccd323c612598312455db0cfb85c64f
 
             <button className='btn btn-primary' type='submit'>
               Subir informacion del paciente

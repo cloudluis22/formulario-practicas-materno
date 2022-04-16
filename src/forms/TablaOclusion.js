@@ -28,11 +28,11 @@ export const TablaOclusion = ({ IdPaciente }) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/api/v1/oclusion-alineamiento/${IdPaciente}`)
+      .get(`http://localhost:3001/api/v1/oclusion-y-alineamiento/${IdPaciente}`)
       .then((response) => {
         setData({
           loading: false,
-          data: response.data.alimentacion,
+          data: response.data.oclusionyalinamiento,
           ok: true,
         });
 
@@ -54,6 +54,7 @@ export const TablaOclusion = ({ IdPaciente }) => {
 
   if (Data.data.length > 0) {
     formValues = Data.data[0];
+    console.log(formValues);
   }
 
   if (!Data.loading && Data.ok) {
@@ -109,31 +110,23 @@ export const TablaOclusion = ({ IdPaciente }) => {
         onSubmit={async (values, { resetForm }) => {
           let submitValues = {
             id: IdPaciente,
-            ComidasDiarias: values.ComidasDiarias,
-            Carne: values.Carne,
-            Leche: values.Leche,
-            Pan: values.Pan,
-            Frutas: values.Frutas,
-            Yoghurt: values.Yoghurt,
-            Jugos: values.Jugos,
-            Vegetales: values.Vegetales,
-            Dulces: values.Dulces,
-            Gomitas: values.Gomitas,
-            Huevo: values.Huevo,
-            Galletas: values.Galletas,
-            Chocolate: values.Chocolate,
-            Pescado: values.Pescado,
-            Mermelada: values.Mermelada,
-            Chicle: values.Chicle,
-            Agua: values.Agua,
-            Yakult: values.Yakult,
-            Te: values.Te,
+            LineaMedia: values.LineaMedia,
+            PlanoTerminal: values.PlanoTerminal,
+            ClaseMolar: values.ClaseMolar,
+            EspaciosPrimates: values.EspaciosPrimates,
+            EspaciosFisiologicos: values.EspaciosFisiologicos,
+            Traslape: values.Traslape,
+            Sobremordida: values.Sobremordida,
+            MordidaAbierta: values.MordidaAbierta,
+            MordidaProfunda: values.MordidaProfunda,
+            MalposicionDentaria: values.MalposicionDentaria,
+            Diastema: values.Diastema,
           };
 
           if (!edit) {
             await axios
               .post(
-                `http://localhost:3001/api/v1/alimentacion/${IdPaciente}`,
+                `http://localhost:3001/api/v1/oclusion-y-alineamiento/${IdPaciente}`,
                 submitValues
               )
               .then((response) => {
@@ -154,7 +147,7 @@ export const TablaOclusion = ({ IdPaciente }) => {
           } else {
             await axios
               .put(
-                `http://localhost:3001/api/v1/alimentacion/${IdPaciente}`,
+                `http://localhost:3001/api/v1/oclusion-y-alineamiento/${IdPaciente}`,
                 submitValues
               )
               .then((response) => {
