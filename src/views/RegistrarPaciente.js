@@ -3,13 +3,16 @@ import axios from 'axios';
 import uniqid from 'uniqid';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
-import  moment  from 'moment';
+import moment from 'moment';
 
 export const RegistrarPaciente = () => {
   let navigate = useNavigate();
   return (
     <div className='bcg-color d-flex justify-content-center flex-column align-items-center'>
-      <h1 className='display-2 text-light'> Registro de Pacientes </h1>
+      <h1 className='display-2 text-light animate__animated animate__fadeIn'>
+        {' '}
+        Registro de Pacientes{' '}
+      </h1>
       <Formik
         initialValues={{
           NombrePaciente: '',
@@ -25,7 +28,6 @@ export const RegistrarPaciente = () => {
           Telefono: '',
           Celular: '',
           OtroContacto: '',
-
         }}
         validate={(values) => {
           let errors = {};
@@ -99,14 +101,12 @@ export const RegistrarPaciente = () => {
           return errors;
         }}
         onSubmit={async (values, { resetForm }) => {
-          
           const IdPaciente = uniqid();
           const date = moment().format();
-          console.log(date)
+          console.log(date);
 
           await axios
             .post('http://localhost:3001/api/v1/registrar-paciente', {
-            
               id: IdPaciente,
               Mydate: date,
               NombrePaciente: values.NombrePaciente,
@@ -143,7 +143,7 @@ export const RegistrarPaciente = () => {
         }}>
         {({ errors, touched }) => (
           <Form
-            className='card px-5 mb-3
+            className='card px-5 mb-3 animate__animated animate__backInUp
             '
             style={{ width: '550px', overflow: 'auto' }}>
             <br></br>
@@ -210,7 +210,7 @@ export const RegistrarPaciente = () => {
               </div>
 
               <br></br>
-                    {/* EdadPaciente */}
+              {/* EdadPaciente */}
               <div className='mb-3'>
                 <label htmlFor='Edad' className='form-label'>
                   Edad del paciente
@@ -242,46 +242,44 @@ export const RegistrarPaciente = () => {
 
               <br></br>
 
-
-                      {/*Radio Button Genero */}
-                      <div className='mb-4 mt-2'>
-            <div id='my-radio-group'> Genero</div>
-            <div role='group' aria-labelledby='my-radio-group'>
-              <label>
-                <Field
-                  type='radio'
-                  className='form-check-input mx-2'
-                  name='Genero'
-                  id='Genero'
-                  value='Masculino'
-                />
-                Masculino
-              </label>
-              <br></br>
-              <label>
-                <Field
-                  type='radio'
-                  className='form-check-input mx-2'
-                  name='Genero'
-                  id='Genero'
-                  value='Femenino'
-                />
-                Femenino
-              </label>
-              <br></br>
-              <label>
-                <Field
-                  type='radio'
-                  className='form-check-input mx-2'
-                  name='Genero'
-                  id='Genero'
-                  value='Otro'
-                />
-                Otro
-              </label>
-            </div>
-          </div>
-
+              {/*Radio Button Genero */}
+              <div className='mb-4 mt-2'>
+                <div id='my-radio-group'> Genero</div>
+                <div role='group' aria-labelledby='my-radio-group'>
+                  <label>
+                    <Field
+                      type='radio'
+                      className='form-check-input mx-2'
+                      name='Genero'
+                      id='Genero'
+                      value='Masculino'
+                    />
+                    Masculino
+                  </label>
+                  <br></br>
+                  <label>
+                    <Field
+                      type='radio'
+                      className='form-check-input mx-2'
+                      name='Genero'
+                      id='Genero'
+                      value='Femenino'
+                    />
+                    Femenino
+                  </label>
+                  <br></br>
+                  <label>
+                    <Field
+                      type='radio'
+                      className='form-check-input mx-2'
+                      name='Genero'
+                      id='Genero'
+                      value='Otro'
+                    />
+                    Otro
+                  </label>
+                </div>
+              </div>
 
               <div className='mb-3'>
                 <label htmlFor='GustosPersonales' className='form-label'>

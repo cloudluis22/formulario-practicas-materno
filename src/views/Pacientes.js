@@ -77,11 +77,11 @@ export const Pacientes = () => {
 
   return (
     <div className='bcg-main-color'>
-      <h1 className='text-white text-center mt-3'>
+      <h1 className='text-white text-center mt-3 animate__animated animate__fadeIn'>
         Información de los Pacientes
       </h1>
       <button
-        className='btn btn-primary ms-5 mb-3'
+        className='btn btn-primary ms-5 mb-3 animate__animated animate__fadeIn'
         onClick={() => navigate('/registro')}>
         <FontAwesomeIcon icon={faPlus} /> Nuevo Paciente
       </button>
@@ -107,7 +107,7 @@ export const Pacientes = () => {
 
       {!Data.loading && Data.ok && (
         <div className='container-md'>
-          <table className='table table-striped table-responsive'>
+          <table className='table table-striped table-responsive animate__animated animate__fadeInUp'>
             <thead>
               <tr>
                 <th className='col'> ID del Paciente </th>

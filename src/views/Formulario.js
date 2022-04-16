@@ -65,13 +65,13 @@ export const Formulario = () => {
 
       {!Data.loading && Data.ok && (
         <div style={{ width: '100%', height: '100%' }}>
-          <h1 className='text-white text-center mt-3'>
+          <h1 className='text-white text-center mt-3 animate__animated animate__fadeIn'>
             Información del Paciente
           </h1>
-          <h2 className='text-white text-center mt-2'>
+          <h2 className='text-white text-center mt-2 animate__animated animate__fadeIn'>
             {Data.data.NombrePaciente}
           </h2>
-          <h3 className='text-white text-center mt-2'>
+          <h3 className='text-white text-center mt-2 animate__animated animate__fadeIn'>
             ID: {Data.data.IdPaciente}
           </h3>
           {formIndex !== 0 && (
@@ -84,7 +84,7 @@ export const Formulario = () => {
             </button>
           )}
 
-          <div className='d-flex align-items-center justify-content-center mt-3 pb-3'>
+          <div className='d-flex align-items-center justify-content-center mt-3 pb-3 animate__animated animate__backInUp'>
             {formIndex === 0 && <TablaSecciones setFormIndex={setFormIndex} />}
             {formIndex === 1 && (
               <TablaEditarPaciente IdPaciente={Data.data.IdPaciente} />
@@ -102,7 +102,9 @@ export const Formulario = () => {
             {formIndex === 8 && <TablaPerniciosos />}
             {formIndex === 9 && <TablaErupcion />}
             {formIndex === 10 && <TablaMedioBucalG />}
-            {formIndex === 11 && <TablaAmamantacion />}
+            {formIndex === 11 && (
+              <TablaAmamantacion IdPaciente={Data.data.IdPaciente} />
+            )}
           </div>
         </div>
       )}

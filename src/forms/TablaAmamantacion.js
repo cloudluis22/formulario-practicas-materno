@@ -4,13 +4,13 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 
 export const TablaAmamantacion = ({ IdPaciente }) => {
-  const [LblTomaPechoEdad, setLblTomaPechoEdad] = useState(false);
+  const [LblTomaPechoEdad, setLblTomaPechoEdad] = useState(true);
   const [LblFrecuenciaAlimentacionPecho, setLblFrecuenciaAlimentacionPecho] =
-    useState(false);
-  const [LblUsabaBiberon, setLblUsabaBiberon] = useState(false);
-  const [LblUsabaChupon, setLblUsabaChupon] = useState(false);
-  const [LblAlimentacionNocturna, setLblAlimentacionNocturna] = useState(false);
-  const [LblBebeConsumeSolidos, setLblBebeConsumeSolidos] = useState(false);
+    useState(true);
+  const [LblUsabaBiberon, setLblUsabaBiberon] = useState(true);
+  const [LblUsabaChupon, setLblUsabaChupon] = useState(true);
+  const [LblAlimentacionNocturna, setLblAlimentacionNocturna] = useState(true);
+  const [LblBebeConsumeSolidos, setLblBebeConsumeSolidos] = useState(true);
 
   const [Data, setData] = useState({
     loading: true,
@@ -24,7 +24,7 @@ export const TablaAmamantacion = ({ IdPaciente }) => {
     TomaPechoEdad: '',
     LblTomaPechoEdad: '',
     LblFrecuenciaAlimentacionPecho: '',
-    TipoAlimentacion: '',
+    TipoDeAlimentacion: '',
     UsabaBiberon: '',
     LblUsabaBiberon: '',
     ContenidoBiberon: '',
@@ -41,31 +41,29 @@ export const TablaAmamantacion = ({ IdPaciente }) => {
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      axios
-        .get(`http://localhost:3001/api/v1/amamantacion/${IdPaciente}`)
-        .then((response) => {
-          setData({
-            loading: false,
-            data: response.data.alimentacion,
-            ok: true,
-          });
-
-          if (Data.data.length === 0) {
-            setEdit(false);
-          } else {
-            setEdit(true);
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-          setData({
-            loading: false,
-            data: [],
-            ok: false,
-          });
+    axios
+      .get(`http://localhost:3001/api/v1/alimentacion-bebe/${IdPaciente}`)
+      .then((response) => {
+        setData({
+          loading: false,
+          data: response.data.alimentacionbebe,
+          ok: true,
         });
-    }, 1000);
+
+        if (Data.data.length === 0) {
+          setEdit(false);
+        } else {
+          setEdit(true);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        setData({
+          loading: false,
+          data: [],
+          ok: false,
+        });
+      });
   }, [IdPaciente, Data.data]);
 
   if (Data.data.length > 0) {
@@ -96,8 +94,8 @@ export const TablaAmamantacion = ({ IdPaciente }) => {
             setLblFrecuenciaAlimentacionPecho(false);
           }
 
-          if (!values.TipoAlimentacion) {
-            errors.TipoAlimentacion = 'Debe de seleccionar este campo';
+          if (!values.TipoDeAlimentacion) {
+            errors.TipoDeAlimentacion = 'Debe de seleccionar este campo';
           }
 
           if (values.UsabaBiberon === 'Si') {
@@ -155,13 +153,16 @@ export const TablaAmamantacion = ({ IdPaciente }) => {
             LblTomaPechoEdad: values.LblTomaPechoEdad,
             LblFrecuenciaAlimentacionPecho:
               values.LblFrecuenciaAlimentacionPecho,
-            TipoAlimentacion: values.TipoAlimentacion,
+            TipoDeAlimentacion: values.TipoDeAlimentacion,
+            UsabaBiberon: values.UsabaBiberon,
             LblUsabaBiberon: values.LblUsabaBiberon,
             ContenidoBiberon: values.ContenidoBiberon,
             EdadYaNoTomaBiberon: values.EdadYaNoTomaBiberon,
+            UsabaChupon: values.UsabaChupon,
             LblUsabaChupon: values.LblUsabaChupon,
             ContenidoChupon: values.ContenidoChupon,
             EdadYaNoUsaChupon: values.EdadYaNoTomaBiberon,
+            AlimentacionNocturna: values.AlimentacionNocturna,
             LblAlimentacionNocturna: values.LblAlimentacionNocturna,
             LimpiaSuBoquita: values.LimpiaSuBoquita,
             BebeConsumeSolidos: values.BebeConsumeSolidos,
@@ -171,7 +172,7 @@ export const TablaAmamantacion = ({ IdPaciente }) => {
           if (!edit) {
             await axios
               .post(
-                `http://localhost:3001/api/v1/amamantacion/${IdPaciente}`,
+                `http://localhost:3001/api/v1/alimentacion-bebe/${IdPaciente}`,
                 submitValues
               )
               .then((response) => {
@@ -192,7 +193,7 @@ export const TablaAmamantacion = ({ IdPaciente }) => {
           } else {
             await axios
               .put(
-                `http://localhost:3001/api/v1/amamantacion/${IdPaciente}`,
+                `http://localhost:3001/api/v1/alimentacion-bebe/${IdPaciente}`,
                 submitValues
               )
               .then((response) => {
@@ -312,8 +313,8 @@ export const TablaAmamantacion = ({ IdPaciente }) => {
                   <Field
                     type='radio'
                     className='form-check-input mx-2'
-                    name='TipoAlimentacion'
-                    id='TipoAlimentacion'
+                    name='TipoDeAlimentacion'
+                    id='TipoDeAlimentacion'
                     value='LactanciaExclusiva'
                   />
                   Lactancia Exclusiva
@@ -323,8 +324,8 @@ export const TablaAmamantacion = ({ IdPaciente }) => {
                   <Field
                     type='radio'
                     className='form-check-input mx-2'
-                    name='TipoAlimentacion'
-                    id='TipoAlimentacion'
+                    name='TipoDeAlimentacion'
+                    id='TipoDeAlimentacion'
                     value='Mixta'
                   />
                   Mixta
@@ -334,8 +335,8 @@ export const TablaAmamantacion = ({ IdPaciente }) => {
                   <Field
                     type='radio'
                     className='form-check-input mx-2'
-                    name='TipoAlimentacion'
-                    id='TipoAlimentacion'
+                    name='TipoDeAlimentacion'
+                    id='TipoDeAlimentacion'
                     value='Biberón'
                   />
                   Biberón
@@ -523,8 +524,8 @@ export const TablaAmamantacion = ({ IdPaciente }) => {
               </label>
               <Field
                 type='text'
-                id='EdadYaNoUsaChupon'
-                name='EdadYaNoUsaChupon'
+                id='ContenidoChupon'
+                name='ContenidoChupon'
                 className={
                   !touched.ContenidoChupon
                     ? 'form-control'
@@ -542,12 +543,12 @@ export const TablaAmamantacion = ({ IdPaciente }) => {
                   </div>
                 )}
               />
-              <div id='EdadYaNoUsaChuponHelp' className='form-text'>
+              <div id='ContenidoChuponHelp' className='form-text'>
                 se debe ingresar el contenido del chupón
               </div>
             </div>
 
-            <label htmlFor='EdadYaNoTomaBiberon' className='form-label'>
+            <label htmlFor='EdadYaNoUsaChupon' className='form-label'>
               ¿Hasta que edad utilizó chupón? (años)
             </label>
             <Field
