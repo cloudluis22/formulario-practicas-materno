@@ -1,280 +1,352 @@
 import React, { useEffect, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import axios from 'axios';
-import uniqid from 'uniqid';
 import Swal from 'sweetalert2';
 
-export const TablaMedioBucalG = () => {
-  return (
-    <Formik
-      initialValues={{
-        Higiene: '',
-        PlacaDentobacteriana: '',
-        PHSaliva: '',
-        Localizacion: '',
-        CalculoDental: '',
-      }}
-      validate={(values) => {
-        let errors = {};
+export const TablaMedioBucalG = ({ IdPaciente }) => {
+  let formValues = {
+    Higiene: '',
+    PlacaDentobacteriana: '',
+    PHSaliva: '',
+    Localizacion: '',
+    CalculoDental: '',
+  };
 
-        if (!values.Higiene) {
-          errors.Higiene = 'Debe seleccionar este campo';
+  const [Data, setData] = useState({
+    loading: true,
+    data: [],
+    ok: false,
+  });
+
+  const [edit, setEdit] = useState(false);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3001/api/v1/alimentacion/${IdPaciente}`)
+      .then((response) => {
+        setData({
+          loading: false,
+          data: response.data.alimentacion,
+          ok: true,
+        });
+
+        if (Data.data.length === 0) {
+          setEdit(false);
+        } else {
+          setEdit(true);
         }
+      })
+      .catch((error) => {
+        console.log(error);
+        setData({
+          loading: false,
+          data: [],
+          ok: false,
+        });
+      });
+  }, [IdPaciente, Data.data]);
 
-        if (!values.PlacaDentobacteriana) {
-          errors.PlacaDentobacteriana = 'Debe seleccionar este campo';
-        }
+  if (Data.data.length > 0) {
+    formValues = Data.data[0];
+  }
 
-        if (!values.PHSaliva) {
-          errors.PHSaliva = 'Por favor ingrese el PH de Saliva (1-14)';
-        }
+  if (!Data.loading && Data.ok) {
+    return (
+      <Formik
+        initialValues={formValues}
+        validate={(values) => {
+          let errors = {};
 
-        if (!values.Localizacion) {
-          errors.Localizacion = 'Debe seleccionar este campo';
-        }
+          if (!values.Higiene) {
+            errors.Higiene = 'Debe seleccionar este campo';
+          }
 
-        if (!values.CalculoDental) {
-          errors.CalculoDental = 'Debe seleccionar este campo';
-        }
+          if (!values.PlacaDentobacteriana) {
+            errors.PlacaDentobacteriana = 'Debe seleccionar este campo';
+          }
 
-        console.log('errores');
-        return errors;
-      }}
-      onSubmit={async (values, { resetForm }) => {
-        const IdPaciente = uniqid();
-        await axios
-          .post('http://localhost:3001/api/v1/insert', {
+          if (!values.PHSaliva) {
+            errors.PHSaliva = 'Por favor ingrese el PH de Saliva (1-14)';
+          }
+
+          if (!values.Localizacion) {
+            errors.Localizacion = 'Debe seleccionar este campo';
+          }
+
+          if (!values.CalculoDental) {
+            errors.CalculoDental = 'Debe seleccionar este campo';
+          }
+
+          console.log('errores');
+          return errors;
+        }}
+        onSubmit={async (values, { resetForm }) => {
+          let submitValues = {
             id: IdPaciente,
             Higiene: values.Higiene,
             PlacaDentobacteriana: values.PlacaDentobacteriana,
             PHSaliva: values.PHSaliva,
             Localizacion: values.Localizacion,
             CalculoDental: values.CalculoDental,
-          })
-          .then((response) => {
-            Swal.fire('Cool!', 'Informacion Subida correctamente.', 'success');
-          })
-          .catch((error) => {
-            console.log(error);
-            Swal.fire(
-              'Oops!',
-              'La informacion del registro no ha podido ser enviada correctamente, prueba de nuevo.',
-              'error'
-            );
-          });
-      }}>
-      {({ errors, touched }) => (
-        <Form
-          className='card px-5'
-          style={{ width: '550px', height: '550px', overflow: 'auto' }}>
-          <div className='mb-4 mt-2'>
-            <div id='my-radio-group'>Higiene</div>
-            <div role='group' aria-labelledby='my-radio-group'>
-              <label>
-                <Field
-                  type='radio'
-                  className='form-check-input mx-2'
-                  name='Higiene'
-                  id='Higiene'
-                  value='Buena'
-                />
-                Buena
-              </label>
-              <br></br>
-              <label>
-                <Field
-                  type='radio'
-                  className='form-check-input mx-2'
-                  name='Higiene'
-                  id='Higiene'
-                  value='Regular'
-                />
-                Regular
-              </label>
-              <br></br>
-              <label>
-                <Field
-                  type='radio'
-                  className='form-check-input mx-2'
-                  name='Higiene'
-                  id='Higiene'
-                  value='Mala'
-                />
-                Deficiente
-              </label>
+          };
+
+          if (!edit) {
+            await axios
+              .post(
+                `http://localhost:3001/api/v1/medio-bucal-general/${IdPaciente}`,
+                submitValues
+              )
+              .then((response) => {
+                Swal.fire(
+                  'Cool!',
+                  'Informacion Subida correctamente.',
+                  'success'
+                );
+              })
+              .catch((error) => {
+                console.log(error);
+                Swal.fire(
+                  'Oops!',
+                  'La informacion de la alimentación no ha podido ser enviada correctamente, prueba de nuevo.',
+                  'error'
+                );
+              });
+          } else {
+            await axios
+              .put(
+                `http://localhost:3001/api/v1/medio-bucal-general/${IdPaciente}`,
+                submitValues
+              )
+              .then((response) => {
+                Swal.fire(
+                  'Cool!',
+                  'Informacion Actualizada Correctamente.',
+                  'success'
+                );
+              })
+              .catch((error) => {
+                console.log(error);
+                Swal.fire(
+                  'Oops!',
+                  'La informacion del registro no ha podido ser enviada correctamente, prueba de nuevo.',
+                  'error'
+                );
+              });
+          }
+        }}>
+        {({ errors, touched }) => (
+          <Form
+            className='card px-5'
+            style={{ width: '550px', height: '550px', overflow: 'auto' }}>
+            <div className='mb-4 mt-2'>
+              <div id='my-radio-group'>Higiene</div>
+              <div role='group' aria-labelledby='my-radio-group'>
+                <label>
+                  <Field
+                    type='radio'
+                    className='form-check-input mx-2'
+                    name='Higiene'
+                    id='Higiene'
+                    value='Buena'
+                  />
+                  Buena
+                </label>
+                <br></br>
+                <label>
+                  <Field
+                    type='radio'
+                    className='form-check-input mx-2'
+                    name='Higiene'
+                    id='Higiene'
+                    value='Regular'
+                  />
+                  Regular
+                </label>
+                <br></br>
+                <label>
+                  <Field
+                    type='radio'
+                    className='form-check-input mx-2'
+                    name='Higiene'
+                    id='Higiene'
+                    value='Mala'
+                  />
+                  Deficiente
+                </label>
+              </div>
             </div>
-          </div>
 
-          <div className='mb-4 mt-2'>
-            <div id='my-radio-group'>Placa Dentobacteriana</div>
-            <div role='group' aria-labelledby='my-radio-group'>
-              <label>
-                <Field
-                  type='radio'
-                  className='form-check-input mx-2'
-                  name='PlacaDentobacteriana'
-                  id='PlacaDentobacteriana'
-                  value='Normal/Poca'
-                />
-                Normal/Poca
-              </label>
-              <br></br>
-              <label>
-                <Field
-                  type='radio'
-                  className='form-check-input mx-2'
-                  name='PlacaDentobacteriana'
-                  id='PlacaDentobacteriana'
-                  value='Mediana'
-                />
-                Mediana
-              </label>
-              <br></br>
-              <label>
-                <Field
-                  type='radio'
-                  className='form-check-input mx-2'
-                  name='PlacaDentobacteriana'
-                  id='PlacaDentobacteriana'
-                  value='Abundante'
-                />
-                Abundante
-              </label>
-              <label>
-                <Field
-                  type='radio'
-                  className='form-check-input mx-2'
-                  name='PlacaDentobacteriana'
-                  id='PlacaDentobacteriana'
-                  value='24hrs'
-                />
-                24hrs
-              </label>
-              <label>
-                <Field
-                  type='radio'
-                  className='form-check-input mx-2'
-                  name='PlacaDentobacteriana'
-                  id='PlacaDentobacteriana'
-                  value='48hrsOmas'
-                />
-                48hrs o mas
-              </label>
+            <div className='mb-4 mt-2'>
+              <div id='my-radio-group'>Placa Dentobacteriana</div>
+              <div role='group' aria-labelledby='my-radio-group'>
+                <label>
+                  <Field
+                    type='radio'
+                    className='form-check-input mx-2'
+                    name='PlacaDentobacteriana'
+                    id='PlacaDentobacteriana'
+                    value='Normal/Poca'
+                  />
+                  Normal/Poca
+                </label>
+                <br></br>
+                <label>
+                  <Field
+                    type='radio'
+                    className='form-check-input mx-2'
+                    name='PlacaDentobacteriana'
+                    id='PlacaDentobacteriana'
+                    value='Mediana'
+                  />
+                  Mediana
+                </label>
+                <br></br>
+                <label>
+                  <Field
+                    type='radio'
+                    className='form-check-input mx-2'
+                    name='PlacaDentobacteriana'
+                    id='PlacaDentobacteriana'
+                    value='Abundante'
+                  />
+                  Abundante
+                </label>
+                <label>
+                  <Field
+                    type='radio'
+                    className='form-check-input mx-2'
+                    name='PlacaDentobacteriana'
+                    id='PlacaDentobacteriana'
+                    value='24hrs'
+                  />
+                  24hrs
+                </label>
+                <label>
+                  <Field
+                    type='radio'
+                    className='form-check-input mx-2'
+                    name='PlacaDentobacteriana'
+                    id='PlacaDentobacteriana'
+                    value='48hrsOmas'
+                  />
+                  48hrs o mas
+                </label>
+              </div>
             </div>
-          </div>
 
-          <label htmlFor='CepilladosDiaros' className='form-label'>
-            PH Saliva
-          </label>
-          <Field
-            type='text'
-            id='PHSaliva'
-            name='PHSaliva'
-            className={
-              !touched.PHSaliva
-                ? 'form-control'
-                : errors.PHSaliva
-                ? 'form-control is-invalid'
-                : 'form-control is-valid'
-            }
-            placeholder='No. de PH de Saliva (1-14)'
-          />
-          <ErrorMessage
-            name='PHSaliva'
-            component={() => (
-              <div className='invalid-feedback'>{errors.PHSaliva}</div>
-            )}
-          />
-          <div id='PHSalivaHelp' className='form-text'>
-            se debe ingresar el no. del 1-14 en que esta su ph de saliva
-          </div>
-
-          <br></br>
-
-          <div className='mb-4 mt-2'>
-            <div id='my-radio-group'>Localizacion</div>
-            <div role='group' aria-labelledby='my-radio-group'>
-              <label>
-                <Field
-                  type='radio'
-                  className='form-check-input mx-2'
-                  name='Localizacion'
-                  id='Localizacion'
-                  value='Oclusal'
-                />
-                Oclusal
-              </label>
-              <br></br>
-              <label>
-                <Field
-                  type='radio'
-                  className='form-check-input mx-2'
-                  name='Localizacion'
-                  id='Localizacion'
-                  value='Interproximal'
-                />
-                Interproximal
-              </label>
-              <br></br>
-              <label>
-                <Field
-                  type='radio'
-                  className='form-check-input mx-2'
-                  name='Localizacion'
-                  id='Localizacion'
-                  value='Cervical'
-                />
-                Cervical
-              </label>
-              <br></br>
-              <label>
-                <Field
-                  type='radio'
-                  className='form-check-input mx-2'
-                  name='Localizacion'
-                  id='Localizacion'
-                  value='Subgingival'
-                />
-                Subgingival
-              </label>
+            <label htmlFor='CepilladosDiaros' className='form-label'>
+              PH Saliva
+            </label>
+            <Field
+              type='text'
+              id='PHSaliva'
+              name='PHSaliva'
+              className={
+                !touched.PHSaliva
+                  ? 'form-control'
+                  : errors.PHSaliva
+                  ? 'form-control is-invalid'
+                  : 'form-control is-valid'
+              }
+              placeholder='No. de PH de Saliva (1-14)'
+            />
+            <ErrorMessage
+              name='PHSaliva'
+              component={() => (
+                <div className='invalid-feedback'>{errors.PHSaliva}</div>
+              )}
+            />
+            <div id='PHSalivaHelp' className='form-text'>
+              se debe ingresar el no. del 1-14 en que esta su ph de saliva
             </div>
-          </div>
 
-          <div className='mb-4 mt-2'>
-            <div id='my-radio-group'>Calculo Dental</div>
-            <div role='group' aria-labelledby='my-radio-group'>
-              <label>
-                <Field
-                  type='radio'
-                  className='form-check-input mx-2'
-                  name='CalculoDental'
-                  id='CalculoDental'
-                  value='Si'
-                />
-                Si
-              </label>
-              <br></br>
-              <label>
-                <Field
-                  type='radio'
-                  className='form-check-input mx-2'
-                  name='CalculoDental'
-                  id='CalculoDental'
-                  value='No'
-                />
-                No
-              </label>
-              <br></br>
+            <br></br>
+
+            <div className='mb-4 mt-2'>
+              <div id='my-radio-group'>Localizacion</div>
+              <div role='group' aria-labelledby='my-radio-group'>
+                <label>
+                  <Field
+                    type='radio'
+                    className='form-check-input mx-2'
+                    name='Localizacion'
+                    id='Localizacion'
+                    value='Oclusal'
+                  />
+                  Oclusal
+                </label>
+                <br></br>
+                <label>
+                  <Field
+                    type='radio'
+                    className='form-check-input mx-2'
+                    name='Localizacion'
+                    id='Localizacion'
+                    value='Interproximal'
+                  />
+                  Interproximal
+                </label>
+                <br></br>
+                <label>
+                  <Field
+                    type='radio'
+                    className='form-check-input mx-2'
+                    name='Localizacion'
+                    id='Localizacion'
+                    value='Cervical'
+                  />
+                  Cervical
+                </label>
+                <br></br>
+                <label>
+                  <Field
+                    type='radio'
+                    className='form-check-input mx-2'
+                    name='Localizacion'
+                    id='Localizacion'
+                    value='Subgingival'
+                  />
+                  Subgingival
+                </label>
+              </div>
             </div>
-          </div>
 
-          <button className='btn btn-primary' type='submit'>
-            Subir informacion del paciente
-          </button>
+            <div className='mb-4 mt-2'>
+              <div id='my-radio-group'>Calculo Dental</div>
+              <div role='group' aria-labelledby='my-radio-group'>
+                <label>
+                  <Field
+                    type='radio'
+                    className='form-check-input mx-2'
+                    name='CalculoDental'
+                    id='CalculoDental'
+                    value='Si'
+                  />
+                  Si
+                </label>
+                <br></br>
+                <label>
+                  <Field
+                    type='radio'
+                    className='form-check-input mx-2'
+                    name='CalculoDental'
+                    id='CalculoDental'
+                    value='No'
+                  />
+                  No
+                </label>
+                <br></br>
+              </div>
+            </div>
 
-          <br></br>
-        </Form>
-      )}
-    </Formik>
-  );
+            <button className='btn btn-primary' type='submit'>
+              Subir informacion del paciente
+            </button>
+
+            <br></br>
+          </Form>
+        )}
+      </Formik>
+    );
+  }
 };
