@@ -322,6 +322,10 @@ export const TablaPerniciosos = ({ IdPaciente }) => {
               </div>
             </div>
 
+<<<<<<< HEAD
+
+          
+=======
             <div className='mb-4 mt-2'>
               <div id='my-radio-group'>Deglucion Atipica</div>
               <div role='group' aria-labelledby='my-radio-group'>
@@ -349,6 +353,7 @@ export const TablaPerniciosos = ({ IdPaciente }) => {
               </div>
             </div>
 
+>>>>>>> eeecb13f4ccd323c612598312455db0cfb85c64f
             <div className='mb-3'>
               <label htmlFor='LblOtros' className='form-label'>
                 Otros:
@@ -373,6 +378,10 @@ export const TablaPerniciosos = ({ IdPaciente }) => {
                 )}
               />
             </div>
+<<<<<<< HEAD
+          )
+=======
+>>>>>>> eeecb13f4ccd323c612598312455db0cfb85c64f
 
             <button className='btn btn-primary' type='submit'>
               Subir informacion del paciente

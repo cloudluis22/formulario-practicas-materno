@@ -28,11 +28,11 @@ export const TablaErupcion = ({ IdPaciente }) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/api/v1/erupcion/${IdPaciente}`)
+      .get(`http://localhost:3001/api/v1/erupcion-y-denticion/${IdPaciente}`)
       .then((response) => {
         setData({
           loading: false,
-          data: response.data.alimentacion,
+          data: response.data.erupcionydenticion,
           ok: true,
         });
 
@@ -63,39 +63,37 @@ export const TablaErupcion = ({ IdPaciente }) => {
         initialValues={formValues}
         validate={(values) => {
           let errors = {};
-
           if (!values.EdadDental) {
             errors.EdadDental = 'Tiene que llenar este campo.';
           }
           if (!values.SecuenciaAnormal) {
-            errors.EdadDental = 'Tiene que llenar este campo.';
+            errors.SecuenciaAnormal = 'Tiene que llenar este campo.';
           }
           if (!values.PerdidaPrematura) {
-            errors.EdadDental = 'Tiene que llenar este campo.';
+            errors.PerdidaPrematura = 'Tiene que llenar este campo.';
           }
           if (!values.RetencionProlongada) {
-            errors.EdadDental = 'Tiene que llenar este campo.';
+            errors.RetencionProlongada = 'Tiene que llenar este campo.';
           }
           if (!values.ErupcionRetardada) {
-            errors.EdadDental = 'Tiene que llenar este campo.';
+            errors.ErupcionRetardada = 'Tiene que llenar este campo.';
           }
           if (!values.FaltaContactoProximal) {
-            errors.EdadDental = 'Tiene que llenar este campo.';
+            errors.FaltaContactoProximal = 'Tiene que llenar este campo.';
           }
           if (!values.HipoplasiaIncisivo) {
-            errors.EdadDental = 'Tiene que llenar este campo.';
+            errors.HipoplasiaIncisivo = 'Tiene que llenar este campo.';
           }
           if (!values.AmeloDentinogenesisImperfecta) {
-            errors.EdadDental = 'Tiene que llenar este campo.';
+            errors.AmeloDentinogenesisImperfecta = 'Tiene que llenar este campo.';
           }
           if (!values.Fluorosis) {
-            errors.EdadDental = 'Tiene que llenar este campo.';
+            errors.Fluorosis = 'Tiene que llenar este campo.';
           }
           if (!values.Otros) {
-            errors.EdadDental = 'Tiene que llenar este campo.';
+            errors.Otros = 'Tiene que llenar este campo.';
           }
-
-          console.log('errores');
+          console.log(values)
           return errors;
         }}
         onSubmit={async (values, { resetForm }) => {
@@ -114,10 +112,12 @@ export const TablaErupcion = ({ IdPaciente }) => {
             Otros: values.Otros,
           };
 
+          
+
           if (!edit) {
             await axios
               .post(
-                `http://localhost:3001/api/v1/alimentacion/${IdPaciente}`,
+                `http://localhost:3001/api/v1/erupcion-y-denticion/${IdPaciente}`,
                 submitValues
               )
               .then((response) => {
@@ -138,7 +138,7 @@ export const TablaErupcion = ({ IdPaciente }) => {
           } else {
             await axios
               .put(
-                `http://localhost:3001/api/v1/alimentacion/${IdPaciente}`,
+                `http://localhost:3001/api/v1/erupcion-y-denticion/${IdPaciente}`,
                 submitValues
               )
               .then((response) => {
@@ -186,9 +186,38 @@ export const TablaErupcion = ({ IdPaciente }) => {
                 )}
               />
               <div id='EdadDentalHelp' className='form-text'>
-                No / Si: Especifique
+                Especifique la edad dental
               </div>
             </div>
+
+            <div className='mb-4 mt-2'>
+              <label htmlFor='SecuenciaAnormal' className='form-label'>
+               Secuencia Anormal
+              </label>
+              <Field
+                type='text'
+                id='SecuenciaAnormal'
+                name='SecuenciaAnormal'
+                className={
+                  !touched.SecuenciaAnormal
+                    ? 'form-control'
+                    : errors.SecuenciaAnormal
+                    ? 'form-control is-invalid'
+                    : 'form-control is-valid'
+                }
+                placeholder='Especifique: '
+              />
+              <ErrorMessage
+                name='SecuenciaAnormal'
+                component={() => (
+                  <div className='invalid-feedback'>{errors.SecuenciaAnormal}</div>
+                )}
+              />
+              <div id='SecuenciaAnormalHelp' className='form-text'>
+                Especifique
+              </div>
+            </div>
+
 
             <div className='mb-4 mt-2'>
               <label htmlFor='PerdidaPrematura' className='form-label'>
@@ -216,7 +245,7 @@ export const TablaErupcion = ({ IdPaciente }) => {
                 )}
               />
               <div id='PerdidaPrematuraHelp' className='form-text'>
-                No / Si: Especifique
+                Especifique
               </div>
             </div>
 
@@ -226,8 +255,8 @@ export const TablaErupcion = ({ IdPaciente }) => {
               </label>
               <Field
                 type='text'
-                id='PerdidaPrematura'
-                name='PerdidaPrematura'
+                id='RetencionProlongada'
+                name='RetencionProlongada'
                 className={
                   !touched.RetencionProlongada
                     ? 'form-control'
