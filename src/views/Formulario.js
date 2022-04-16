@@ -13,6 +13,7 @@ import { TablaPerniciosos } from '../forms/TablaPerniciosos';
 import { TablaErupcion } from '../forms/TablaErupcion';
 import { TablaMedioBucalG } from '../forms/TablaMedioBucalG';
 import { TablaAmamantacion } from '../forms/TablaAmamantacion';
+import { Modal } from '../components/Modal';
 
 export const Formulario = () => {
   const { id } = useParams();
@@ -22,6 +23,9 @@ export const Formulario = () => {
     data: [],
     ok: false,
   });
+
+  const [openModal, setOpenModal] = useState(false);
+  const [currentModal, setCurrentModal] = useState('');
 
   useEffect(() => {
     setTimeout(() => {
@@ -48,6 +52,14 @@ export const Formulario = () => {
 
   return (
     <div className='bcg-color'>
+      {openModal && (
+        <Modal
+          setOpen={setOpenModal}
+          idPaciente={Data.data.IdPaciente}
+          formulario={currentModal}
+        />
+      )}
+
       {Data.loading && (
         <div
           className='d-flex justify-content-center align-items-center flex-column mt-5'
@@ -85,7 +97,13 @@ export const Formulario = () => {
           )}
 
           <div className='d-flex align-items-center justify-content-center mt-3 pb-3 animate__animated animate__backInUp'>
-            {formIndex === 0 && <TablaSecciones setFormIndex={setFormIndex} />}
+            {formIndex === 0 && (
+              <TablaSecciones
+                setFormIndex={setFormIndex}
+                setOpenModal={setOpenModal}
+                setCurrentModal={setCurrentModal}
+              />
+            )}
             {formIndex === 1 && (
               <TablaEditarPaciente IdPaciente={Data.data.IdPaciente} />
             )}

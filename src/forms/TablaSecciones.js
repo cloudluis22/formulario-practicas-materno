@@ -1,6 +1,11 @@
 import React from 'react';
+import modalValues from '../ModalValues';
 
-export const TablaSecciones = ({ setFormIndex }) => {
+export const TablaSecciones = ({
+  setFormIndex,
+  setOpenModal,
+  setCurrentModal,
+}) => {
   return (
     <div
       className='card px-4'
@@ -34,7 +39,12 @@ export const TablaSecciones = ({ setFormIndex }) => {
             </button>
           </td>
           <td className='text-light'>
-            <button className='btn btn-outline-info text-nowrap btn-sm mb-4'>
+            <button
+              className='btn btn-outline-info text-nowrap btn-sm mb-4'
+              onClick={() => {
+                setOpenModal(true);
+                setCurrentModal(modalValues.informacion);
+              }}>
               {' '}
               Ver Información{' '}
             </button>
@@ -54,7 +64,12 @@ export const TablaSecciones = ({ setFormIndex }) => {
             </button>
           </td>
           <td>
-            <button className='btn btn-outline-info text-nowrap btn-sm mb-4'>
+            <button
+              className='btn btn-outline-info text-nowrap btn-sm mb-4'
+              onClick={() => {
+                setOpenModal(true);
+                setCurrentModal(modalValues.alimentacion);
+              }}>
               {' '}
               Ver Información{' '}
             </button>
@@ -74,7 +89,12 @@ export const TablaSecciones = ({ setFormIndex }) => {
             </button>
           </td>
           <td>
-            <button className='btn btn-outline-info text-nowrap btn-sm mb-4'>
+            <button
+              className='btn btn-outline-info text-nowrap btn-sm mb-4'
+              onClick={() => {
+                setOpenModal(true);
+                setCurrentModal(modalValues.habitosDeHigiene);
+              }}>
               {' '}
               Ver Información{' '}
             </button>
@@ -94,7 +114,12 @@ export const TablaSecciones = ({ setFormIndex }) => {
             </button>
           </td>
           <td>
-            <button className='btn btn-outline-info text-nowrap btn-sm mb-4'>
+            <button
+              className='btn btn-outline-info text-nowrap btn-sm mb-4'
+              onClick={() => {
+                setOpenModal(true);
+                setCurrentModal(modalValues.antecedentesPersonales);
+              }}>
               {' '}
               Ver Información{' '}
             </button>
@@ -114,7 +139,12 @@ export const TablaSecciones = ({ setFormIndex }) => {
             </button>
           </td>
           <td>
-            <button className='btn btn-outline-info text-nowrap btn-sm mb-4'>
+            <button
+              className='btn btn-outline-info text-nowrap btn-sm mb-4'
+              onClick={() => {
+                setOpenModal(true);
+                setCurrentModal(modalValues.antecedentesFamiliares);
+              }}>
               {' '}
               Ver Información{' '}
             </button>
@@ -134,7 +164,12 @@ export const TablaSecciones = ({ setFormIndex }) => {
             </button>
           </td>
           <td>
-            <button className='btn btn-outline-info text-nowrap btn-sm mb-4'>
+            <button
+              className='btn btn-outline-info text-nowrap btn-sm mb-4'
+              onClick={() => {
+                setOpenModal(true);
+                setCurrentModal(modalValues.oclusionAlineamiento);
+              }}>
               {' '}
               Ver Información{' '}
             </button>
@@ -154,7 +189,12 @@ export const TablaSecciones = ({ setFormIndex }) => {
             </button>
           </td>
           <td>
-            <button className='btn btn-outline-info text-nowrap btn-sm mb-4'>
+            <button
+              className='btn btn-outline-info text-nowrap btn-sm mb-4'
+              onClick={() => {
+                setOpenModal(true);
+                setCurrentModal(modalValues.tejidosBlandos);
+              }}>
               {' '}
               Ver Información{' '}
             </button>
@@ -174,7 +214,12 @@ export const TablaSecciones = ({ setFormIndex }) => {
             </button>
           </td>
           <td>
-            <button className='btn btn-outline-info text-nowrap btn-sm mb-4'>
+            <button
+              className='btn btn-outline-info text-nowrap btn-sm mb-4'
+              onClick={() => {
+                setOpenModal(true);
+                setCurrentModal(modalValues.habitosPerniciosos);
+              }}>
               {' '}
               Ver Información{' '}
             </button>
@@ -194,7 +239,12 @@ export const TablaSecciones = ({ setFormIndex }) => {
             </button>
           </td>
           <td>
-            <button className='btn btn-outline-info text-nowrap btn-sm mb-4'>
+            <button
+              className='btn btn-outline-info text-nowrap btn-sm mb-4'
+              onClick={() => {
+                setOpenModal(true);
+                setCurrentModal(modalValues.erupcionDenticion);
+              }}>
               {' '}
               Ver Información{' '}
             </button>
@@ -214,7 +264,12 @@ export const TablaSecciones = ({ setFormIndex }) => {
             </button>
           </td>
           <td>
-            <button className='btn btn-outline-info text-nowrap btn-sm mb-4'>
+            <button
+              className='btn btn-outline-info text-nowrap btn-sm mb-4'
+              onClick={() => {
+                setOpenModal(true);
+                setCurrentModal(modalValues.medioBucal);
+              }}>
               {' '}
               Ver Información{' '}
             </button>
@@ -234,7 +289,12 @@ export const TablaSecciones = ({ setFormIndex }) => {
             </button>
           </td>
           <td>
-            <button className='btn btn-outline-info text-nowrap btn-sm mb-4'>
+            <button
+              className='btn btn-outline-info text-nowrap btn-sm mb-4'
+              onClick={() => {
+                setOpenModal(true);
+                setCurrentModal(modalValues.amamantacion);
+              }}>
               {' '}
               Ver Información{' '}
             </button>

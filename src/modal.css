@@ -1,0 +1,41 @@
+.modal-background {
+  background: rgba(13, 19, 34, 0.8);
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  top: 0;
+  z-index: 1;
+}
+
+.modal-box {
+  background: #ffffff;
+  border-radius: 0.5em;
+  box-shadow: 0 10px 20px rgba(black, 0.2);
+  left: 50%;
+  max-width: 90%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+  height: 750px;
+}
+
+.close-modal {
+  color: red;
+  position: absolute;
+  right: 0;
+  margin-right: 30px;
+  font-size: 2rem;
+}
+
+.close-modal:hover {
+  cursor: pointer;
+}
