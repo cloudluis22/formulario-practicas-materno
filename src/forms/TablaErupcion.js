@@ -63,7 +63,6 @@ export const TablaErupcion = ({ IdPaciente }) => {
         initialValues={formValues}
         validate={(values) => {
           let errors = {};
-          console.log("OLAAAAAAAAAAAAAAAAAAAAAA")
           if (!values.EdadDental) {
             errors.EdadDental = 'Tiene que llenar este campo.';
           }
