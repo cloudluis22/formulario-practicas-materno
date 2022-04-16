@@ -30,7 +30,7 @@ export const TablaAntecedentesFamiliares = ({ IdPaciente }) => {
         .then((response) => {
           setData({
             loading: false,
-            data: response.data.antecedentes,
+            data: response.data.antecedentesfamiliares,
             ok: true,
           });
 
