@@ -32,7 +32,7 @@ export const TablaOclusion = ({ IdPaciente }) => {
       .then((response) => {
         setData({
           loading: false,
-          data: response.data.oclusionyalinamiento,
+          data: response.data.oclusionyalineamiento,
           ok: true,
         });
 

@@ -84,7 +84,7 @@ export const HabitosDeHigiene = ({ idPaciente }) => {
   } else if (!Data.loading && !Data.ok) {
     return (
       <h3 className='text-dark text-center'>
-        La información no pudo ser recabada del servidor
+        La informaciÃ³n no pudo ser recabada del servidor
       </h3>
     );
   } else if (!Data.loading && Data.ok && !info) {

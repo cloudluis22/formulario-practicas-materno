@@ -12,7 +12,7 @@ export const TablaPerniciosos = ({ IdPaciente }) => {
     MorderseLabio: '',
     MorderseLasUnas: '',
     DeglucionAtipica: '',
-    LblOtros: '',
+    Otros: '',
   };
 
   const [Data, setData] = useState({
@@ -87,8 +87,8 @@ export const TablaPerniciosos = ({ IdPaciente }) => {
             errors.DeglucionAtipica = 'Debe seleccionar este campo';
           }
 
-          if (!values.LblOtros) {
-            errors.LblOtros = 'Usted tiene que llenar este campo';
+          if (!values.Otros) {
+            errors.Otros = 'Usted tiene que llenar este campo';
           }
 
           console.log('errores');
@@ -104,7 +104,7 @@ export const TablaPerniciosos = ({ IdPaciente }) => {
             MorderseLabio: values.MorderseLabio,
             MorderseLasUnas: values.MorderseLasUnas,
             DeglucionAtipica: values.DeglucionAtipica,
-            LblOtros: values.LblOtros,
+            Otros: values.Otros,
           };
 
           if (!edit) {
@@ -345,26 +345,26 @@ export const TablaPerniciosos = ({ IdPaciente }) => {
             </div>
 
             <div className='mb-3'>
-              <label htmlFor='LblOtros' className='form-label'>
+              <label htmlFor='Otros' className='form-label'>
                 Otros:
               </label>
               <Field
                 type='text'
-                id='LblOtros'
-                name='LblOtros'
+                id='Otros'
+                name='Otros'
                 className={
-                  !touched.LblOtros
+                  !touched.Otros
                     ? 'form-control'
-                    : errors.LblOtros
+                    : errors.Otros
                     ? 'form-control is-invalid'
                     : 'form-control is-valid'
                 }
                 placeholder='otros habitos perniciosos'
               />
               <ErrorMessage
-                name='LblOtros'
+                name='Otros'
                 component={() => (
-                  <div className='invalid-feedback'>{errors.LblOtros}</div>
+                  <div className='invalid-feedback'>{errors.Otros}</div>
                 )}
               />
             </div>
