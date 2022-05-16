@@ -8,6 +8,7 @@ import {
 import { Formulario } from './views/Formulario';
 import { RegistrarPaciente } from './views/RegistrarPaciente';
 import { Pacientes } from './views/Pacientes';
+import { ImprimirPaciente } from './views/ImprimirPaciente';
 
 export const App = () => {
   return (
@@ -16,6 +17,7 @@ export const App = () => {
         <Route path='/pacientes' element={<Pacientes />} />
         <Route path='/edicion/:id' element={<Formulario />} />
         <Route path='/registro' element={<RegistrarPaciente />} />
+        <Route path='/imprimir/:id' element={<ImprimirPaciente />} />
         <Route path='*' element={<Navigate to='/pacientes' replace />} />
       </Routes>
     </Router>

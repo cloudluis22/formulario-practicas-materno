@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { TablaSecciones } from '../forms/TablaSecciones';
 import { TablaEditarPaciente } from '../forms/TablaEditarPaciente';
 import { TablaAlimentacion } from '../forms/TablaAlimentacion';
@@ -14,8 +14,13 @@ import { TablaErupcion } from '../forms/TablaErupcion';
 import { TablaMedioBucalG } from '../forms/TablaMedioBucalG';
 import { TablaAmamantacion } from '../forms/TablaAmamantacion';
 import { Modal } from '../components/Modal';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faPrint,
+} from '@fortawesome/free-solid-svg-icons';
 
 export const Formulario = () => {
+  let navigate = useNavigate();
   const { id } = useParams();
   const [formIndex, setFormIndex] = useState(0);
   const [Data, setData] = useState({
@@ -96,7 +101,7 @@ export const Formulario = () => {
             </button>
           )}
 
-          <div className='d-flex align-items-center justify-content-center mt-3 pb-3 animate__animated animate__backInUp'>
+          <div className='d-flex align-items-center flex-column justify-content-center mt-3 pb-3 animate__animated animate__backInUp'>
             {formIndex === 0 && (
               <TablaSecciones
                 setFormIndex={setFormIndex}
@@ -137,6 +142,11 @@ export const Formulario = () => {
             {formIndex === 11 && (
               <TablaAmamantacion IdPaciente={Data.data.IdPaciente} />
             )}
+            <button onClick={() => {
+              navigate(`/imprimir/${Data.data.IdPaciente}`)
+            }} className='btn btn-primary mt-3'>
+              Imprimir Expediente <FontAwesomeIcon icon={faPrint} />
+            </button>
           </div>
         </div>
       )}
