@@ -12,7 +12,7 @@ export const OclusionAlineamiento = ({ idPaciente }) => {
     axios
       .get(`http://localhost:3001/api/v1/oclusion-y-alineamiento/${idPaciente}`)
       .then((response) => {
-        console.log(response.data.oclusionyalineamiento);
+      
         setData({
           loading: false,
           data: response.data.oclusionyalineamiento,
@@ -20,7 +20,7 @@ export const OclusionAlineamiento = ({ idPaciente }) => {
         });
       })
       .catch((error) => {
-        console.log(error);
+        
         setData({
           loading: false,
           data: [],

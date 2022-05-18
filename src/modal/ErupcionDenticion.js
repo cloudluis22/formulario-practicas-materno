@@ -12,7 +12,6 @@ export const ErupcionDenticion = ({ idPaciente }) => {
     axios
       .get(`http://localhost:3001/api/v1/erupcion-y-denticion/${idPaciente}`)
       .then((response) => {
-        console.log(response.data.erupcionydenticion);
         setData({
           loading: false,
           data: response.data.erupcionydenticion,
@@ -20,7 +19,6 @@ export const ErupcionDenticion = ({ idPaciente }) => {
         });
       })
       .catch((error) => {
-        console.log(error);
         setData({
           loading: false,
           data: [],

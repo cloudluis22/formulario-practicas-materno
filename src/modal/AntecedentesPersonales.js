@@ -12,7 +12,6 @@ export const AntecedentesPersonales = ({ idPaciente }) => {
     axios
       .get(`http://localhost:3001/api/v1/antecedentes-personales/${idPaciente}`)
       .then((response) => {
-        console.log(response.data.antecedentespersonales);
         setData({
           loading: false,
           data: response.data.antecedentespersonales,
@@ -20,7 +19,6 @@ export const AntecedentesPersonales = ({ idPaciente }) => {
         });
       })
       .catch((error) => {
-        console.log(error);
         setData({
           loading: false,
           data: [],

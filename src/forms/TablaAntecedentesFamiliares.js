@@ -41,7 +41,7 @@ export const TablaAntecedentesFamiliares = ({ IdPaciente }) => {
           }
         })
         .catch((error) => {
-          console.log(error);
+          
           setData({
             loading: false,
             data: [],
@@ -53,7 +53,6 @@ export const TablaAntecedentesFamiliares = ({ IdPaciente }) => {
 
   if (Data.data.length > 0) {
     formValues = Data.data[0];
-    console.log(formValues);
   }
 
   if (!Data.loading && Data.ok) {
@@ -90,7 +89,7 @@ export const TablaAntecedentesFamiliares = ({ IdPaciente }) => {
                 );
               })
               .catch((error) => {
-                console.log(error);
+                
                 Swal.fire(
                   'Oops!',
                   'La informacion de la alimentación no ha podido ser enviada correctamente, prueba de nuevo.',
@@ -111,7 +110,7 @@ export const TablaAntecedentesFamiliares = ({ IdPaciente }) => {
                 );
               })
               .catch((error) => {
-                console.log(error);
+                
                 Swal.fire(
                   'Oops!',
                   'La informacion del registro no ha podido ser enviada correctamente, prueba de nuevo.',

@@ -41,7 +41,6 @@ export const TablaEditarPaciente = ({ IdPaciente }) => {
           });
         })
         .catch((error) => {
-          console.log(error);
           setData({
             loading: false,
             data: [],
@@ -158,7 +157,7 @@ export const TablaEditarPaciente = ({ IdPaciente }) => {
               });
             })
             .catch((error) => {
-              console.log(error);
+              
               Swal.fire(
                 'Oops!',
                 'La informacion del registro no ha podido ser enviada correctamente, prueba de nuevo.',

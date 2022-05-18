@@ -28,7 +28,7 @@ export const Pacientes = () => {
         });
       })
       .catch((error) => {
-        console.log(error);
+        
         setData({
           loading: false,
           data: [],
@@ -63,7 +63,6 @@ export const Pacientes = () => {
             });
           })
           .catch((error) => {
-            console.error(error);
             Swal.fire({
               title: '¡Oops!',
               text: 'El paciente no pudo ser eliminado',

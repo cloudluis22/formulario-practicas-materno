@@ -103,7 +103,6 @@ export const RegistrarPaciente = () => {
         onSubmit={async (values, { resetForm }) => {
           const IdPaciente = uniqid();
           const date = moment().format();
-          console.log(date);
 
           await axios
             .post('http://localhost:3001/api/v1/registrar-paciente', {
@@ -133,7 +132,7 @@ export const RegistrarPaciente = () => {
               });
             })
             .catch((error) => {
-              console.log(error);
+              
               Swal.fire(
                 'Oops!',
                 'La informacion del registro no ha podido ser enviada correctamente, prueba de nuevo.',
