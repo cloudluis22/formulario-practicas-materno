@@ -28,7 +28,7 @@ export const TablaEditarPaciente = ({ IdPaciente }) => {
   });
 
   useEffect(() => {
-    setTimeout(() => {
+   
       axios
         .get(
           `http://localhost:3001/api/v1/obtener-paciente-completo/${IdPaciente}`
@@ -48,7 +48,7 @@ export const TablaEditarPaciente = ({ IdPaciente }) => {
             ok: false,
           });
         });
-    }, 1000);
+    
   }, [IdPaciente]);
 
   if (Data.ok) {

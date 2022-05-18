@@ -21,7 +21,6 @@ export const Pacientes = () => {
     axios
       .get('http://localhost:3001/api/v1/obtener-pacientes')
       .then((response) => {
-        console.log(response.data.pacientes);
         setData({
           loading: false,
           data: response.data.pacientes,
