@@ -3,11 +3,12 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { useGetInfo } from '../hooks/useGetInfo';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { renderToString } from 'react-dom/server';
 import jsPDF from "jspdf";
 import {
   faFaceSadTear
 } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
+import { renderToString } from 'react-dom/server';
 import html2canvas from 'html2canvas';
 
 export const ImprimirPaciente = () => {

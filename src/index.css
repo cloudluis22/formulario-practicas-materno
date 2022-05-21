@@ -34,6 +34,14 @@
   background-color: #3975b9;
 }
 
+.btn-regresar-registrar {
+
+  position: relative;
+  top: 3rem;
+  right: 30rem;
+
+}
+
 .form-settings {
   overflow: scroll;
   width: 480px;

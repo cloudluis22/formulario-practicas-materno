@@ -4,15 +4,26 @@ import uniqid from 'uniqid';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import jsPDF from "jspdf";
+import {
+  faArrowLeft
+} from '@fortawesome/free-solid-svg-icons';
 
 export const RegistrarPaciente = () => {
+  
   let navigate = useNavigate();
+
+  const volverMenuPacientes = () => {
+    navigate('pacienntes')
+  }
+
   return (
-    <div className='bcg-color d-flex justify-content-center flex-column align-items-center'>
+    <div className='bcg-color d-flex justify-content-center flex-column align-items-center overflow-hidden'>
       <h1 className='display-2 text-light animate__animated animate__fadeIn'>
-        {' '}
-        Registro de Pacientes{' '}
+        Registro de Pacientes
       </h1>
+      <button className='btn btn-primary btn-regresar-registrar animate__animated animate__fadeIn' onClick={volverMenuPacientes}> <FontAwesomeIcon icon={faArrowLeft} /> Regresar a Menu Pacientes </button>
       <Formik
         initialValues={{
           NombrePaciente: '',
