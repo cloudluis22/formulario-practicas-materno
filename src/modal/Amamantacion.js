@@ -12,7 +12,7 @@ export const Amamantacion = ({ idPaciente }) => {
     axios
       .get(`http://localhost:3001/api/v1/alimentacion-bebe/${idPaciente}`)
       .then((response) => {
-        console.log(response.data.alimentacionbebe);
+        
         setData({
           loading: false,
           data: response.data.alimentacionbebe,
@@ -20,7 +20,7 @@ export const Amamantacion = ({ idPaciente }) => {
         });
       })
       .catch((error) => {
-        console.log(error);
+        
         setData({
           loading: false,
           data: [],

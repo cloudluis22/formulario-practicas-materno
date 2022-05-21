@@ -12,7 +12,7 @@ export const TejidosBlandos = ({ idPaciente }) => {
     axios
       .get(`http://localhost:3001/api/v1/tejidos-blandos/${idPaciente}`)
       .then((response) => {
-        console.log(response.data.tejidosblandos);
+
         setData({
           loading: false,
           data: response.data.tejidosblandos,
@@ -20,7 +20,7 @@ export const TejidosBlandos = ({ idPaciente }) => {
         });
       })
       .catch((error) => {
-        console.log(error);
+        
         setData({
           loading: false,
           data: [],

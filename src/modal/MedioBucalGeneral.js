@@ -12,7 +12,7 @@ export const MedioBucalGeneral = ({ idPaciente }) => {
     axios
       .get(`http://localhost:3001/api/v1/medio-bucal-general/${idPaciente}`)
       .then((response) => {
-        console.log(response.data.mediobucalgeneral);
+
         setData({
           loading: false,
           data: response.data.mediobucalgeneral,
@@ -20,7 +20,7 @@ export const MedioBucalGeneral = ({ idPaciente }) => {
         });
       })
       .catch((error) => {
-        console.log(error);
+        
         setData({
           loading: false,
           data: [],

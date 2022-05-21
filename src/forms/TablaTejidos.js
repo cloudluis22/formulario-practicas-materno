@@ -42,7 +42,7 @@ export const TablaTejidos = ({ IdPaciente }) => {
         }
       })
       .catch((error) => {
-        console.log(error);
+        
         setData({
           loading: false,
           data: [],
@@ -100,7 +100,7 @@ export const TablaTejidos = ({ IdPaciente }) => {
               'Por favor ingrese ingrese el valor de este campo, o en su defecto agregue:  No aplica.';
           }
 
-          console.log('errores');
+
           return errors;
         }}
         onSubmit={async (values, { resetForm }) => {
@@ -132,7 +132,7 @@ export const TablaTejidos = ({ IdPaciente }) => {
                 );
               })
               .catch((error) => {
-                console.log(error);
+                
                 Swal.fire(
                   'Oops!',
                   'La informacion de la alimentación no ha podido ser enviada correctamente, prueba de nuevo.',
@@ -153,7 +153,7 @@ export const TablaTejidos = ({ IdPaciente }) => {
                 );
               })
               .catch((error) => {
-                console.log(error);
+                
                 Swal.fire(
                   'Oops!',
                   'La informacion del registro no ha podido ser enviada correctamente, prueba de nuevo.',

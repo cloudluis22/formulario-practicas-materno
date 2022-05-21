@@ -37,7 +37,6 @@ export const Formulario = () => {
       axios
         .get(`http://localhost:3001/api/v1/obtener-paciente/${id}`)
         .then((response) => {
-          console.log(response.data.paciente[0]);
           setData({
             loading: false,
             data: response.data.paciente[0],
@@ -45,7 +44,7 @@ export const Formulario = () => {
           });
         })
         .catch((error) => {
-          console.log(error);
+          
           setData({
             loading: false,
             data: [],

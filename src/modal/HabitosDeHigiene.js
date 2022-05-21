@@ -12,7 +12,6 @@ export const HabitosDeHigiene = ({ idPaciente }) => {
     axios
       .get(`http://localhost:3001/api/v1/habitos-higiene/${idPaciente}`)
       .then((response) => {
-        console.log(response.data.habitoshigiene);
         setData({
           loading: false,
           data: response.data.habitoshigiene,
@@ -20,7 +19,6 @@ export const HabitosDeHigiene = ({ idPaciente }) => {
         });
       })
       .catch((error) => {
-        console.log(error);
         setData({
           loading: false,
           data: [],

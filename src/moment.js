@@ -10,10 +10,10 @@ let fecha2 = moment('2022-01-02')
 
 let mañana = moment('2022-04-14T20:54:29-05:00')
 
-console.log(fecha2.diff(fecha1, 'days'))
+(fecha2.diff(fecha1, 'days'))
 
-console.log(mydateU)
-console.log(mañana.diff(mydate, 'days'))
+(mydateU)
+(mañana.diff(mydate, 'days'))
 //2022-04-13T20:54:29-05:00
 //Moment<2022-04-13T20:55:34-05:00>
 */
@@ -24,20 +24,20 @@ let mifecha = moment.unix(mifechaU)
 
 let hoy = moment()
 
-console.log(mifechaU)
-console.log(mifecha)
+(mifechaU)
+(mifecha)
 
 let fecha1 = moment('2022-01-01')
 let fecha2 = moment('2022-01-02')
 
-console.log(hoy.diff(fecha2, 'days'))
+(hoy.diff(fecha2, 'days'))
 */
 
 let lunes = moment('2022-04-14T20:54:29-05:00')
 let martes = moment('2022-04-15T20:54:30-05:00')
 
-console.log(martes.diff(lunes,'days'))
+(martes.diff(lunes,'days'))
 
 let miercoles = moment().format()
 
-console.log(miercoles)
+(miercoles)

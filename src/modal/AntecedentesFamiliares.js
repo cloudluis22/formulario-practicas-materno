@@ -12,7 +12,6 @@ export const AntecedentesFamiliares = ({ idPaciente }) => {
     axios
       .get(`http://localhost:3001/api/v1/antecedentes-familiares/${idPaciente}`)
       .then((response) => {
-        console.log(response.data.antecedentesfamiliares);
         setData({
           loading: false,
           data: response.data.antecedentesfamiliares,
@@ -20,7 +19,6 @@ export const AntecedentesFamiliares = ({ idPaciente }) => {
         });
       })
       .catch((error) => {
-        console.log(error);
         setData({
           loading: false,
           data: [],

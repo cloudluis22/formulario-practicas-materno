@@ -51,7 +51,7 @@ export const TablaAlimentacion = ({ IdPaciente }) => {
         }
       })
       .catch((error) => {
-        console.log(error);
+        
         setData({
           loading: false,
           data: [],
@@ -199,7 +199,7 @@ export const TablaAlimentacion = ({ IdPaciente }) => {
                 );
               })
               .catch((error) => {
-                console.log(error);
+                
                 Swal.fire(
                   'Oops!',
                   'La informacion de la alimentación no ha podido ser enviada correctamente, prueba de nuevo.',
@@ -220,7 +220,7 @@ export const TablaAlimentacion = ({ IdPaciente }) => {
                 );
               })
               .catch((error) => {
-                console.log(error);
+                
                 Swal.fire(
                   'Oops!',
                   'La informacion del registro no ha podido ser enviada correctamente, prueba de nuevo.',

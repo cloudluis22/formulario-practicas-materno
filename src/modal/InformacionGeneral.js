@@ -14,7 +14,7 @@ export const InformacionGeneral = ({ idPaciente }) => {
         `http://localhost:3001/api/v1/obtener-paciente-completo/${idPaciente}`
       )
       .then((response) => {
-        console.log(response.data.paciente);
+       
         setData({
           loading: false,
           data: response.data.paciente[0],
@@ -22,7 +22,7 @@ export const InformacionGeneral = ({ idPaciente }) => {
         });
       })
       .catch((error) => {
-        console.log(error);
+        
         setData({
           loading: false,
           data: [],
