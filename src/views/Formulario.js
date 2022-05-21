@@ -123,7 +123,6 @@ export const Formulario = () => {
             {formIndex === 5 && (
               <TablaAntecedentesFamiliares IdPaciente={Data.data.IdPaciente} />
             )}
-<<<<<<< HEAD
             {formIndex === 6 && (
               <TablaOclusion IdPaciente={Data.data.IdPaciente} />
             )}
@@ -139,13 +138,6 @@ export const Formulario = () => {
             {formIndex === 10 && (
               <TablaMedioBucalG IdPaciente={Data.data.IdPaciente} />
             )}
-=======
-            {formIndex === 6 && <TablaOclusion />}
-            {formIndex === 7 && <TablaTejidos />}
-            {formIndex === 8 && <TablaPerniciosos />}
-            {formIndex === 9 && <TablaErupcion />}
-            {formIndex === 10 && <TablaMedioBucalG />}
->>>>>>> 2756075843d462ab40ea4eb614c786d1d10e2ced
             {formIndex === 11 && (
               <TablaAmamantacion IdPaciente={Data.data.IdPaciente} />
             )}
