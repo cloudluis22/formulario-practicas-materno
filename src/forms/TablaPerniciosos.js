@@ -12,7 +12,7 @@ export const TablaPerniciosos = ({ IdPaciente }) => {
     MorderseLabio: '',
     MorderseLasUnas: '',
     DeglucionAtipica: '',
-    Otros: '',
+    LblOtros: '',
   };
 
   const [Data, setData] = useState({
@@ -87,8 +87,8 @@ export const TablaPerniciosos = ({ IdPaciente }) => {
             errors.DeglucionAtipica = 'Debe seleccionar este campo';
           }
 
-          if (!values.Otros) {
-            errors.Otros = 'Usted tiene que llenar este campo';
+          if (!values.LblOtros) {
+            errors.LblOtros = 'Usted tiene que llenar este campo';
           }
 
           return errors;
@@ -103,7 +103,7 @@ export const TablaPerniciosos = ({ IdPaciente }) => {
             MorderseLabio: values.MorderseLabio,
             MorderseLasUnas: values.MorderseLasUnas,
             DeglucionAtipica: values.DeglucionAtipica,
-            Otros: values.Otros,
+            LblOtros: values.LblOtros,
           };
 
           if (!edit) {
@@ -349,8 +349,8 @@ export const TablaPerniciosos = ({ IdPaciente }) => {
               </label>
               <Field
                 type='text'
-                id='Otros'
-                name='Otros'
+                id='LblOtros'
+                name='LblOtros'
                 className={
                   !touched.Otros
                     ? 'form-control'
@@ -361,7 +361,7 @@ export const TablaPerniciosos = ({ IdPaciente }) => {
                 placeholder='otros habitos perniciosos'
               />
               <ErrorMessage
-                name='Otros'
+                name='LblOtros'
                 component={() => (
                   <div className='invalid-feedback'>{errors.Otros}</div>
                 )}
