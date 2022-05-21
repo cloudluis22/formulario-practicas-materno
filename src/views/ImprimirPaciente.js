@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useParams } from 'react-router-dom';
 import { useGetInfo } from '../hooks/useGetInfo';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,9 +7,7 @@ import jsPDF from "jspdf";
 import {
   faFaceSadTear
 } from '@fortawesome/free-solid-svg-icons';
-import { useNavigate } from 'react-router-dom';
 import { renderToString } from 'react-dom/server';
-import html2canvas from 'html2canvas';
 
 export const ImprimirPaciente = () => {
   const { id } = useParams();
@@ -117,8 +115,6 @@ export const ImprimirPaciente = () => {
           <h3> Alimentación (Dieta Habitual) </h3>
           <hr />
 
-          <h4> Consumo semanal de alimentos: </h4>
-
           {data[1] !== undefined && (
             <div>
 
@@ -126,6 +122,8 @@ export const ImprimirPaciente = () => {
                 <h5> ¿Cuántas comidas hace al dia? </h5>
                 <p> {data[1].ComidasDiarias} comidas </p>
               </div>
+
+          <h4> Consumo semanal de alimentos: </h4>
 
               <div className='mb-3'>
                 <h5> Carne </h5>
