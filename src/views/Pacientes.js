@@ -5,6 +5,7 @@ import {
   faPlus,
   faPersonCircleQuestion,
   faTrashCan,
+  faSearch
 } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
@@ -16,6 +17,8 @@ export const Pacientes = () => {
     data: [],
     ok: false,
   });
+
+  let pacientes = [];
 
   useEffect(() => {
     axios
@@ -36,6 +39,8 @@ export const Pacientes = () => {
         });
       });
   }, []);
+
+  pacientes = Data.data;
 
   const EliminarPaciente = (IdPaciente) => {
     Swal.fire({
@@ -105,6 +110,12 @@ export const Pacientes = () => {
 
       {!Data.loading && Data.ok && (
         <div className='container-md'>
+
+          <div>
+            <input className='form-control busqueda' />
+            <FontAwesomeIcon icon={faSearch} className='busqueda-icono' />
+          </div>
+          
           <table className='table table-striped table-responsive animate__animated animate__fadeInUp'>
             <thead>
               <tr>
@@ -116,7 +127,7 @@ export const Pacientes = () => {
               </tr>
             </thead>
             <tbody>
-              {Data.data.map((paciente) => {
+              {pacientes.map((paciente) => {
                 return (
                   <tr>
                     <td> {paciente.IdPaciente} </td>
