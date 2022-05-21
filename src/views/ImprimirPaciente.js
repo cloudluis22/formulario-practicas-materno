@@ -2,31 +2,31 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { useGetInfo } from '../hooks/useGetInfo';
-<<<<<<< HEAD
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { renderToString } from 'react-dom/server';
+import jsPDF from "jspdf";
 import {
   faFaceSadTear
 } from '@fortawesome/free-solid-svg-icons';
+import html2canvas from 'html2canvas';
 
 export const ImprimirPaciente = () => {
   const { id } = useParams();
   const { dataState } = useGetInfo(id);
 
   const {ok, loading, data} = dataState
-
+  
+  const print = () => {
+    const string = renderToString(<ImprimirPaciente />);
+    const pdf = new jsPDF("portrait", "pt", "letter");
+    pdf.html(document.body, { html2canvas: { scale: 0.85 }, margin : [1, 1, 1, 1] } )
+    .then(() => {
+      pdf.save(`expediente-paciente-${id}.pdf`);
+      }
+    )
+  };
 
   console.log(data);
-=======
-
-export const ImprimirPaciente = () => {
-  const { id } = useParams();
-  const { dataState } =  useGetInfo(id);
-
-  useEffect(() => {
-  
-  }, [dataState]);
-  
->>>>>>> 5931329d74ac86dd0eb5ed92998e891ed14d983d
 
   return (
     <div className='bcg-imprimir-color'>
@@ -527,7 +527,9 @@ export const ImprimirPaciente = () => {
           )}
 
         </div>
-      )}      
+      )}
+
+      <button className='btn btn-primary' onClick={()  => {  print() }}> Guardar en PDF </button>      
 
     </div>
   )
