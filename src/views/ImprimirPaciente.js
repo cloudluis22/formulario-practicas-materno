@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { useGetInfo } from '../hooks/useGetInfo';
+<<<<<<< HEAD
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faFaceSadTear
@@ -15,6 +16,17 @@ export const ImprimirPaciente = () => {
 
 
   console.log(data);
+=======
+
+export const ImprimirPaciente = () => {
+  const { id } = useParams();
+  const { dataState } =  useGetInfo(id);
+
+  useEffect(() => {
+  
+  }, [dataState]);
+  
+>>>>>>> 5931329d74ac86dd0eb5ed92998e891ed14d983d
 
   return (
     <div className='bcg-imprimir-color'>
