@@ -16,7 +16,7 @@ import { TablaAmamantacion } from '../forms/TablaAmamantacion';
 import { Modal } from '../components/Modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faPrint,
+  faPrint, faArrowLeft,
 } from '@fortawesome/free-solid-svg-icons';
 
 export const Formulario = () => {
@@ -90,17 +90,18 @@ export const Formulario = () => {
           <h3 className='text-white text-center mt-2 animate__animated animate__fadeIn'>
             ID: {Data.data.IdPaciente}
           </h3>
-          {formIndex !== 0 && (
-            <button
-              className='btn btn-primary ms-5'
+
+          <button
+              className='btn btn-primary btn-regresar-pacientes-menu animate__animated animate__fadeIn'
               onClick={() => {
-                setFormIndex(0);
+                navigate('/pacientes')
               }}>
-              Volver
+              <FontAwesomeIcon icon={faArrowLeft} /> Regresar a Menu Pacientes
             </button>
-          )}
+
 
           <div className='d-flex align-items-center flex-column justify-content-center mt-3 pb-3 animate__animated animate__backInUp'>
+
             {formIndex === 0 && (
               <TablaSecciones
                 setFormIndex={setFormIndex}
@@ -146,6 +147,15 @@ export const Formulario = () => {
             }} className='btn btn-primary mt-3'>
               Imprimir Expediente <FontAwesomeIcon icon={faPrint} />
             </button>
+            {formIndex !== 0 && (
+            <button
+              className='btn btn-primary btn-regresar-pacientes animate__animated animate__fadeIn'
+              onClick={() => {
+                setFormIndex(0);
+              }}>
+              <FontAwesomeIcon icon={faArrowLeft} /> Regresar
+            </button>
+          )}
           </div>
         </div>
       )}

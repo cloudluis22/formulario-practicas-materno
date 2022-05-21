@@ -42,6 +42,22 @@
 
 }
 
+.btn-regresar-pacientes {
+
+  position: relative;
+  right: 30rem;
+  bottom: 40rem;
+
+}
+
+.btn-regresar-pacientes-menu {
+
+  position: relative;
+  left: 5rem;
+  bottom: 5rem;
+
+}
+
 .form-settings {
   overflow: scroll;
   width: 480px;
