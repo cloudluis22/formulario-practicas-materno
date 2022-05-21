@@ -527,10 +527,33 @@ export const ImprimirPaciente = () => {
             <p> Esta sección no ha sido llenada. </p>
           )}
 
+          <h3> Amamantación </h3>
+          <hr />
+
+          {data[2] !== undefined && (
+            <div>
+
+              <div className='mb-3'>
+                <h5> ¿Su bebé toma/tomó pecho? </h5>
+                <p> {data[2].TomaPechoEdad || "N/A"}  </p>
+              </div>
+
+              <div className='mb-3'>
+                <h5> ¿Hasta que edad? </h5>
+                <p> {data[2].LblTomaPechoEdad || "N/A"} </p>
+              </div>
+
+            </div>
+          )}
+
+          {data[2] === undefined && (
+            <p> Esta sección no ha sido llenada. </p>
+          )}
+
+            <button className='btn btn-primary' onClick={()  => {  print() }}> Guardar en PDF </button>      
         </div>
       )}
 
-      <button className='btn btn-primary' onClick={()  => {  print() }}> Guardar en PDF </button>      
 
     </div>
   )
