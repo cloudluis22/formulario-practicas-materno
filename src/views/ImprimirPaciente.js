@@ -117,16 +117,16 @@ export const ImprimirPaciente = () => {
           <h3> Alimentación (Dieta Habitual) </h3>
           <hr />
 
-          <div className='mb-3'>
-            <h5> ¿Cuántas comidas hace al dia? </h5>
-            <p> {data[1].ComidasDiarias} comidas </p>
-          </div>
+          {data[1] !== undefined && (
+            <div>
 
+              <div className='mb-3'>
+                <h5> ¿Cuántas comidas hace al dia? </h5>
+                <p> {data[1].ComidasDiarias} comidas </p>
+              </div>
 
           <h4> Consumo semanal de alimentos: </h4>
 
-          {data[1] !== undefined && (
-            <div>
               <div className='mb-3'>
                 <h5> Carne </h5>
                 <p> {data[1].Carne} veces </p>
