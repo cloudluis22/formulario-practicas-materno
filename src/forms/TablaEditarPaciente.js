@@ -20,6 +20,7 @@ export const TablaEditarPaciente = ({ IdPaciente }) => {
     Telefono: '',
     Celular: '',
     OtroContacto: '',
+    NombrePediatra: '',
   };
   const [Data, setData] = useState({
     loading: true,
@@ -89,6 +90,10 @@ export const TablaEditarPaciente = ({ IdPaciente }) => {
             errors.FechaDeNacimiento = 'No ha agregado una fecha valida';
           }
 
+          if (!values.NombrePediatra) {
+            errors.NombrePediatra = 'No ha agregado un nombre';
+          }
+
           if (!values.LugarDeNacimiento) {
             errors.LugarDeNacimiento =
               'Por favor ingrese el lugar de nacimiento del paciente.';
@@ -146,6 +151,7 @@ export const TablaEditarPaciente = ({ IdPaciente }) => {
               Telefono: values.Telefono,
               Celular: values.Celular,
               OtroContacto: values.OtroContacto,
+              NombrePediatra: values.NombrePediatra,
             })
             .then((response) => {
               Swal.fire(
@@ -168,7 +174,7 @@ export const TablaEditarPaciente = ({ IdPaciente }) => {
         {({ errors, touched }) => (
           <Form
             className='card px-5'
-            style={{ width: '550px', overflow: 'auto', height: '550px' }}>
+            style={{ width: '550px', height: '550px', overflow: 'auto'}}>
             <br></br>
 
             <div className='mb-4 mt-2'>
@@ -233,7 +239,7 @@ export const TablaEditarPaciente = ({ IdPaciente }) => {
               </div>
 
               <br></br>
-
+              {/* EdadPaciente */}
               <div className='mb-3'>
                 <label htmlFor='Edad' className='form-label'>
                   Edad del paciente
@@ -297,14 +303,12 @@ export const TablaEditarPaciente = ({ IdPaciente }) => {
                       className='form-check-input mx-2'
                       name='Genero'
                       id='Genero'
-                      value='Otro'
+                      value='Sin especificar'
                     />
-                    Otro
+                    Sin especificar
                   </label>
                 </div>
               </div>
-
-              <br></br>
 
               <div className='mb-3'>
                 <label htmlFor='GustosPersonales' className='form-label'>
@@ -501,7 +505,7 @@ export const TablaEditarPaciente = ({ IdPaciente }) => {
                 Telefono
               </label>
               <Field
-                type='number'
+                type='text'
                 id='Telefono'
                 name='Telefono'
                 className={
@@ -530,7 +534,7 @@ export const TablaEditarPaciente = ({ IdPaciente }) => {
                 Celular
               </label>
               <Field
-                type='number'
+                type='text'
                 id='Celular'
                 name='Celular'
                 className={
@@ -559,7 +563,7 @@ export const TablaEditarPaciente = ({ IdPaciente }) => {
                 Otro Contacto
               </label>
               <Field
-                type='number'
+                type='text'
                 id='OtroContacto'
                 name='OtroContacto'
                 className={
@@ -579,6 +583,35 @@ export const TablaEditarPaciente = ({ IdPaciente }) => {
               />
               <div id='OtroContactoHelp' className='form-text'>
                 Aqui debes de ingresar el Otro Contacto.
+              </div>
+
+                  <br></br>
+
+                  {/*Nombre del pediatra*/}
+              <label htmlFor='OtroContacto' className='form-label'>
+                Nombre del pediatra
+              </label>
+              <Field
+                type='text'
+                id='NombrePediatra'
+                name='NombrePediatra'
+                className={
+                  !touched.NombrePediatra
+                    ? 'form-control'
+                    : errors.NombrePediatra
+                    ? 'form-control is-invalid'
+                    : 'form-control is-valid'
+                }
+                placeholder='Ingrese el Nombre del pediatra'
+              />
+              <ErrorMessage
+                name='NombrePediatra'
+                component={() => (
+                  <div className='invalid-feedback'>{errors.NombrePediatra}</div>
+                )}
+              />
+              <div id='NombrePediatraHelp' className='form-text'>
+                Aqui debes de ingresar el nombre del pediatra
               </div>
 
               <br></br>

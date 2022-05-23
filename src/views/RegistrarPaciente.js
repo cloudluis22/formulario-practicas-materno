@@ -38,6 +38,7 @@ export const RegistrarPaciente = () => {
           Telefono: '',
           Celular: '',
           OtroContacto: '',
+          NombrePediatra: '',
         }}
         validate={(values) => {
           let errors = {};
@@ -73,6 +74,11 @@ export const RegistrarPaciente = () => {
           if (!values.LugarDeNacimiento) {
             errors.LugarDeNacimiento =
               'Por favor ingrese el lugar de nacimiento del paciente.';
+          }
+
+          if (!values.NombrePediatra) {
+            errors.NombrePediatra =
+              'Por favor ingrese el nombre del pediatra.';
           }
 
           if (!values.PadreMadreTutor) {
@@ -131,6 +137,7 @@ export const RegistrarPaciente = () => {
               Telefono: values.Telefono,
               Celular: values.Celular,
               OtroContacto: values.OtroContacto,
+              NombrePediatra: values.NombrePediatra,
             })
             .then((response) => {
               Swal.fire(
@@ -283,9 +290,9 @@ export const RegistrarPaciente = () => {
                       className='form-check-input mx-2'
                       name='Genero'
                       id='Genero'
-                      value='Otro'
+                      value='Sin especificar'
                     />
-                    Otro
+                    Sin especificar
                   </label>
                 </div>
               </div>
@@ -563,6 +570,35 @@ export const RegistrarPaciente = () => {
               />
               <div id='OtroContactoHelp' className='form-text'>
                 Aqui debes de ingresar el Otro Contacto.
+              </div>
+
+                  <br></br>
+
+                  {/*Nombre del pediatra*/}
+              <label htmlFor='OtroContacto' className='form-label'>
+                Nombre del pediatra
+              </label>
+              <Field
+                type='text'
+                id='NombrePediatra'
+                name='NombrePediatra'
+                className={
+                  !touched.NombrePediatra
+                    ? 'form-control'
+                    : errors.NombrePediatra
+                    ? 'form-control is-invalid'
+                    : 'form-control is-valid'
+                }
+                placeholder='Ingrese el Nombre del pediatra'
+              />
+              <ErrorMessage
+                name='NombrePediatra'
+                component={() => (
+                  <div className='invalid-feedback'>{errors.NombrePediatra}</div>
+                )}
+              />
+              <div id='NombrePediatraHelp' className='form-text'>
+                Aqui debes de ingresar el nombre del pediatra
               </div>
 
               <br></br>
