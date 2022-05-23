@@ -77,7 +77,8 @@ export const TablaAlimentacion = ({ IdPaciente }) => {
           if (!values.Carne) {
             errors.Carne =
               'Por favor ingrese la cantidad de veces que come carne a la semana.';
-          }
+              console.log("Buenas tardes")
+            }
 
           if (!values.Leche) {
             errors.Leche =

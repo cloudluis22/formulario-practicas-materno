@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -9,8 +9,9 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { useForm } from '../hooks/useForm';
 
-export const Pacientes = () => {
+export const Pacientes = React.memo(() => {
   let navigate = useNavigate();
   const [Data, setData] = useState({
     loading: true,
@@ -18,10 +19,8 @@ export const Pacientes = () => {
     ok: false,
   });
 
-  let pacientes = [];
-
-  useEffect(() => {
-    axios
+  const traerPacientes = async () => {
+    await axios
       .get('http://localhost:3001/api/v1/obtener-pacientes')
       .then((response) => {
         setData({
@@ -31,16 +30,40 @@ export const Pacientes = () => {
         });
       })
       .catch((error) => {
-        
         setData({
           loading: false,
           data: [],
           ok: false,
         });
       });
-  }, []);
+  }
+  
+  const [values, handleInputChange, reset] = useForm({
+    busqueda: ''
+  });
 
-  pacientes = Data.data;
+  const { busqueda } = values;
+
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    if(busqueda !== ''){
+      setData({
+        ...Data,
+        data: Data.data.filter(paciente => paciente.NombrePaciente.includes(busqueda))
+      });
+      reset();
+    }
+    else {
+      traerPacientes()
+    }
+  }
+
+  useEffect(() => {
+   
+    traerPacientes();
+
+  }, []);
 
   const EliminarPaciente = (IdPaciente) => {
     Swal.fire({
@@ -111,10 +134,10 @@ export const Pacientes = () => {
       {!Data.loading && Data.ok && (
         <div className='container-md'>
 
-          <div>
-            <input className='form-control busqueda' />
+          <form onSubmit={handleSubmit}>
+            <input className='form-control busqueda' placeholder='Busca un paciente...' value={busqueda} name='busqueda' onChange={handleInputChange} />
             <FontAwesomeIcon icon={faSearch} className='busqueda-icono' />
-          </div>
+          </form>
           
           <table className='table table-striped table-responsive animate__animated animate__fadeInUp'>
             <thead>
@@ -127,7 +150,7 @@ export const Pacientes = () => {
               </tr>
             </thead>
             <tbody>
-              {pacientes.map((paciente) => {
+              {Data.data.map((paciente) => {
                 return (
                   <tr>
                     <td> {paciente.IdPaciente} </td>
@@ -164,4 +187,4 @@ export const Pacientes = () => {
       )}
     </div>
   );
-};
+});

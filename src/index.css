@@ -67,6 +67,10 @@
   font-size: 1.2em;
 }
 
+.busqueda::placeholder {
+  color: gray;
+}
+
 .busqueda:focus {
   background-color: white;
   color: black;
