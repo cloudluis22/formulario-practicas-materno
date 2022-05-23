@@ -4,10 +4,10 @@ import { useParams } from 'react-router-dom';
 import { useGetInfo } from '../hooks/useGetInfo';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import jsPDF from "jspdf";
+import html2canvas from 'html2canvas';
 import {
   faFaceSadTear
 } from '@fortawesome/free-solid-svg-icons';
-import { renderToString } from 'react-dom/server';
 
 export const ImprimirPaciente = () => {
   const { id } = useParams();
@@ -16,16 +16,32 @@ export const ImprimirPaciente = () => {
   const {ok, loading, data} = dataState
   
   const print = () => {
-    const string = renderToString(<ImprimirPaciente />);
-    const pdf = new jsPDF("portrait", "pt", "letter");
-    pdf.html(document.body, { html2canvas: { scale: 0.85 }, margin : [1, 1, 1, 1] } )
-    .then(() => {
-      pdf.save(`expediente-paciente-${id}.pdf`);
-      }
-    )
-  };
+    html2canvas(document.body, {
+      scale: 0.5,
+      scrollX: 0,
+      scrollY: 0
+    }).then(function(canvas) {
+      var imgData = canvas.toDataURL('image/png');
+      var imgWidth = 210; 
+      var pageHeight = 295;  
+      var imgHeight = canvas.height * imgWidth / canvas.width;
+      var heightLeft = imgHeight;
 
-  console.log(data);
+      var doc = new jsPDF('p', 'mm', undefined, 'FAST');
+      var position = 0;
+
+      doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+      heightLeft -= pageHeight;
+
+      while (heightLeft >= 0) {
+        position = heightLeft - imgHeight;
+        doc.addPage();
+        doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+      }
+      doc.save('prueba.pdf');
+    })
+  };
 
   return (
     <div className='bcg-imprimir-color'>
@@ -38,8 +54,6 @@ export const ImprimirPaciente = () => {
             <div className="spinner-grow text-dark" role="status" style={{height: '4rem', width: '4rem'}}>
               <span className="visually-hidden">Loading...</span>
             </div>
-
-            
     
           </div>
         
@@ -57,6 +71,9 @@ export const ImprimirPaciente = () => {
       {!loading && ok && (
         
         <div className='mt-3 px-3'>
+
+          <button className='btn btn-primary' onClick={()  => {  print() }}> Guardar en PDF </button>      
+
           <h1 className='text-center'> Expediente del Paciente </h1>
 
           <h3> Datos Generales </h3>
@@ -541,17 +558,365 @@ export const ImprimirPaciente = () => {
                 <p> {data[2].LblTomaPechoEdad || "N/A"} </p>
               </div>
 
+              <div className='mb-3'>
+                <h5> Frecuencia </h5>
+                <p> {data[2].LblFrecuenciaAlimentacionPecho	 || "N/A"} </p>
+              </div>
+
+              <div className='mb-3'>
+                <h5> La alimentación de su bebé es o fue: </h5>
+                <p> {data[2].	TipoDeAlimentacion || "N/A"} </p>
+              </div>
+
+              <div className='mb-3'>
+                <h5> ¿Su hijo utiliza / utilizó biberón? </h5>
+                <p> {data[2].UsabaBiberon || "N/A"} </p>
+              </div>
+
+              <div className='mb-3'>
+                <h5>  Frecuencia </h5>
+                <p> {data[2].LblUsabaBiberon || "N/A"} </p>
+              </div>
+
+              <div className='mb-3'>
+                <h5> ¿Cuál es/era el contenido de su biberón? </h5>
+                <p> {data[2].ContenidoBiberon || "N/A"} </p>
+              </div>
+
+              <div className='mb-3'>
+                <h5> ¿Hasta qué edad tomó biberón? </h5>
+                <p> {data[2].EdadYaNoTomaBiberon || "N/A"} </p>
+              </div>
+
+              <div className='mb-3'>
+                <h5> ¿Su hijo utiliza o utilizó chupón? </h5>
+                <p> {data[2].UsabaChupon || "N/A"} </p>
+              </div>
+
+              <div className='mb-3'>
+                <h5> Frecuencia </h5>
+                <p> {data[2].LblUsabaChupon || "N/A"} </p>
+              </div>
+
+              <div className='mb-3'>
+                <h5> ¿Cuál es/era el contenido de su chupón? </h5>
+                <p> {data[2].ContenidoChupon || "N/A"} </p>
+              </div>
+
+              <div className='mb-3'>
+                <h5> ¿Hasta qué edad utilizó chupón?  </h5>
+                <p> {data[2].EdadYaNoUsaChupon || "N/A"} </p>
+              </div>
+
+              <div className='mb-3'>
+                <h5> ¿Su bebé sigue teniendo alimentación nocturna? </h5>
+                <p> {data[2].AlimentacionNocturna || "N/A"} </p>
+              </div>
+              
+              <div className='mb-3'>
+                <h5> ¿Cuál era su contenido? </h5>
+                <p> {data[2].LblAlimentacionNocturna || "N/A"} </p>
+              </div>
+
+              <div className='mb-3'>
+                <h5> ¿Limpia si boquita después de la alimentación nocturna? </h5>
+                <p> {data[2].LimpiaSuBoquita || "N/A"} </p>
+              </div>
+
+              <div className='mb-3'>
+                <h5> ¿Su bebé come alimentos sólidos? </h5>
+                <p> {data[2].BebeConsumeSolidos || "N/A"} </p>
+              </div>
+
+              <div className='mb-3'>
+                <h5> ¿Mastica o tienen que ser molidos? </h5>
+                <p> {data[2].LblBebeConsumeSolidos || "N/A"} </p>
+              </div>
+
+
             </div>
           )}
 
           {data[2] === undefined && (
             <p> Esta sección no ha sido llenada. </p>
           )}
+          
+          <h3> Antecedentes Familiares</h3>
+          <hr />
 
-            <button className='btn btn-primary' onClick={()  => {  print() }}> Guardar en PDF </button>      
+
+          {data[3] !== undefined && (
+            <div>
+
+              <div className='mb-3'> <h5> Algún familiar de su hijo padece: </h5> </div>
+
+              <div className='mb-3'>
+                <h5> Diabetes  </h5>
+                <p> {data[3].Diabetes || "N/A"} </p>
+              </div>
+
+              <div className='mb-3'>
+                <h5> Cáncer  </h5>
+                <p> {data[3].Cancer || "N/A"} </p>
+              </div>
+
+              <div className='mb-3'>
+                <h5> Hipertensión </h5>
+                <p> {data[3].Hipertension || "N/A"} </p>
+              </div>
+              
+              <div className='mb-3'>
+                <h5> VIH </h5>
+                <p> {data[3].VIH || "N/A"} </p>
+              </div>
+
+              <div className='mb-3'>
+                <h5> Enfermedades Degenerativas </h5>
+                <p> {data[3].EnfermedadDegenerativa || "N/A"} </p>
+              </div>
+
+              <div className='mb-3'>
+                <h5> Enfermedades Mentales </h5>
+                <p> {data[3].EnfermedadMental || "N/A"} </p>
+              </div>
+
+            </div>
+          )}
+
+          {data[3] === undefined && (
+            <p> Esta sección no ha sido llenada. </p>
+          )}
+
+          <h3> Oclusión y alineamiento </h3>
+          <hr/>
+            
+          {data[9] !== undefined && (
+            <div>
+
+              <div className='mb-3'>
+                <h5> Linea Media </h5>
+                <p> {data[9].LineaMedia || "N/A"} </p>
+              </div>
+
+              <div className='mb-3'>
+                <h5> PlanoTerminal </h5>
+                <p> {data[9].PlanoTerminal || "N/A"} </p>
+              </div>
+
+              <div className='mb-3'>
+                <h5> Clase Molar </h5>
+                <p> {data[9].ClaseMolar || "N/A"} </p>
+              </div>
+
+              <div className='mb-3'>
+                <h5> Espacios Primates </h5>
+                <p> {data[9].EspaciosPrimates || "N/A"} </p>
+              </div>
+
+              <div className='mb-3'>
+                <h5> Espacios Fisiológicos </h5>
+                <p> {data[9].EspaciosFisiologicos || "N/A"} </p>
+              </div>
+
+              <div className='mb-3'>
+                <h5> Traslape </h5>
+                <p> {data[9].Traslape || "N/A"} </p>
+              </div>
+
+              <div className='mb-3'>
+                <h5> Sobremordida </h5>
+                <p> {data[9].Sobremordida || "N/A"} </p>
+              </div>
+
+              <div className='mb-3'>
+                <h5> MordidaAbierta </h5>
+                <p> {data[9].MordidaAbierta || "N/A"} </p>
+              </div>
+
+              <div className='mb-3'>
+                <h5> Mordida Profunda </h5>
+                <p> {data[9].MordidaProfunda || "N/A"} </p>
+              </div>
+
+              <div className='mb-3'>
+                <h5> Malposición Dentaria </h5>
+                <p> {data[9].MalposicionDentaria || "N/A"} </p>
+              </div>
+
+              <div className='mb-3'>
+                <h5> Diastema </h5>
+                <p> {data[9].Diastema || "N/A"} </p>
+              </div>
+
+            </div>
+          )}
+
+          {data[9] === undefined && (
+            <p> Esta sección no ha sido llenada. </p>
+          )}
+
+            <h3> Hábitos Perniciosos </h3>
+          <hr />
+
+          {data[7] !== undefined && (
+            <div>
+
+              <div className='mb-3'>
+                <h5> Respirador Bucal </h5>
+                <p> {data[7].RespiradoBucal || "N/A"} </p>
+              </div>
+
+              <div className='mb-3'>
+                <h5> Succión Digital </h5>
+                <p> {data[7].SuccionDigital || "N/A"} </p>
+              </div>
+
+              <div className='mb-3'>
+                <h5> Succión Chupete </h5>
+                <p> {data[7].SuccionChupete || "N/A"} </p>
+              </div>
+
+              <div className='mb-3'>
+                <h5> Succión Labial </h5>
+                <p> {data[7].SuccionLabial || "N/A"} </p>
+              </div>
+
+              <div className='mb-3'>
+                <h5> 	Morderse el Labio </h5>
+                <p> {data[7].	MorderseLabio || "N/A"} </p>
+              </div>
+
+              <div className='mb-3'>
+                <h5> Morderse las uñas </h5>
+                <p> {data[7].MorderseLasUnas || "N/A"} </p>
+              </div>
+
+              <div className='mb-3'>
+                <h5> Deglución Atípica/Protusión lingual </h5>
+                <p> {data[7].DeglucionAtipica || "N/A"} </p>
+              </div>
+
+              <div className='mb-3'>
+                <h5> Otros </h5>
+                <p> {data[7].Otros || "N/A"} </p>
+              </div>
+
+            </div>
+          )}
+
+          {data[7] === undefined && (
+            <p> Esta sección no ha sido llenada. </p>
+          )}
+
+          <h3> Erupción y dentición </h3>
+          <hr />
+
+          {data[5] !== undefined && (
+            <div>
+
+              <div className='mb-3'>
+                <h5> Edad Dental </h5>
+                <p> {data[5].EdadDental || "N/A"} </p>
+              </div>
+
+              <div className='mb-3'>
+                <h5> Secuencia Anormal </h5>
+                <p> {data[5].SecuenciaAnormal || "N/A"} </p>
+              </div>
+
+              <div className='mb-3'>
+                <h5> Pérdida Prematura </h5>
+                <p> {data[5].PerdidaPrematura || "N/A"} </p>
+              </div>
+
+              <div className='mb-3'>
+                <h5> Retención Prolongada </h5>
+                <p> {data[5].RetencionProlongada || "N/A"} </p>
+              </div>
+
+              <div className='mb-3'>
+                <h5> Erupción Retardada </h5>
+                <p> {data[5].ErupcionRetardada || "N/A"} </p>
+              </div>
+
+              <div className='mb-3'>
+                <h5> Falta de Contacto Proximal </h5>
+                <p> {data[5].FaltaContactoProximal || "N/A"} </p>
+              </div>
+
+              <div className='mb-3'>
+                <h5> Hipoplasia Incisivo Molar</h5>
+                <p> {data[5].HipoplasiaIncisivo || "N/A"} </p>
+              </div>
+
+              <div className='mb-3'>
+                <h5> Hipoplasia En Deciduos </h5>
+                <p> {data[5].HipoplasiaEnDeciduos || "N/A"} </p>
+              </div>
+
+              <div className='mb-3'>
+                <h5> Amelo/Dentinogénesis Imperfecta </h5>
+                <p> {data[5].AmeloDentinogenesisImperfecta || "N/A"} </p>
+              </div>
+
+              <div className='mb-3'>
+                <h5> Fluorosis </h5>
+                <p> {data[5].Fluorosis || "N/A"} </p>
+              </div>
+
+              <div className='mb-3'>
+                <h5> Otros </h5>
+                <p> {data[5].Otros || "N/A"} </p>
+              </div>
+
+            </div>
+          )}
+
+          {data[5] === undefined && (
+            <p> Esta sección no ha sido llenada. </p>
+          )}
+
+        <h3> Medio Bucal General </h3>
+          <hr />
+
+          {data[8] !== undefined && (
+            <div>
+
+              <div className='mb-3'>
+                <h5> Higiene </h5>
+                <p> {data[8].Higiene || "N/A"} </p>
+              </div>
+
+              <div className='mb-3'>
+                <h5> Placa Dentobacteriana	 </h5>
+                <p> {data[8].PlacaDentobacteriana	 || "N/A"} </p>
+              </div>
+
+              <div className='mb-3'>
+                <h5> PHSaliva </h5>
+                <p> {data[8].PHSaliva || "N/A"} </p>
+              </div>
+
+              <div className='mb-3'>
+                <h5> Localización </h5>
+                <p> {data[8].Localizacion || "N/A"} </p>
+              </div>
+
+              <div className='mb-3'>
+                <h5> Cálculo Dental </h5>
+                <p> {data[8].CalculoDental || "N/A"} </p>
+              </div>
+
+              
+            </div>
+          )}
+
+          {data[8] === undefined && (
+            <p> Esta sección no ha sido llenada. </p>
+          )}
+
         </div>
       )}
-
 
     </div>
   )

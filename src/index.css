@@ -19,8 +19,8 @@
 .bcg-imprimir-color {
   position: absolute;
   width: 100%;
-  height: 100%;
-  position: fixed;
+  height: 15000px;
+  position: absolute;
   background-color: white;
   color: black;
   overflow: auto;
