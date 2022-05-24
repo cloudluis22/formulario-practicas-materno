@@ -4,9 +4,11 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 
 export const TablaAntecedentesFamiliares = ({ IdPaciente }) => {
+  
   const [Data, setData] = useState({
     loading: true,
     data: [],
+    info: [],
     ok: false,
   });
 
@@ -20,9 +22,10 @@ export const TablaAntecedentesFamiliares = ({ IdPaciente }) => {
   };
 
   const [edit, setEdit] = useState(false);
+  const [NombreTutor, setNombreTutor] = useState("");
 
   useEffect(() => {
-    setTimeout(() => {
+    
       axios
         .get(
           `http://localhost:3001/api/v1/antecedentes-familiares/${IdPaciente}`
@@ -48,8 +51,16 @@ export const TablaAntecedentesFamiliares = ({ IdPaciente }) => {
             ok: false,
           });
         });
-    }, 1000);
-  }, [IdPaciente, Data.data]);
+        axios.get(`http://localhost:3001/api/v1/obtener-paciente/${IdPaciente}`)
+        .then((response) => {
+          setNombreTutor(
+            response.data.paciente[0].TutorEncargado
+          )
+          
+        
+        }) 
+  },  
+  [IdPaciente, Data.data]);
 
   if (Data.data.length > 0) {
     formValues = Data.data[0];
@@ -287,6 +298,15 @@ export const TablaAntecedentesFamiliares = ({ IdPaciente }) => {
                     No
                   </label>
                 </div>
+              </div>
+              <br></br>
+              <div className='mb-4 mt-2'>
+                <label>
+                Yo <u><strong>{NombreTutor}</strong></u>, declaro que
+la información que aquí se expresa es verídica, estoy enterado de que es información
+confidencial y solamente la Dra. Alicia Díaz Magdaleno tendrá acceso a este documento;
+en caso de requerirlo yo puedo solicitar un resumen de mi historial clínico y evolución.
+                </label>
               </div>
 
               <button className='btn btn-primary' type='submit'>
