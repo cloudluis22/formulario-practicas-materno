@@ -1,11 +1,12 @@
-import React, { useState, useEffect, memo } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faPlus,
   faPersonCircleQuestion,
   faTrashCan,
-  faSearch
+  faSearch,
+  faUserDoctor
 } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
@@ -169,13 +170,23 @@ export const Pacientes = React.memo(() => {
                           className='ms-1'
                         />
                       </button>
+
                       <button
-                        className='btn btn-sm btn-danger'
+                        className='btn btn-sm btn-danger me-2'
                         onClick={() => {
                           EliminarPaciente(paciente.IdPaciente);
                         }}>
                         Eliminar
                         <FontAwesomeIcon icon={faTrashCan} className='ms-1' />
+                      </button>
+
+                      <button
+                        className='btn btn-sm btn-primary'
+                        onClick={() => {
+                          navigate(`/administrar-consultas/${paciente.IdPaciente}`);
+                        }}>
+                        Administrar Consultas 
+                        <FontAwesomeIcon icon={faUserDoctor} className='ms-1' />
                       </button>
                     </td>
                   </tr>
