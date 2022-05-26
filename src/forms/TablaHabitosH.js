@@ -58,6 +58,7 @@ export const TablaHabitos = ({ IdPaciente }) => {
         validate={(values) => {
           let errors = {};
 
+
           if (!values.EncargadoCepillado) {
             errors.EncargadoCepillado =
               'Por favor ingrese la persona la cual se encarga del cepillado de dientes del paciente.';
@@ -71,6 +72,18 @@ export const TablaHabitos = ({ IdPaciente }) => {
           if (!values.MarcaPastaDental) {
             errors.MarcaPastaDental =
               'Por favor ingrese la marca de la pasta dental.';
+          }
+
+          if (!values.CepilladoDiarioDormir) {
+            errors.CepilladoDiarioDormir = 'Debe seleccionar este campo';
+          }
+
+          if (!values.EnjuagueBucal) {
+            errors.EnjuagueBucal = 'Debe seleccionar este campo';
+          }
+
+          if (!values.HiloDental) {
+            errors.HiloDental = 'Debe seleccionar este campo';
           }
 
 
@@ -227,95 +240,166 @@ export const TablaHabitos = ({ IdPaciente }) => {
 
             <br></br>
 
-            {/*CepilladoDiarioDormir */}
-            <label htmlFor='MarcaPastaDental' className='form-label'>
-              ¿Se cepilla los dientes antes de dormir sin falta?
-            </label>
-            <Field
-              type='text'
-              id='CepilladoDiarioDormir'
-              name='CepilladoDiarioDormir'
-              className={
-                !touched.CepilladoDiarioDormir
-                  ? 'form-control'
-                  : errors.CepilladoDiarioDormir
-                  ? 'form-control is-invalid'
-                  : 'form-control is-valid'
-              }
-              placeholder='si/no , siempre / casi siempre / a veces'
-            />
-            <ErrorMessage
-              name='CepilladoDiarioDormir'
-              component={() => (
-                <div className='invalid-feedback'>
-                  {errors.CepilladoDiarioDormir}
+
+            <div className='mb-4 mt-2'>
+                <div id='my-radio-group'>¿Se cepilla los dientes antes de dormir? Frecuencia:</div>
+                <div role='group' aria-labelledby='my-radio-group'>
+                  <label>
+                    <Field
+                      type='radio'
+                      className='form-check-input mx-2'
+                      name='CepilladoDiarioDormir'
+                      id='CepilladoDiarioDormir'
+                      value='Siempre'
+                    />
+                    Siempre
+                  </label>
+                  <br></br>
+                  <label>
+                    <Field
+                      type='radio'
+                      className='form-check-input mx-2'
+                      name='CepilladoDiarioDormir'
+                      id='CepilladoDiarioDormir'
+                      value='Casi Siempre'
+                    />
+                    Casi Siempre
+                  </label>
+                  <br></br>
+                  <label>
+                    <Field
+                      type='radio'
+                      className='form-check-input mx-2'
+                      name='CepilladoDiarioDormir'
+                      id='CepilladoDiarioDormir'
+                      value='A veces'
+                    />
+                    A veces
+                  </label>
+                  <br></br>
+                  <label>
+                    <Field
+                      type='radio'
+                      className='form-check-input mx-2'
+                      name='CepilladoDiarioDormir'
+                      id='CepilladoDiarioDormir'
+                      value='Nunca'
+                    />
+                    Nunca
+                  </label>
                 </div>
-              )}
-            />
-            <div id='CepilladoDiarioDormirHelp' className='form-text'>
-              se debe contestar si o no si cepilla los dientes antes de dormir
-              sin falta y con que fecuencia siempre / casi siempre / a veces
-            </div>
-
+              </div>
             <br></br>
 
-            {/*EnjuagueBucal */}
-            <label htmlFor='MarcaPastaDental' className='form-label'>
-              ¿Utiliza enjuague bucal?
-            </label>
-            <Field
-              type='text'
-              id='EnjuagueBucal'
-              name='EnjuagueBucal'
-              className={
-                !touched.EnjuagueBucal
-                  ? 'form-control'
-                  : errors.EnjuagueBucal
-                  ? 'form-control is-invalid'
-                  : 'form-control is-valid'
-              }
-              placeholder='si/no , siempre / casi siempre / a veces'
-            />
-            <ErrorMessage
-              name='EnjuagueBucal'
-              component={() => (
-                <div className='invalid-feedback'>{errors.EnjuagueBucal}</div>
-              )}
-            />
-            <div id='EnjuagueBucalHelp' className='form-text'>
-              se debe contestar si o no utiliza enguaje bucal y con que
-              fecuencia siempre / casi siempre / a veces
-            </div>
 
+            <div className='mb-4 mt-2'>
+                <div id='my-radio-group'>¿Utiliza enjuague bucal?<br></br> Frecuencia:</div>
+                <div role='group' aria-labelledby='my-radio-group'>
+                  <label>
+                    <Field
+                      type='radio'
+                      className='form-check-input mx-2'
+                      name='EnjuagueBucal'
+                      id='EnjuagueBucal'
+                      value='Siempre'
+                    />
+                    Siempre
+                  </label>
+                  <br></br>
+                  <label>
+                    <Field
+                      type='radio'
+                      className='form-check-input mx-2'
+                      name='EnjuagueBucal'
+                      id='EnjuagueBucal'
+                      value='Casi Siempre'
+                    />
+                    Casi Siempre
+                  </label>
+                  <br></br>
+                  <label>
+                    <Field
+                      type='radio'
+                      className='form-check-input mx-2'
+                      name='EnjuagueBucal'
+                      id='EnjuagueBucal'
+                      value='A veces'
+                    />
+                    A veces
+                  </label>
+                  <br></br>
+                  <label>
+                    <Field
+                      type='radio'
+                      className='form-check-input mx-2'
+                      name='EnjuagueBucal'
+                      id='EnjuagueBucal'
+                      value='Nunca'
+                    />
+                    Nunca
+                  </label>
+                </div>
+              </div>
             <br></br>
 
-            {/*HiloDental */}
-            <label htmlFor='MarcaPastaDental' className='form-label'>
-              ¿Utiliza hilo dental?
-            </label>
-            <Field
-              type='text'
-              id='HiloDental'
-              name='HiloDental'
-              className={
-                !touched.HiloDental
-                  ? 'form-control'
-                  : errors.HiloDental
-                  ? 'form-control is-invalid'
-                  : 'form-control is-valid'
-              }
-              placeholder='si/no , siempre / casi siempre / a veces'
-            />
-            <ErrorMessage
-              name='HiloDental'
-              component={() => (
-                <div className='invalid-feedback'>{errors.HiloDental}</div>
-              )}
-            />
-            <div id='HiloDentalHelp' className='form-text'>
-              se debe contestar si o no utiliza hilo dental y con que fecuencia
-              siempre / casi siempre / a veces
-            </div>
+
+            <div className='mb-4 mt-2'>
+                <div id='my-radio-group'> ¿Utiliza hilo dental?<br></br>Frecuencia</div>
+                <div role='group' aria-labelledby='my-radio-group'>
+                  <label>
+                    <Field
+                      type='radio'
+                      className='form-check-input mx-2'
+                      name='HiloDental'
+                      id='HiloDental'
+                      value='Siempre'
+                    />
+                    Siempre
+                  </label>
+                  <br></br>
+                  <label>
+                    <Field
+                      type='radio'
+                      className='form-check-input mx-2'
+                      name='HiloDental'
+                      id='HiloDental'
+                      value='Casi Siempre'
+                    />
+                    Casi Siempre
+                  </label>
+                  <br></br>
+                  <label>
+                    <Field
+                      type='radio'
+                      className='form-check-input mx-2'
+                      name='HiloDental'
+                      id='HiloDental'
+                      value='A veces'
+                    />
+                    A veces
+                  </label>
+                  <br></br>
+                  <label>
+                    <Field
+                      type='radio'
+                      className='form-check-input mx-2'
+                      name='HiloDental'
+                      id='HiloDental'
+                      value='Nunca'
+                    />
+                    Nunca
+                  </label>
+                </div>
+              </div>
+            <br></br>
+
+
+
+
+             
+             
+
+
 
             <br></br>
 

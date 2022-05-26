@@ -400,6 +400,7 @@ export const TablaAmamantacion = ({ IdPaciente }) => {
               </div>
             )}
 
+                {/*
             <label htmlFor='ContenidoBiberon' className='form-label'>
               ¿Cuál es / era el contenido de su biberón? (Leche Materna, Leche
               de Formula, Chocolate en polvo, Auzcar/Miel, Té)
@@ -425,9 +426,26 @@ export const TablaAmamantacion = ({ IdPaciente }) => {
                 </div>
               )}
             />
-            <div id='EdadYaNoTomaBiberonHelp' className='form-text'>
+            <div id='BiberonHelp' className='form-text'>
               se debe ingresar cual es / era el contenido del biberón
             </div>
+             */}
+
+
+          
+          
+          <label>
+          <Field class="form-check-input" type="checkbox" name="checked" value="One"></Field>
+            Depende si probando si si
+          </label>
+          
+          <label>
+          <Field class="form-check-input" type="checkbox" name="checked" value="two"></Field>
+            Depende si probando si si
+          </label>
+          
+
+            <br></br>
 
             <label htmlFor='EdadYaNoTomaBiberon' className='form-label'>
               ¿Hasta que edad tomó biberón? (años)
