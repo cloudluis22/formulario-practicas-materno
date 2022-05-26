@@ -16,6 +16,16 @@
   background-image: linear-gradient(43deg, #9cacff 2%, #d170ff 66%);
 }
 
+.bcg-administrar-consultas {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background-color: #0093E9;
+  background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+  
+}
+
 .bcg-imprimir-color {
   position: absolute;
   width: 100%;

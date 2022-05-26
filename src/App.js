@@ -9,6 +9,7 @@ import { Formulario } from './views/Formulario';
 import { RegistrarPaciente } from './views/RegistrarPaciente';
 import { Pacientes } from './views/Pacientes';
 import { ImprimirPaciente } from './views/ImprimirPaciente';
+import { AdministrarConsultas } from './views/AdministrarConsultas';
 
 export const App = () => {
   return (
@@ -18,6 +19,7 @@ export const App = () => {
         <Route path='/edicion/:id' element={<Formulario />} />
         <Route path='/registro' element={<RegistrarPaciente />} />
         <Route path='/imprimir/:id' element={<ImprimirPaciente />} />
+        <Route path='/administrar-consultas/:id' element={<AdministrarConsultas />} />
         <Route path='*' element={<Navigate to='/pacientes' replace />} />
       </Routes>
     </Router>
