@@ -9,6 +9,8 @@ export const TablaAmamantacion = ({ IdPaciente }) => {
     useState(true);
   const [LblUsabaBiberon, setLblUsabaBiberon] = useState(true);
   const [LblUsabaChupon, setLblUsabaChupon] = useState(true);
+  const [ContenidoChupon, setContenidoChupon] = useState(true)
+  const [EdadYaNoUsaChupon, setEdadYaNoUsaChupon] = useState(true);
   const [LblAlimentacionNocturna, setLblAlimentacionNocturna] = useState(true);
   const [LblBebeConsumeSolidos, setLblBebeConsumeSolidos] = useState(true);
 
@@ -117,11 +119,21 @@ export const TablaAmamantacion = ({ IdPaciente }) => {
 
           if (values.UsabaChupon === 'Si') {
             setLblUsabaChupon(true);
+            setContenidoChupon(true);
+            setEdadYaNoUsaChupon(true);
             if (!values.LblUsabaChupon) {
               errors.LblUsabaChupon = 'Usted tiene que llenar este campo';
             }
+            if (!values.ContenidoChupon) {
+              errors.ContenidoChupon = 'Usted tiene que llenar este campo';
+            }
+            if (!values.EdadYaNoUsaChupon){
+              errors.EdadYaNoUsaChupon = 'Usted tiene que llenar este campo';
+            }
           } else {
+            setContenidoChupon(false);
             setLblUsabaChupon(false);
+            setEdadYaNoUsaChupon(false);
           }
 
           if (!values.EdadYaNoTomaBiberon) {
@@ -131,6 +143,7 @@ export const TablaAmamantacion = ({ IdPaciente }) => {
 
           if (!values.ContenidoBiberon) {
             errors.ContenidoBiberon = 'Debe de llenar este campo';
+            
           }
 
           if (values.BebeConsumeSolidos === 'Si') {
@@ -432,17 +445,35 @@ export const TablaAmamantacion = ({ IdPaciente }) => {
              */}
 
 
+          <div>
+            <p>¿Cuál era el contenido de su biberón?</p>
+            
+          <Field class="form-check-input" type="checkbox" name="CBLeche" value="Leche materna" id='CBLeche'></Field>
+            <span className="ms-1">Leche Materna</span>
           
-          
+          <br></br>
           <label>
-          <Field class="form-check-input" type="checkbox" name="checked" value="One"></Field>
-            Depende si probando si si
+          <Field class="form-check-input" type="checkbox" name="checked" value="Leche de fórmula"></Field>
+            <span className="ms-1">Leche de fórmula</span>
           </label>
-          
+          <br></br>
           <label>
-          <Field class="form-check-input" type="checkbox" name="checked" value="two"></Field>
-            Depende si probando si si
+          <Field class="form-check-input" type="checkbox" name="checked" value="Chocolate en polvo"></Field>
+            <span className="ms-1">Chocolate en polvo</span> 
           </label>
+          <br></br>
+          <label>
+          <Field class="form-check-input" type="checkbox" name="checked" value="Azucar/miel"></Field>
+            <span className="ms-1">Azucar/miel</span>
+          </label>
+          <br></br>
+          <label>
+          <Field class="form-check-input" type="checkbox" name="checked" value="té"></Field>
+            <span className='ms-1'>té</span> Té
+          </label>
+          </div>
+          
+          
           
 
             <br></br>
@@ -534,7 +565,8 @@ export const TablaAmamantacion = ({ IdPaciente }) => {
               </div>
             )}
 
-            <div className='mb-3'>
+            {ContenidoChupon && (
+              <div className='mb-3'>
               <label htmlFor='ContenidoChupon' className='form-label'>
                 ¿Cuál es / era el contenido de su chupón?
               </label>
@@ -563,34 +595,44 @@ export const TablaAmamantacion = ({ IdPaciente }) => {
                 se debe ingresar el contenido del chupón
               </div>
             </div>
-
+            )}
+            
+            {EdadYaNoUsaChupon && (
+            
+            <div className='mb-3'>
             <label htmlFor='EdadYaNoUsaChupon' className='form-label'>
-              ¿Hasta que edad utilizó chupón? (años)
-            </label>
-            <Field
-              type='text'
-              id='EdadYaNoUsaChupon'
-              name='EdadYaNoUsaChupon'
-              className={
-                !touched.EdadYaNoUsaChupon
-                  ? 'form-control'
-                  : errors.EdadYaNoUsaChupon
-                  ? 'form-control is-invalid'
-                  : 'form-control is-valid'
-              }
-              placeholder='Años que dejo el chupon'
-            />
-            <ErrorMessage
-              name='EdadYaNoUsaChupon'
-              component={() => (
-                <div className='invalid-feedback'>
-                  {errors.EdadYaNoUsaChupon}
-                </div>
-              )}
-            />
-            <div id='EdadYaNoUsaChuponHelp' className='form-text'>
-              se debe ingresar hasta que edad dejó el chupón (años)
-            </div>
+            ¿Hasta que edad utilizó chupón? (años)
+          </label>
+          <Field
+            type='text'
+            id='EdadYaNoUsaChupon'
+            name='EdadYaNoUsaChupon'
+            className={
+              !touched.EdadYaNoUsaChupon
+                ? 'form-control'
+                : errors.EdadYaNoUsaChupon
+                ? 'form-control is-invalid'
+                : 'form-control is-valid'
+            }
+            placeholder='Años que dejo el chupon'
+          />
+          <ErrorMessage
+            name='EdadYaNoUsaChupon'
+            component={() => (
+              <div className='invalid-feedback'>
+                {errors.EdadYaNoUsaChupon}
+              </div>
+            )}
+          />
+          <div id='EdadYaNoUsaChuponHelp' className='form-text'>
+            se debe ingresar hasta que edad dejó el chupón (años)
+          </div>
+          </div>
+
+
+            )}
+            
+            
 
             <br></br>
 
