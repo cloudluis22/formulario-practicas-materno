@@ -36,7 +36,6 @@ export const AdministrarConsultas = () => {
 
   useEffect(() => {
     
-
     try {
 
       axios
@@ -91,6 +90,8 @@ export const AdministrarConsultas = () => {
     axios.delete(`http://localhost:3001/api/v1/consultas/${id}/${consultaActual.IdConsulta}`)
     .then(() => {
       obtenerPacientes();
+      setEditMode(false);
+      setConsultaActual({})
     })
   }
 
@@ -113,6 +114,21 @@ export const AdministrarConsultas = () => {
       Progreso: editValues.Progreso
     })
     setEditMode(true);
+  }
+
+  const handleSubmitEdit = (evt) => {
+    evt.preventDefault();
+    axios.put(`http://localhost:3001/api/v1/consultas/${id}`, {
+      IdConsulta: consultaActual.IdConsulta,
+      Fecha,
+      Area,
+      Progreso
+    })
+    .then(() => {
+      obtenerPacientes();
+      reset();
+    })
+
   }
    
 
@@ -165,9 +181,9 @@ export const AdministrarConsultas = () => {
 
                         <div className='d-flex flex-row'>
                          { editMode && <button className='btn me-2 btn-danger mt-3' onClick={handleDelete}> Eliminar Consulta </button> } 
-                         { editMode && <button className='btn me-2 btn-success mt-3' onSubmit={handleSubmit}> Modificar Consulta </button>  } 
+                         { editMode && <button className='btn me-2 btn-success mt-3' onClick={handleSubmitEdit}> Modificar Consulta </button>  } 
                          { editMode && <button className='btn me-2 btn-info mt-3' onClick={handleDescartar}> Descartar Cambios </button> } 
-                         { !editMode && <button className='btn me-2 btn-success mt-3' onSubmit={handleSubmit}> Agregar Consulta </button> }
+                         { !editMode && <button className='btn me-2 btn-success mt-3' onClick={handleSubmit}> Agregar Consulta </button> }
                         </div>
 
                     </form>
