@@ -565,7 +565,7 @@ export const ImprimirPaciente = () => {
 
               <div className='mb-3'>
                 <h5> La alimentación de su bebé es o fue: </h5>
-                <p> {data[2].	TipoDeAlimentacion || "N/A"} </p>
+                <p> {data[2].TipoDeAlimentacion || "N/A"} </p>
               </div>
 
               <div className='mb-3'>
@@ -783,7 +783,7 @@ export const ImprimirPaciente = () => {
 
               <div className='mb-3'>
                 <h5> 	Morderse el Labio </h5>
-                <p> {data[7].	MorderseLabio || "N/A"} </p>
+                <p> {data[7].MorderseLabio || "N/A"} </p>
               </div>
 
               <div className='mb-3'>

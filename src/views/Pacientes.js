@@ -6,7 +6,8 @@ import {
   faPersonCircleQuestion,
   faTrashCan,
   faSearch,
-  faUserDoctor
+  faUserDoctor,
+  faFaceSadTear
 } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
@@ -107,11 +108,7 @@ export const Pacientes = React.memo(() => {
       <h1 className='text-white text-center mt-3 animate__animated animate__fadeIn'>
         Información de los Pacientes
       </h1>
-      <button
-        className='btn btn-primary ms-5 mb-3 animate__animated animate__fadeIn'
-        onClick={() => navigate('/registro')}>
-        <FontAwesomeIcon icon={faPlus} /> Nuevo Paciente
-      </button>
+
       {Data.loading && (
         <div
           className='d-flex justify-content-center align-items-center flex-column mt-5'
@@ -127,74 +124,84 @@ export const Pacientes = React.memo(() => {
         </div>
       )}
       {!Data.loading && !Data.ok && (
-        <div>
-          <p> Hubo un error al traer la información </p>
+        <div className='d-flex flex-column align-items-center'>
+          <h3> Hubo un error al traer la información, intenta conectarte de nuevo más tarde o contacta a un administrador. </h3>
+          <FontAwesomeIcon icon={faFaceSadTear} size='5x' />
         </div>
       )}
 
       {!Data.loading && Data.ok && (
-        <div className='container-md'>
+        <div>
+            <button
+              className='btn btn-primary ms-5 mb-3 animate__animated animate__fadeIn'
+              onClick={() => navigate('/registro')}>
+              <FontAwesomeIcon icon={faPlus} /> Nuevo Paciente
+            </button>
+          <div className='container-md'>
 
-          <form onSubmit={handleSubmit}>
-            <input className='form-control busqueda' placeholder='Busca un paciente...' value={busqueda} name='busqueda' onChange={handleInputChange} />
-            <FontAwesomeIcon icon={faSearch} className='busqueda-icono' />
-          </form>
+
+            <form onSubmit={handleSubmit}>
+              <input className='form-control busqueda' placeholder='Busca un paciente...' value={busqueda} name='busqueda' onChange={handleInputChange} />
+              <FontAwesomeIcon icon={faSearch} className='busqueda-icono' />
+            </form>
+            
+            <table className='table table-striped table-responsive animate__animated animate__fadeInUp'>
+              <thead>
+                <tr>
+                  <th className='col'> ID del Paciente </th>
+                  <th className='col'> Nombre del Paciente </th>
+                  <th className='col'> Género </th>
+                  <th className='col'> Número Telefónico </th>
+                  <th className='col'> Administrar Paciente </th>
+                </tr>
+              </thead>
+              <tbody>
+                {Data.data.map((paciente) => {
+                  return (
+                    <tr>
+                      <td> {paciente.IdPaciente} </td>
+                      <td> {paciente.NombrePaciente} </td>
+                      <td> {paciente.Genero} </td>
+                      <td> {paciente.Celular} </td>
+                      <td>
+                        <button
+                          className='btn btn-sm me-2 btn-info-paciente'
+                          onClick={() => {
+                            navigate(`/edicion/${paciente.IdPaciente}`);
+                          }}>
+                          Ver Info
+                          <FontAwesomeIcon
+                            icon={faPersonCircleQuestion}
+                            className='ms-1'
+                          />
+                        </button>
+
+                        <button
+                          className='btn btn-sm btn-danger me-2'
+                          onClick={() => {
+                            EliminarPaciente(paciente.IdPaciente);
+                          }}>
+                          Eliminar
+                          <FontAwesomeIcon icon={faTrashCan} className='ms-1' />
+                        </button>
+
+                        <button
+                          className='btn btn-sm btn-primary'
+                          onClick={() => {
+                            navigate(`/administrar-consultas/${paciente.IdPaciente}`);
+                          }}>
+                          Administrar Consultas 
+                          <FontAwesomeIcon icon={faUserDoctor} className='ms-1' />
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
           
-          <table className='table table-striped table-responsive animate__animated animate__fadeInUp'>
-            <thead>
-              <tr>
-                <th className='col'> ID del Paciente </th>
-                <th className='col'> Nombre del Paciente </th>
-                <th className='col'> Género </th>
-                <th className='col'> Número Telefónico </th>
-                <th className='col'> Administrar Paciente </th>
-              </tr>
-            </thead>
-            <tbody>
-              {Data.data.map((paciente) => {
-                return (
-                  <tr>
-                    <td> {paciente.IdPaciente} </td>
-                    <td> {paciente.NombrePaciente} </td>
-                    <td> {paciente.Genero} </td>
-                    <td> {paciente.Celular} </td>
-                    <td>
-                      <button
-                        className='btn btn-sm me-2 btn-info-paciente'
-                        onClick={() => {
-                          navigate(`/edicion/${paciente.IdPaciente}`);
-                        }}>
-                        Ver Info
-                        <FontAwesomeIcon
-                          icon={faPersonCircleQuestion}
-                          className='ms-1'
-                        />
-                      </button>
-
-                      <button
-                        className='btn btn-sm btn-danger me-2'
-                        onClick={() => {
-                          EliminarPaciente(paciente.IdPaciente);
-                        }}>
-                        Eliminar
-                        <FontAwesomeIcon icon={faTrashCan} className='ms-1' />
-                      </button>
-
-                      <button
-                        className='btn btn-sm btn-primary'
-                        onClick={() => {
-                          navigate(`/administrar-consultas/${paciente.IdPaciente}`);
-                        }}>
-                        Administrar Consultas 
-                        <FontAwesomeIcon icon={faUserDoctor} className='ms-1' />
-                      </button>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
+        </div> 
       )}
     </div>
   );

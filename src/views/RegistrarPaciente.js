@@ -172,6 +172,7 @@ export const RegistrarPaciente = () => {
                 type='text'
                 id='NombrePaciente'
                 name='NombrePaciente'
+                autocomplete='off'
                 className={
                   !touched.NombrePaciente
                     ? 'form-control'
@@ -203,6 +204,7 @@ export const RegistrarPaciente = () => {
                   type='text'
                   id='NombrePreferido'
                   name='NombrePreferido'
+                  autocomplete='off'
                   className={
                     !touched.NombrePreferido
                       ? 'form-control'
@@ -235,6 +237,7 @@ export const RegistrarPaciente = () => {
                   type='text'
                   id='Edad'
                   name='Edad'
+                  autocomplete='off'
                   className={
                     !touched.Edad
                       ? 'form-control'
@@ -339,6 +342,7 @@ export const RegistrarPaciente = () => {
                   type='date'
                   id='FechaDeNacimiento'
                   name='FechaDeNacimiento'
+                  autocomplete='off'
                   className={
                     !touched.FechaDeNacimiento
                       ? 'form-control'
@@ -371,6 +375,7 @@ export const RegistrarPaciente = () => {
                   type='text'
                   id='LugarDeNacimiento'
                   name='LugarDeNacimiento'
+                  autocomplete='off'
                   className={
                     !touched.LugarDeNacimiento
                       ? 'form-control'
@@ -404,6 +409,7 @@ export const RegistrarPaciente = () => {
                 type='text'
                 id='PadreMadreTutor'
                 name='PadreMadreTutor'
+                autocomplete='off'
                 className={
                   !touched.PadreMadreTutor
                     ? 'form-control'
@@ -435,6 +441,7 @@ export const RegistrarPaciente = () => {
                 type='text'
                 id='TutorEncargado'
                 name='TutorEncargado'
+                autocomplete='off'
                 className={
                   !touched.TutorEncargado
                     ? 'form-control'
@@ -466,6 +473,7 @@ export const RegistrarPaciente = () => {
                 type='text'
                 id='Domicilio'
                 name='Domicilio'
+                autocomplete='off'
                 className={
                   !touched.Domicilio
                     ? 'form-control'
@@ -495,6 +503,7 @@ export const RegistrarPaciente = () => {
                 type='text'
                 id='Telefono'
                 name='Telefono'
+                autocomplete='off'
                 className={
                   !touched.Telefono
                     ? 'form-control'
@@ -524,6 +533,7 @@ export const RegistrarPaciente = () => {
                 type='text'
                 id='Celular'
                 name='Celular'
+                autocomplete='off'
                 className={
                   !touched.Celular
                     ? 'form-control'
@@ -553,6 +563,7 @@ export const RegistrarPaciente = () => {
                 type='text'
                 id='OtroContacto'
                 name='OtroContacto'
+                autocomplete='off'
                 className={
                   !touched.OtroContacto
                     ? 'form-control'
@@ -580,6 +591,7 @@ export const RegistrarPaciente = () => {
               </label>
               <Field
                 type='text'
+                autocomplete='off'
                 id='NombrePediatra'
                 name='NombrePediatra'
                 className={
