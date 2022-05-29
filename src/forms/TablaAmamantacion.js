@@ -9,7 +9,8 @@ export const TablaAmamantacion = ({ IdPaciente }) => {
     useState(true);
   const [LblUsabaBiberon, setLblUsabaBiberon] = useState(true);
   const [LblUsabaChupon, setLblUsabaChupon] = useState(true);
-  const [ContenidoChupon, setContenidoChupon] = useState(true)
+  const [ContenidoChuponOtro, setContenidoChuponOtro] = useState(true)
+  const [ContenidoBiberonOtro, setContenidoBiberonOtro] = useState(true)
   const [EdadYaNoUsaChupon, setEdadYaNoUsaChupon] = useState(true);
   const [LblAlimentacionNocturna, setLblAlimentacionNocturna] = useState(true);
   const [LblBebeConsumeSolidos, setLblBebeConsumeSolidos] = useState(true);
@@ -24,22 +25,32 @@ export const TablaAmamantacion = ({ IdPaciente }) => {
 
   let formValues = {
     TomaPechoEdad: '',
-    LblTomaPechoEdad: '',
-    LblFrecuenciaAlimentacionPecho: '',
-    TipoDeAlimentacion: '',
-    UsabaBiberon: '',
-    LblUsabaBiberon: '',
-    ContenidoBiberon: '',
-    EdadYaNoTomaBiberon: '',
-    UsabaChupon: '',
-    LblUsabaChupon: '',
-    ContenidoChupon: '',
-    EdadYaNoUsaChupon: '',
-    AlimentacionNocturna: '',
-    LblAlimentacionNocturna: '',
-    LimpiaSuBoquita: '',
-    BebeConsumeSolidos: '',
-    LblBebeConsumeSolidos: '',
+        LblTomaPechoEdad: '',
+        LblFrecuenciaAlimentacionPecho: '',
+        TipoDeAlimentacion: '',
+        UsabaBiberon: '',
+        LblUsabaBiberon: '',
+        CBLecheMaterna: false,
+        CBLecheFormula: false,
+        CBChocolate: false,
+        CBAzucar: false,
+        CBTe: false,
+        ContenidoBiberonOtro: '',  
+        EdadYaNoTomaBiberon: '',
+        UsabaChupon: '',
+        LblUsabaChupon: '',
+        CCNada: false,
+        CCMiel: false,
+        ContenidoChuponOtro: '',  
+        EdadYaNoUsaChupon: '',
+        AlimentacionNocturna: '',
+        ANPecho: false,
+        ANBiberon: false,
+        ANVasoEntrenador: false,
+        LblAlimentacionNocturna: '',
+        LimpiaSuBoquita: '',
+        BebeConsumeSolidos: '',
+        LblBebeConsumeSolidos: '',
   };
 
   useEffect(() => {
@@ -48,10 +59,23 @@ export const TablaAmamantacion = ({ IdPaciente }) => {
       .then((response) => {
         setData({
           loading: false,
-          data: response.data.alimentacionbebe,
+          data: {...response.data.alimentacionbebe[0],
+            CBLecheMaterna:!!response.data.alimentacionbebe[0].CBLecheMaterna,
+            CBLecheFormula:!!response.data.alimentacionbebe[0].CBLecheFormula,
+            CBChocolate:!!response.data.alimentacionbebe[0].CBChocolate,
+            CBAzucar:!!response.data.alimentacionbebe[0].CBAzucar,
+            CBTe:!!response.data.alimentacionbebe[0].CBTe,
+            CCNada:!!response.data.alimentacionbebe[0].CCNada,
+            CCMiel:!!response.data.alimentacionbebe[0].CCMiel,
+            ANPecho:!!response.data.alimentacionbebe[0].ANPecho,
+            ANPecho:!!response.data.alimentacionbebe[0].ANPecho,
+            ANBiberon:!!response.data.alimentacionbebe[0].ANBiberon,
+            ANVasoEntrenador:!!response.data.alimentacionbebe[0].ANVasoEntrenador,
+          },
           ok: true,
         });
-
+          console.log(Data.data)
+        
         if (Data.data.length === 0) {
           setEdit(false);
         } else {
@@ -67,8 +91,8 @@ export const TablaAmamantacion = ({ IdPaciente }) => {
       });
   }, [IdPaciente, Data.data]);
 
-  if (Data.data.length > 0) {
-    formValues = Data.data[0];
+  if (Data.data) {
+    formValues = Data.data;
   }
 
   if (!Data.loading && Data.ok) {
@@ -100,11 +124,13 @@ export const TablaAmamantacion = ({ IdPaciente }) => {
 
           if (values.UsabaBiberon === 'Si') {
             setLblUsabaBiberon(true);
+            setContenidoBiberonOtro(true);
             if (!values.LblUsabaBiberon) {
               errors.LblUsabaBiberon = 'Usted tiene que llenar este campo';
             }
           } else {
             setLblUsabaBiberon(false);
+            setContenidoBiberonOtro(false);
           }
 
           if (values.AlimentacionNocturna === 'Si') {
@@ -119,19 +145,19 @@ export const TablaAmamantacion = ({ IdPaciente }) => {
 
           if (values.UsabaChupon === 'Si') {
             setLblUsabaChupon(true);
-            setContenidoChupon(true);
+            setContenidoChuponOtro(true);
             setEdadYaNoUsaChupon(true);
             if (!values.LblUsabaChupon) {
               errors.LblUsabaChupon = 'Usted tiene que llenar este campo';
             }
-            if (!values.ContenidoChupon) {
-              errors.ContenidoChupon = 'Usted tiene que llenar este campo';
+            if (!values.ContenidoChuponOtro) {
+              errors.ContenidoChuponOtro = 'Usted tiene que llenar este campo';
             }
             if (!values.EdadYaNoUsaChupon){
               errors.EdadYaNoUsaChupon = 'Usted tiene que llenar este campo';
             }
           } else {
-            setContenidoChupon(false);
+            setContenidoChuponOtro(false);
             setLblUsabaChupon(false);
             setEdadYaNoUsaChupon(false);
           }
@@ -141,10 +167,6 @@ export const TablaAmamantacion = ({ IdPaciente }) => {
               'Por favor ingrese hasta que edad tomó biberón (años).';
           }
 
-          if (!values.ContenidoBiberon) {
-            errors.ContenidoBiberon = 'Debe de llenar este campo';
-            
-          }
 
           if (values.BebeConsumeSolidos === 'Si') {
             setLblBebeConsumeSolidos(true);
@@ -159,27 +181,37 @@ export const TablaAmamantacion = ({ IdPaciente }) => {
         }}
         onSubmit={async (values, { resetForm }) => {
           let submitValues = {
-            id: IdPaciente,
-            TomaPechoEdad: values.TomaPechoEdad,
-            LblTomaPechoEdad: values.LblTomaPechoEdad,
-            LblFrecuenciaAlimentacionPecho:
-              values.LblFrecuenciaAlimentacionPecho,
-            TipoDeAlimentacion: values.TipoDeAlimentacion,
-            UsabaBiberon: values.UsabaBiberon,
-            LblUsabaBiberon: values.LblUsabaBiberon,
-            ContenidoBiberon: values.ContenidoBiberon,
-            EdadYaNoTomaBiberon: values.EdadYaNoTomaBiberon,
-            UsabaChupon: values.UsabaChupon,
-            LblUsabaChupon: values.LblUsabaChupon,
-            ContenidoChupon: values.ContenidoChupon,
-            EdadYaNoUsaChupon: values.EdadYaNoTomaBiberon,
-            AlimentacionNocturna: values.AlimentacionNocturna,
-            LblAlimentacionNocturna: values.LblAlimentacionNocturna,
-            LimpiaSuBoquita: values.LimpiaSuBoquita,
-            BebeConsumeSolidos: values.BebeConsumeSolidos,
-            LblBebeConsumeSolidos: values.LblBebeConsumeSolidos,
+        id: IdPaciente,
+        TomaPechoEdad: values.TomaPechoEdad,
+        LblTomaPechoEdad: values.LblTomaPechoEdad,
+        LblFrecuenciaAlimentacionPecho: values.LblFrecuenciaAlimentacionPecho,
+        TipoDeAlimentacion: values.TipoDeAlimentacion,
+        UsabaBiberon: values.UsabaBiberon,
+        LblUsabaBiberon: values.LblUsabaBiberon,
+        CBLecheMaterna: values.CBLecheMaterna,
+        CBLecheFormula: values.CBLecheFormula,
+        CBChocolate: values.CBChocolate,
+        CBAzucar: values.CBAzucar,
+        CBTe: values.CBTe,
+        ContenidoBiberonOtro: values.ContenidoBiberonOtro,  
+        EdadYaNoTomaBiberon: values.EdadYaNoTomaBiberon,
+        UsabaChupon: values.UsabaChupon,
+        LblUsabaChupon: values.LblUsabaChupon,
+        CCNada: values.CCNada,
+        CCMiel: values.CCMiel,  
+        ContenidoChuponOtro: values.ContenidoChuponOtro,  
+        EdadYaNoUsaChupon: values.EdadYaNoUsaChupon,
+        AlimentacionNocturna: values.AlimentacionNocturna,
+        ANPecho: values.ANPecho,
+        ANBiberon: values.ANBiberon,
+        ANVasoEntrenador: values.ANVasoEntrenador,
+        LblAlimentacionNocturna: values.LblAlimentacionNocturna,
+        LimpiaSuBoquita: values.LimpiaSuBoquita,
+        BebeConsumeSolidos: values.BebeConsumeSolidos,
+        LblBebeConsumeSolidos: values.LblBebeConsumeSolidos,
+           
           };
-
+          
           if (!edit) {
             await axios
               .post(
@@ -413,70 +445,72 @@ export const TablaAmamantacion = ({ IdPaciente }) => {
               </div>
             )}
 
-                {/*
-            <label htmlFor='ContenidoBiberon' className='form-label'>
-              ¿Cuál es / era el contenido de su biberón? (Leche Materna, Leche
-              de Formula, Chocolate en polvo, Auzcar/Miel, Té)
+
+                {ContenidoBiberonOtro && (
+
+                <div className='mb-4 mt-2'>
+
+          <div>
+            <p>¿Cuál era el contenido de su biberón?</p>
+            
+          <Field class="form-check-input" type="checkbox" name="CBLecheMaterna"  id='CBLeche'></Field>
+            <span className="ms-1">Leche Materna</span>
+          
+          <br></br>
+          <label>
+          <Field class="form-check-input" type="checkbox" name="CBLecheFormula"  id='CBLecheFormula'></Field>
+            <span className="ms-1">Leche de fórmula</span>
+          </label>
+          <br></br>
+          <label>
+          <Field class="form-check-input" type="checkbox" name="CBChocolate"  id='CBChocolate'></Field>
+            <span className="ms-1">Chocolate en polvo</span> 
+          </label>
+          <br></br>
+          <label>
+          <Field class="form-check-input" type="checkbox" name="CBAzucar"  id='CBAzucar'></Field>
+            <span className="ms-1">Azucar/miel</span>
+          </label>
+          <br></br>
+          <label>
+          <Field class="form-check-input" type="checkbox" name="CBTe"  id= "CBTe"></Field>
+            <span className='ms-1'>Té</span>
+          </label>
+          </div>
+
+
+
+            <label htmlFor='ContenidoBiberonOtro' className='form-label'>
+              Otro:
             </label>
             <Field
               type='text'
-              id='ContenidoBiberon'
-              name='ContenidoBiberon'
+              id='ContenidoBiberonOtro'
+              name='ContenidoBiberonOtro'
               className={
-                !touched.ContenidoBiberon
+                !touched.ContenidoBiberonOtro
                   ? 'form-control'
-                  : errors.ContenidoBiberon
+                  : errors.ContenidoBiberonOtro
                   ? 'form-control is-invalid'
                   : 'form-control is-valid'
               }
               placeholder='Leche Materna, Leche Materna, Leche de Formula, Chocolate en polvo, Auzcar/Miel, Té '
             />
             <ErrorMessage
-              name='ContenidoBiberon'
+              name='ContenidoBiberonOtro'
               component={() => (
                 <div className='invalid-feedback'>
-                  {errors.ContenidoBiberon}
+                  {errors.ContenidoBiberonOtro}
                 </div>
               )}
             />
             <div id='BiberonHelp' className='form-text'>
               se debe ingresar cual es / era el contenido del biberón
             </div>
-             */}
+            </div>
+             )}
 
 
-          <div>
-            <p>¿Cuál era el contenido de su biberón?</p>
-            
-          <Field class="form-check-input" type="checkbox" name="CBLeche" value="Leche materna" id='CBLeche'></Field>
-            <span className="ms-1">Leche Materna</span>
-          
-          <br></br>
-          <label>
-          <Field class="form-check-input" type="checkbox" name="checked" value="Leche de fórmula"></Field>
-            <span className="ms-1">Leche de fórmula</span>
-          </label>
-          <br></br>
-          <label>
-          <Field class="form-check-input" type="checkbox" name="checked" value="Chocolate en polvo"></Field>
-            <span className="ms-1">Chocolate en polvo</span> 
-          </label>
-          <br></br>
-          <label>
-          <Field class="form-check-input" type="checkbox" name="checked" value="Azucar/miel"></Field>
-            <span className="ms-1">Azucar/miel</span>
-          </label>
-          <br></br>
-          <label>
-          <Field class="form-check-input" type="checkbox" name="checked" value="té"></Field>
-            <span className='ms-1'>té</span> Té
-          </label>
-          </div>
-          
-          
-          
-
-            <br></br>
 
             <label htmlFor='EdadYaNoTomaBiberon' className='form-label'>
               ¿Hasta que edad tomó biberón? (años)
@@ -565,34 +599,46 @@ export const TablaAmamantacion = ({ IdPaciente }) => {
               </div>
             )}
 
-            {ContenidoChupon && (
+            {ContenidoChuponOtro && (
               <div className='mb-3'>
-              <label htmlFor='ContenidoChupon' className='form-label'>
-                ¿Cuál es / era el contenido de su chupón?
+
+          <div>
+            <Field class="form-check-input" type="checkbox" name="CCNada"  id='CCNada'></Field>
+            <span className="ms-1">Nada</span>
+          <br></br>
+          <Field class="form-check-input" type="checkbox" name="CCMiel" id='CCMiel'></Field>
+            <span className="ms-1">Miel</span>
+          <br></br>
+        
+          </div>
+
+
+              <label htmlFor='ContenidoChuponOtro' className='form-label'>
+                Otro contenido:
               </label>
               <Field
                 type='text'
-                id='ContenidoChupon'
-                name='ContenidoChupon'
+                id='ContenidoChuponOtro'
+                name='ContenidoChuponOtro'
                 className={
-                  !touched.ContenidoChupon
+                  !touched.ContenidoChuponOtro
                     ? 'form-control'
-                    : errors.ContenidoChupon
+                    : errors.ContenidoChuponOtro
                     ? 'form-control is-invalid'
                     : 'form-control is-valid'
                 }
                 placeholder='Contenido '
               />
               <ErrorMessage
-                name='ContenidoChupon'
+                name='ContenidoChuponOtro'
                 component={() => (
                   <div className='invalid-feedback'>
-                    {errors.ContenidoChupon}
+                    {errors.ContenidoChuponOtro}
                   </div>
                 )}
               />
-              <div id='ContenidoChuponHelp' className='form-text'>
-                se debe ingresar el contenido del chupón
+              <div id='ContenidoChuponOtroHelp' className='form-text'>
+                en caso de ser necesario se debe ingresar algún otro contenido
               </div>
             </div>
             )}
@@ -668,8 +714,19 @@ export const TablaAmamantacion = ({ IdPaciente }) => {
             {/*LblAlimentacionNocturna */}
             {LblAlimentacionNocturna && (
               <div className='mb-3'>
+
+            <Field class="form-check-input" type="checkbox" name="ANPecho" id='ANPecho'></Field>
+            <span className="ms-1">Leche Materna</span>
+              <br></br>
+            <Field class="form-check-input" type="checkbox" name="ANBiberon" id='ANBiberon'></Field>
+            <span className="ms-1">Biberón</span> 
+              <br></br>
+            <Field class="form-check-input" type="checkbox" name="ANVasoEntrenador" id='ANVasoEntrenador'></Field>
+            <span className="ms-1">Leche Materna</span>
+              <br></br>
+
                 <label htmlFor='LblAlimentacionNocturna' className='form-label'>
-                  Especifique con qué alimentaba al bebé
+                  Otro:
                 </label>
                 <Field
                   type='text'
@@ -682,7 +739,7 @@ export const TablaAmamantacion = ({ IdPaciente }) => {
                       ? 'form-control is-invalid'
                       : 'form-control is-valid'
                   }
-                  placeholder='Pecho, biberón, vaso entrenador, otro'
+                  placeholder='Otro tipo de alimento'
                 />
                 <ErrorMessage
                   name='LblAlimentacionNocturna'
