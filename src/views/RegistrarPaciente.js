@@ -27,7 +27,6 @@ export const RegistrarPaciente = () => {
         initialValues={{
           NombrePaciente: '',
           NombrePreferido: '',
-          Edad: '',
           Genero: 'Masculino',
           GustosPersonales: '',
           FechaDeNacimiento: '',
@@ -49,10 +48,6 @@ export const RegistrarPaciente = () => {
 
           if (!values.NombrePreferido) {
             errors.NombrePreferido = 'Por favor ingrese el nombre preferido.';
-          }
-
-          if (!values.Edad) {
-            errors.Edad = 'Por favor ingrese la edad.';
           }
 
           if (!values.Genero) {
@@ -118,15 +113,18 @@ export const RegistrarPaciente = () => {
         }}
         onSubmit={async (values, { resetForm }) => {
           const IdPaciente = uniqid();
-          const date = moment().format();
+          const now = moment();
+          const nacimiento = moment(values.FechaDeNacimiento);
+
+          const edad = now.diff(nacimiento, 'years');
 
           await axios
             .post('http://localhost:3001/api/v1/registrar-paciente', {
               id: IdPaciente,
-              Mydate: date,
+              Mydate: now,
               NombrePaciente: values.NombrePaciente,
               NombrePreferido: values.NombrePreferido,
-              Edad: values.Edad,
+              Edad: edad,
               Genero: values.Genero,
               GustosPersonales: values.GustosPersonales,
               FechaDeNacimiento: values.FechaDeNacimiento,
@@ -159,8 +157,7 @@ export const RegistrarPaciente = () => {
         }}>
         {({ errors, touched }) => (
           <Form
-            className='card px-5 mb-3 animate__animated animate__backInUp
-            '
+            className='card px-5 mb-3 animate__animated animate__backInUp'
             style={{ width: '550px', overflow: 'auto' }}>
             <br></br>
 
@@ -224,38 +221,6 @@ export const RegistrarPaciente = () => {
                 />
                 <div id='NombrePreferidoHelp' className='form-text'>
                   Ingrese el nombre con el que se le dirigirá al paciente.
-                </div>
-              </div>
-
-              <br></br>
-              {/* EdadPaciente */}
-              <div className='mb-3'>
-                <label htmlFor='Edad' className='form-label'>
-                  Edad del paciente
-                </label>
-                <Field
-                  type='text'
-                  id='Edad'
-                  name='Edad'
-                  autocomplete='off'
-                  className={
-                    !touched.Edad
-                      ? 'form-control'
-                      : errors.Edad
-                      ? 'form-control is-invalid'
-                      : 'form-control is-valid'
-                  }
-                  placeholder='Edad'
-                />
-                <ErrorMessage
-                  name='Edad'
-                  component={() => (
-                    <div className='invalid-feedback'>{errors.Edad}</div>
-                  )}
-                />
-                <div id='EdadHelp' className='form-text'>
-                  Ingrese la edad actual del paciente, especifique si es en años
-                  o semanas.
                 </div>
               </div>
 
