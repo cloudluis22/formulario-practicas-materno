@@ -3,8 +3,12 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useForm } from '../hooks/useForm';
 import uniqid from 'uniqid';
+import moment from 'moment'
+import 'moment/locale/es';
+import Swal from 'sweetalert2';
 
 export const AdministrarConsultas = () => {
+  moment.locale('es');
   const { id } = useParams();
   const [Data, setData] = useState({
     loading: true,
@@ -36,7 +40,6 @@ export const AdministrarConsultas = () => {
 
   useEffect(() => {
     
-
     try {
 
       axios
@@ -75,23 +78,61 @@ export const AdministrarConsultas = () => {
     axios.post(`http://localhost:3001/api/v1/consultas/${id}`, {
       IdConsulta,
       IdPaciente: id,
-      Fecha,
+      Fecha: moment(Fecha).format('DD/MM/YYYY'),
       Area,
       Progreso
     })
     .then(() => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Operación Exitosa',
+        text: 'Consulta agregada exitosamente.',
+      })
       obtenerPacientes();
+      reset();
+    })
+    .catch(() => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Operacion Fallida',
+        text: 'Algo salió mal, intenta más tarde o contacta un administrador',
+      })
     })
 
-    reset();
   }
 
   const handleDelete = (evt) => {
     evt.preventDefault();
-    axios.delete(`http://localhost:3001/api/v1/consultas/${id}/${consultaActual.IdConsulta}`)
-    .then(() => {
-      obtenerPacientes();
-    })
+    Swal.fire({
+      title: '¿Está seguro que desea borrar esta consulta?',
+      text: 'Estos cambios no se pueden deshacer.',
+      icon: 'warning',
+      showDenyButton: true,
+      confirmButtonText: 'Sí, deseo eliminar esta consulta',
+      denyButtonText: `No, conserva esta consulta`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        axios.delete(`http://localhost:3001/api/v1/consultas/${id}/${consultaActual.IdConsulta}`)
+        .then(() => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Operación Exitosa',
+            text: 'Consulta eliminada exitosamente.',
+          })
+          obtenerPacientes();
+          setEditMode(false);
+          setConsultaActual({})
+        })
+        .catch(() => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Operacion Fallida',
+            text: 'Algo salió mal, intenta más tarde o contacta un administrador',
+          })
+        })
+    }});
+
   }
 
   const handleDescartar = () => {
@@ -101,18 +142,61 @@ export const AdministrarConsultas = () => {
   }
 
   const handleEdit = (editValues) => {
+
+    const fecha = editValues.Fecha.split('/');
+    const fechaFormateada = `${fecha[2]}-${fecha[1]}-${fecha[0]}`
+
     setForm({
-      Fecha: editValues.Fecha,
+      Fecha: fechaFormateada,
       Area: editValues.Area,
       Progreso: editValues.Progreso
     })
     setConsultaActual({
       IdConsulta: editValues.IdConsulta,
-      Fecha: editValues.Fecha,
+      Fecha: fechaFormateada,
       Area: editValues.Area,
       Progreso: editValues.Progreso
     })
     setEditMode(true);
+
+  }
+
+  const handleSubmitEdit = (evt) => {
+    evt.preventDefault();
+    Swal.fire({
+      title: '¿Está seguro que desea modificar esta consulta?',
+      text: 'Estos cambios no se pueden deshacer.',
+      icon: 'warning',
+      showDenyButton: true,
+      confirmButtonText: 'Sí, deseo modificar esta consulta',
+      denyButtonText: `No, conserva esta consulta`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        axios.put(`http://localhost:3001/api/v1/consultas/${id}`, {
+          IdConsulta: consultaActual.IdConsulta,
+          Fecha: moment(Fecha).format('DD/MM/YYYY'),
+          Area,
+          Progreso
+        })
+        .then(() => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Operación Exitosa',
+            text: 'Consulta modificada exitosamente.',
+          })
+          obtenerPacientes();
+          reset();
+        })
+        .catch(() => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Operacion Fallida',
+            text: 'Algo salió mal, intenta más tarde o contacta un administrador',
+          })
+        })
+    }});
+
   }
    
 
@@ -165,9 +249,9 @@ export const AdministrarConsultas = () => {
 
                         <div className='d-flex flex-row'>
                          { editMode && <button className='btn me-2 btn-danger mt-3' onClick={handleDelete}> Eliminar Consulta </button> } 
-                         { editMode && <button className='btn me-2 btn-success mt-3' onSubmit={handleSubmit}> Modificar Consulta </button>  } 
+                         { editMode && <button className='btn me-2 btn-success mt-3' onClick={handleSubmitEdit}> Modificar Consulta </button>  } 
                          { editMode && <button className='btn me-2 btn-info mt-3' onClick={handleDescartar}> Descartar Cambios </button> } 
-                         { !editMode && <button className='btn me-2 btn-success mt-3' onSubmit={handleSubmit}> Agregar Consulta </button> }
+                         { !editMode && <button className='btn me-2 btn-success mt-3' onClick={handleSubmit}> Agregar Consulta </button> }
                         </div>
 
                     </form>
