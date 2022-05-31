@@ -12,6 +12,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { useForm } from '../hooks/useForm';
+import Select from 'react-select';
 
 export const Pacientes = React.memo(() => {
   let navigate = useNavigate();
@@ -21,15 +22,92 @@ export const Pacientes = React.memo(() => {
     ok: false,
   });
 
-  const traerPacientes = async () => {
+  const optionsGenero = [
+    { value: null, label: 'Ninguno' },
+    { value: 'Masculino', label: 'Masculino' },
+    { value: 'Femenino', label: 'Femenino' },
+  ];
+
+  const optionsOrdenar = [
+    { value: null, label: 'No Ordenar' },
+    { value: 'a-z', label: 'A-Z' },
+    { value: 'z-a', label: 'Z-A' },
+  ];
+
+  const [opcionGenero, setOpcionGenero] = useState(null);
+  const [opcionOrdenar, setOpcionOrdenar] = useState(null);
+
+  const traerPacientes = async (filtro, orden) => {
     await axios
       .get('http://localhost:3001/api/v1/obtener-pacientes')
       .then((response) => {
-        setData({
-          loading: false,
-          data: response.data.pacientes,
-          ok: true,
-        });
+
+        if(!!filtro) {
+          if(filtro !== 'Ninguno') {
+            setData({
+              loading: false,
+              data: response.data.pacientes.filter((paciente) => paciente.Genero.includes(filtro)),
+              ok: true,
+            });
+          }
+          else {
+            setData({
+              loading: false,
+              data: response.data.pacientes,
+              ok: true,
+            });
+          }
+        }
+        else {
+          setData({
+            loading: false,
+            data: response.data.pacientes,
+            ok: true,
+          });
+        }
+
+        if(!!orden) {
+
+          if(orden !== 'Ninguno') {
+
+            if(orden === 'a-z') {
+              setData({
+                ...Data,
+                data: Data.data.sort((a, b) => {
+                  return a.NombrePaciente.localeCompare(b.NombrePaciente)
+                })
+              });
+
+              if(filtro !== 'Ninguno' && filtro !== null) {
+                setData({
+                  loading: false,
+                  data: Data.data.filter((paciente) => paciente.Genero.includes(filtro)),
+                  ok: true,
+                });
+              }
+
+            }
+            else {
+              setData({
+                ...Data,
+                data: Data.data.sort((a, b) => {
+                  return b.NombrePaciente.localeCompare(a.NombrePaciente)
+                })
+              });
+
+
+              if(filtro !== 'Ninguno' && filtro !== null) {
+                setData({
+                  loading: false,
+                  data: Data.data.filter((paciente) => paciente.Genero.includes(filtro)),
+                  ok: true,
+                });
+              }
+            }
+          }
+
+        }
+
       })
       .catch((error) => {
         setData({
@@ -39,7 +117,8 @@ export const Pacientes = React.memo(() => {
         });
       });
   }
-  
+
+
   const [values, handleInputChange, reset] = useForm({
     busqueda: ''
   });
@@ -62,10 +141,10 @@ export const Pacientes = React.memo(() => {
   }
 
   useEffect(() => {
-   
-    traerPacientes();
-
-  }, []);
+    
+    traerPacientes(opcionGenero && opcionGenero.value, opcionOrdenar && opcionOrdenar.value);
+    
+  }, [opcionGenero, opcionOrdenar]);
 
   const EliminarPaciente = (IdPaciente) => {
     Swal.fire({
@@ -141,10 +220,34 @@ export const Pacientes = React.memo(() => {
           <div className='container-md'>
 
 
-            <form onSubmit={handleSubmit}>
-              <input className='form-control busqueda' placeholder='Busca un paciente...' value={busqueda} name='busqueda' onChange={handleInputChange} />
-              <FontAwesomeIcon icon={faSearch} className='busqueda-icono' />
-            </form>
+            <div className='d-flex flex-row'>
+              <form onSubmit={handleSubmit}>
+                <input className='form-control busqueda' placeholder='Busca un paciente...' value={busqueda} name='busqueda' onChange={handleInputChange} />
+                <FontAwesomeIcon icon={faSearch} className='busqueda-icono' />
+              </form>
+
+              <div className='text-black ms-auto d-flex flex-row'>
+                <Select
+                  defaultValue={opcionOrdenar}
+                  onChange={setOpcionOrdenar}
+                  options={optionsOrdenar}
+                  isSearchable={false}
+                  className='me-3'
+                  placeholder='Ordenar'
+                /> 
+
+                <Select
+                  defaultValue={opcionGenero}
+                  onChange={setOpcionGenero}
+                  options={optionsGenero}
+                  isSearchable={false}
+                  placeholder='Género'
+                /> 
+              </div>
+
+
+            </div>
+
             
             <table className='table table-striped table-responsive animate__animated animate__fadeInUp'>
               <thead>
