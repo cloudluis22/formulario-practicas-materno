@@ -75,6 +75,17 @@ export const AdministrarConsultas = () => {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     const IdConsulta = uniqid();
+
+    if( Fecha === '' || Area === '' || Progreso === '') {
+      Swal.fire({
+        icon: 'error',
+        title: 'Operacion Fallida',
+        text: 'Por favor, asegurese de llenar todos los campos correspondientes antes de crear la consulta.',
+      })
+
+      return;
+    }
+
     axios.post(`http://localhost:3001/api/v1/consultas/${id}`, {
       IdConsulta,
       IdPaciente: id,
@@ -163,6 +174,17 @@ export const AdministrarConsultas = () => {
 
   const handleSubmitEdit = (evt) => {
     evt.preventDefault();
+
+    if( Fecha === consultaActual.Fecha && Area === consultaActual.Area && Progreso === consultaActual.Progreso) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Operacion Fallida',
+        text: 'Por favor, asegurese de realizar cambios para poder modificar la consulta, de lo contrario descarte los cambios.',
+      })
+      
+      return;
+    }
+
     Swal.fire({
       title: '¿Está seguro que desea modificar esta consulta?',
       text: 'Estos cambios no se pueden deshacer.',
@@ -186,6 +208,8 @@ export const AdministrarConsultas = () => {
             text: 'Consulta modificada exitosamente.',
           })
           obtenerPacientes();
+          setEditMode(false);
+          setConsultaActual({})
           reset();
         })
         .catch(() => {
