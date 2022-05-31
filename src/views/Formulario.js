@@ -18,8 +18,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faPrint, faArrowLeft,
 } from '@fortawesome/free-solid-svg-icons';
+import moment from 'moment';
 
 export const Formulario = () => {
+
   let navigate = useNavigate();
   const { id } = useParams();
   const [formIndex, setFormIndex] = useState(0);
@@ -32,9 +34,13 @@ export const Formulario = () => {
   const [openModal, setOpenModal] = useState(false);
   const [currentModal, setCurrentModal] = useState('');
 
-  useEffect(() => {
-    setTimeout(() => {
-      axios
+  const [editable, setEditable] = useState(true);
+
+  useEffect( () => {
+
+
+    const obtenerPaciente = async () => {
+      await axios
         .get(`http://localhost:3001/api/v1/obtener-paciente/${id}`)
         .then((response) => {
           setData({
@@ -42,6 +48,14 @@ export const Formulario = () => {
             data: response.data.paciente[0],
             ok: true,
           });
+
+          const now = moment();
+          const creacion = moment(response.data.paciente[0].Mydate);
+
+          if(now.diff(creacion, 'hours') > 24) {
+            setEditable(false);
+          }
+          
         })
         .catch((error) => {
           
@@ -51,7 +65,10 @@ export const Formulario = () => {
             ok: false,
           });
         });
-    }, 1000);
+    }
+
+    obtenerPaciente();
+     
   }, [id]);
 
   return (
@@ -90,6 +107,9 @@ export const Formulario = () => {
           <h3 className='text-white text-center mt-2 animate__animated animate__fadeIn'>
             ID: {Data.data.IdPaciente}
           </h3>
+          <h4 className='text-white text-center mt-2 animate__animated animate__fadeIn'>  
+            Fecha de Creación: { moment(Data.data.Mydate).format('LLLL') }
+          </h4>
 
           <button
               className='btn btn-primary btn-regresar-pacientes-menu animate__animated animate__fadeIn'
@@ -100,13 +120,14 @@ export const Formulario = () => {
             </button>
 
 
-          <div className='d-flex align-items-center flex-column justify-content-center mt-3 pb-3 animate__animated animate__backInUp'>
+          <div className='d-flex align-items-center flex-column justify-content-center pb-3 animate__animated animate__backInUp'>
 
             {formIndex === 0 && (
               <TablaSecciones
                 setFormIndex={setFormIndex}
                 setOpenModal={setOpenModal}
                 setCurrentModal={setCurrentModal}
+                editable={editable}
               />
             )}
             {formIndex === 1 && (
