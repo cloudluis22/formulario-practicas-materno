@@ -5,7 +5,13 @@ import { useForm } from '../hooks/useForm';
 import uniqid from 'uniqid';
 import moment from 'moment'
 import 'moment/locale/es';
+import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faArrowLeft
+} from '@fortawesome/free-solid-svg-icons';
+
 
 export const AdministrarConsultas = () => {
   moment.locale('es');
@@ -21,6 +27,12 @@ export const AdministrarConsultas = () => {
     Area: '',
     Progreso: ''
   });
+
+  let navigate = useNavigate();
+
+  const volverMenuPacientes = () => {
+    navigate('/pacientes')
+  }
 
   const { Fecha, Area, Progreso } = values;
 
@@ -226,10 +238,14 @@ export const AdministrarConsultas = () => {
 
   return (
     <div className='bcg-administrar-consultas '>
+      
       <h1 className='text-center mt-3 animate__animated animate__fadeIn'>
         Administrador de Consultas
       </h1>
       <h2 className='text-center animate__animated animate__fadeIn'> Paciente: {Data.data.NombrePaciente} </h2>
+
+      <button className='btn btn-primary btn-regresar-consultas animate__animated animate__fadeIn' onClick={volverMenuPacientes}> <FontAwesomeIcon icon={faArrowLeft} /> Regresar a Menu Pacientes </button>
+
       
       <div>
 
@@ -257,7 +273,7 @@ export const AdministrarConsultas = () => {
                 </table>
             </div>
 
-            <div className='col-4'>
+            <div className='col-4 d-flex flex-column'>
                 <div className='card'>
                     <h4 className='text-center mt-3'> Consulta </h4>
                     <form className='px-4 pb-3 d-flex flex-column align-items-center'>
@@ -280,12 +296,10 @@ export const AdministrarConsultas = () => {
 
                     </form>
                 </div>
+                <button className='btn btn-primary mt-3 align-self-center'> Imprimir Consultas </button>
             </div>
         </div>  
-
-
       </div>
-
     </div>
   )
 }

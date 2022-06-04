@@ -68,6 +68,13 @@
 
 }
 
+.btn-regresar-consultas {
+  position: relative;
+
+  left: 6rem;
+  bottom: 5rem;
+}
+
 .busqueda {
   background-color: white;
   color: black;
