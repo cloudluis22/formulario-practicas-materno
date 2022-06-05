@@ -11,7 +11,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faArrowLeft
 } from '@fortawesome/free-solid-svg-icons';
-
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 
 export const AdministrarConsultas = () => {
   moment.locale('es');
@@ -29,6 +30,13 @@ export const AdministrarConsultas = () => {
   });
 
   let navigate = useNavigate();
+
+ const imprimirConsultas = () => {
+    const doc = new jsPDF();
+    autoTable(doc, {html: '#tabla-consultas'});
+    doc.text(`Paciente: ${Data.data.NombrePaciente}`, doc.internal.pageSize.getWidth() / 2, 10, null, 'center');
+    doc.save('consultas.pdf');
+  }
 
   const volverMenuPacientes = () => {
     navigate('/pacientes')
@@ -48,7 +56,6 @@ export const AdministrarConsultas = () => {
       setConsultas(response.data.consultas);
     })
   }
-
 
   useEffect(() => {
     
@@ -251,7 +258,7 @@ export const AdministrarConsultas = () => {
 
         <div className='row px-5'>
             <div className='col-8'> 
-                <table className='table table-striped table-responsive table-hover animate__animated animate__fadeInUp flex-grow-1'>
+                <table className='table table-striped table-responsive table-hover animate__animated animate__fadeInUp flex-grow-1' id='tabla-consultas'>
                     <thead>
                         <tr>
                             <th className='col'> Fecha </th>
@@ -296,7 +303,7 @@ export const AdministrarConsultas = () => {
 
                     </form>
                 </div>
-                <button className='btn btn-primary mt-3 align-self-center'> Imprimir Consultas </button>
+                <button className='btn btn-primary mt-3 align-self-center' onClick={imprimirConsultas}> Imprimir Consultas </button>
             </div>
         </div>  
       </div>
