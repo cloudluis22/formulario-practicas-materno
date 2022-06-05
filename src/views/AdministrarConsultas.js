@@ -5,7 +5,14 @@ import { useForm } from '../hooks/useForm';
 import uniqid from 'uniqid';
 import moment from 'moment'
 import 'moment/locale/es';
+import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faArrowLeft
+} from '@fortawesome/free-solid-svg-icons';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 
 export const AdministrarConsultas = () => {
   moment.locale('es');
@@ -22,6 +29,19 @@ export const AdministrarConsultas = () => {
     Progreso: ''
   });
 
+  let navigate = useNavigate();
+
+ const imprimirConsultas = () => {
+    const doc = new jsPDF();
+    autoTable(doc, {html: '#tabla-consultas'});
+    doc.text(`Paciente: ${Data.data.NombrePaciente}`, doc.internal.pageSize.getWidth() / 2, 10, null, 'center');
+    doc.save('consultas.pdf');
+  }
+
+  const volverMenuPacientes = () => {
+    navigate('/pacientes')
+  }
+
   const { Fecha, Area, Progreso } = values;
 
   const [consultas, setConsultas] = useState([]);
@@ -36,7 +56,6 @@ export const AdministrarConsultas = () => {
       setConsultas(response.data.consultas);
     })
   }
-
 
   useEffect(() => {
     
@@ -75,6 +94,17 @@ export const AdministrarConsultas = () => {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     const IdConsulta = uniqid();
+
+    if( Fecha === '' || Area === '' || Progreso === '') {
+      Swal.fire({
+        icon: 'error',
+        title: 'Operacion Fallida',
+        text: 'Por favor, asegurese de llenar todos los campos correspondientes antes de crear la consulta.',
+      })
+
+      return;
+    }
+
     axios.post(`http://localhost:3001/api/v1/consultas/${id}`, {
       IdConsulta,
       IdPaciente: id,
@@ -163,6 +193,17 @@ export const AdministrarConsultas = () => {
 
   const handleSubmitEdit = (evt) => {
     evt.preventDefault();
+
+    if( Fecha === consultaActual.Fecha && Area === consultaActual.Area && Progreso === consultaActual.Progreso) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Operacion Fallida',
+        text: 'Por favor, asegurese de realizar cambios para poder modificar la consulta, de lo contrario descarte los cambios.',
+      })
+      
+      return;
+    }
+
     Swal.fire({
       title: '¿Está seguro que desea modificar esta consulta?',
       text: 'Estos cambios no se pueden deshacer.',
@@ -186,6 +227,8 @@ export const AdministrarConsultas = () => {
             text: 'Consulta modificada exitosamente.',
           })
           obtenerPacientes();
+          setEditMode(false);
+          setConsultaActual({})
           reset();
         })
         .catch(() => {
@@ -202,16 +245,20 @@ export const AdministrarConsultas = () => {
 
   return (
     <div className='bcg-administrar-consultas '>
+      
       <h1 className='text-center mt-3 animate__animated animate__fadeIn'>
         Administrador de Consultas
       </h1>
       <h2 className='text-center animate__animated animate__fadeIn'> Paciente: {Data.data.NombrePaciente} </h2>
+
+      <button className='btn btn-primary btn-regresar-consultas animate__animated animate__fadeIn' onClick={volverMenuPacientes}> <FontAwesomeIcon icon={faArrowLeft} /> Regresar a Menu Pacientes </button>
+
       
       <div>
 
         <div className='row px-5'>
             <div className='col-8'> 
-                <table className='table table-striped table-responsive table-hover animate__animated animate__fadeInUp flex-grow-1'>
+                <table className='table table-striped table-responsive table-hover animate__animated animate__fadeInUp flex-grow-1' id='tabla-consultas'>
                     <thead>
                         <tr>
                             <th className='col'> Fecha </th>
@@ -233,7 +280,7 @@ export const AdministrarConsultas = () => {
                 </table>
             </div>
 
-            <div className='col-4'>
+            <div className='col-4 d-flex flex-column'>
                 <div className='card'>
                     <h4 className='text-center mt-3'> Consulta </h4>
                     <form className='px-4 pb-3 d-flex flex-column align-items-center'>
@@ -256,12 +303,10 @@ export const AdministrarConsultas = () => {
 
                     </form>
                 </div>
+                <button className='btn btn-primary mt-3 align-self-center' onClick={imprimirConsultas}> Imprimir Consultas </button>
             </div>
         </div>  
-
-
       </div>
-
     </div>
   )
 }

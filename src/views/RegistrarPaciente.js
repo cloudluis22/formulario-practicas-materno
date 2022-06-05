@@ -14,7 +14,7 @@ export const RegistrarPaciente = () => {
   let navigate = useNavigate();
 
   const volverMenuPacientes = () => {
-    navigate('pacienntes')
+    navigate('/pacientes')
   }
 
   return (

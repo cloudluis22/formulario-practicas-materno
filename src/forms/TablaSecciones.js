@@ -5,7 +5,9 @@ export const TablaSecciones = ({
   setFormIndex,
   setOpenModal,
   setCurrentModal,
+  editable
 }) => {
+
   return (
     <div
       className='card px-4'
@@ -30,7 +32,7 @@ export const TablaSecciones = ({
           <td className='text-light'> Información</td>
           <td>
             <button
-              className='btn btn-outline-primary text-nowrap btn-sm me-2 ms-2 mb-4'
+              className={`btn btn-outline-primary text-nowrap btn-sm me-2 ms-2 mb-4 ${ !editable && 'disabled' }`}
               onClick={() => {
                 setFormIndex(1);
               }}>
@@ -55,7 +57,7 @@ export const TablaSecciones = ({
           <td className='text-light'> Alimentación </td>
           <td>
             <button
-              className='btn btn-outline-primary text-nowrap btn-sm ms-2 mb-4'
+              className={`btn btn-outline-primary text-nowrap btn-sm me-2 ms-2 mb-4 ${ !editable && 'disabled' }`}
               onClick={() => {
                 setFormIndex(2);
               }}>
@@ -80,7 +82,7 @@ export const TablaSecciones = ({
           <td className='text-light'> Hábitos de Higiene </td>
           <td>
             <button
-              className='btn btn-outline-primary text-nowrap btn-sm ms-2 mb-4'
+              className={`btn btn-outline-primary text-nowrap btn-sm me-2 ms-2 mb-4 ${ !editable && 'disabled' }`}
               onClick={() => {
                 setFormIndex(3);
               }}>
@@ -105,7 +107,7 @@ export const TablaSecciones = ({
           <td className='text-light'> Antecedentes Personales </td>
           <td>
             <button
-              className='btn btn-outline-primary text-nowrap btn-sm ms-2 mb-4'
+              className={`btn btn-outline-primary text-nowrap btn-sm me-2 ms-2 mb-4 ${ !editable && 'disabled' }`}
               onClick={() => {
                 setFormIndex(4);
               }}>
@@ -130,7 +132,7 @@ export const TablaSecciones = ({
           <td className='text-light'> Antecedentes Familiares </td>
           <td>
             <button
-              className='btn btn-outline-primary text-nowrap btn-sm ms-2 mb-4'
+              className={`btn btn-outline-primary text-nowrap btn-sm me-2 ms-2 mb-4 ${ !editable && 'disabled' }`}
               onClick={() => {
                 setFormIndex(5);
               }}>
@@ -155,7 +157,7 @@ export const TablaSecciones = ({
           <td className='text-light'> Oclusión y Alineamiento </td>
           <td>
             <button
-              className='btn btn-outline-primary text-nowrap btn-sm ms-2 mb-4'
+              className={`btn btn-outline-primary text-nowrap btn-sm me-2 ms-2 mb-4 ${ !editable && 'disabled' }`}
               onClick={() => {
                 setFormIndex(6);
               }}>
@@ -180,7 +182,7 @@ export const TablaSecciones = ({
           <td className='text-light'> Tejidos Blandos </td>
           <td>
             <button
-              className='btn btn-outline-primary text-nowrap btn-sm ms-2 mb-4'
+              className={`btn btn-outline-primary text-nowrap btn-sm me-2 ms-2 mb-4 ${ !editable && 'disabled' }`}
               onClick={() => {
                 setFormIndex(7);
               }}>
@@ -205,7 +207,7 @@ export const TablaSecciones = ({
           <td className='text-light'> Habitos Perniciosos </td>
           <td>
             <button
-              className='btn btn-outline-primary text-nowrap btn-sm ms-2 mb-4'
+              className={`btn btn-outline-primary text-nowrap btn-sm me-2 ms-2 mb-4 ${ !editable && 'disabled' }`}
               onClick={() => {
                 setFormIndex(8);
               }}>
@@ -230,7 +232,7 @@ export const TablaSecciones = ({
           <td className='text-light'> Erupción y Dentición </td>
           <td>
             <button
-              className='btn btn-outline-primary text-nowrap btn-sm ms-2 mb-4'
+              className={`btn btn-outline-primary text-nowrap btn-sm me-2 ms-2 mb-4 ${ !editable && 'disabled' }`}
               onClick={() => {
                 setFormIndex(9);
               }}>
@@ -255,7 +257,7 @@ export const TablaSecciones = ({
           <td className='text-light'> Medio Bucal General </td>
           <td>
             <button
-              className='btn btn-outline-primary text-nowrap btn-sm ms-2 mb-4'
+              className={`btn btn-outline-primary text-nowrap btn-sm me-2 ms-2 mb-4 ${ !editable && 'disabled' }`}
               onClick={() => {
                 setFormIndex(10);
               }}>
@@ -280,7 +282,7 @@ export const TablaSecciones = ({
           <td className='text-light'> Amamantación </td>
           <td>
             <button
-              className='btn btn-outline-primary text-nowrap btn-sm ms-2 mb-4'
+              className={`btn btn-outline-primary text-nowrap btn-sm me-2 ms-2 mb-4 ${ !editable && 'disabled' }`}
               onClick={() => {
                 setFormIndex(11);
               }}>

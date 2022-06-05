@@ -68,10 +68,17 @@
 
 }
 
+.btn-regresar-consultas {
+  position: relative;
+
+  left: 6rem;
+  bottom: 5rem;
+}
+
 .busqueda {
   background-color: white;
   color: black;
-  width: 30%;
+  width: 125%;
   height: 40px;
   padding-left: 35px;
   font-size: 1.2em;
