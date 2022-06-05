@@ -86,6 +86,7 @@ export const Pacientes = React.memo(() => {
             }
           )
           .then(() => {
+            traerPacientes();
             Swal.fire({
               title: '¡Hecho!',
               text: 'Paciente eliminado con éxito',
