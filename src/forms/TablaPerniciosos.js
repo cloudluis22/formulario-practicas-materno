@@ -349,6 +349,7 @@ export const TablaPerniciosos = ({ IdPaciente }) => {
               </label>
               <Field
                 type='text'
+                autocomplete='off'
                 id='LblOtros'
                 name='LblOtros'
                 className={

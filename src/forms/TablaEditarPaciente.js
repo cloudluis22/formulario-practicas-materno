@@ -183,6 +183,7 @@ export const TablaEditarPaciente = ({ IdPaciente }) => {
               </label>
               <Field
                 type='text'
+                autocomplete='off'
                 id='NombrePaciente'
                 name='NombrePaciente'
                 className={
@@ -214,6 +215,7 @@ export const TablaEditarPaciente = ({ IdPaciente }) => {
                 </label>
                 <Field
                   type='text'
+                  autocomplete='off'
                   id='NombrePreferido'
                   name='NombrePreferido'
                   className={
@@ -246,6 +248,7 @@ export const TablaEditarPaciente = ({ IdPaciente }) => {
                 </label>
                 <Field
                   type='text'
+                  autocomplete='off'
                   id='Edad'
                   name='Edad'
                   className={
@@ -382,6 +385,7 @@ export const TablaEditarPaciente = ({ IdPaciente }) => {
                 </label>
                 <Field
                   type='text'
+                  autocomplete='off'
                   id='LugarDeNacimiento'
                   name='LugarDeNacimiento'
                   className={
@@ -415,6 +419,7 @@ export const TablaEditarPaciente = ({ IdPaciente }) => {
               </label>
               <Field
                 type='text'
+                autocomplete='off'
                 id='PadreMadreTutor'
                 name='PadreMadreTutor'
                 className={
@@ -446,6 +451,7 @@ export const TablaEditarPaciente = ({ IdPaciente }) => {
               </label>
               <Field
                 type='text'
+                autocomplete='off'
                 id='TutorEncargado'
                 name='TutorEncargado'
                 className={
@@ -477,6 +483,7 @@ export const TablaEditarPaciente = ({ IdPaciente }) => {
               </label>
               <Field
                 type='text'
+                autocomplete='off'
                 id='Domicilio'
                 name='Domicilio'
                 className={
@@ -506,6 +513,7 @@ export const TablaEditarPaciente = ({ IdPaciente }) => {
               </label>
               <Field
                 type='text'
+                autocomplete='off'
                 id='Telefono'
                 name='Telefono'
                 className={
@@ -535,6 +543,7 @@ export const TablaEditarPaciente = ({ IdPaciente }) => {
               </label>
               <Field
                 type='text'
+                autocomplete='off'
                 id='Celular'
                 name='Celular'
                 className={
@@ -564,6 +573,7 @@ export const TablaEditarPaciente = ({ IdPaciente }) => {
               </label>
               <Field
                 type='text'
+                autocomplete='off'
                 id='OtroContacto'
                 name='OtroContacto'
                 className={
@@ -593,6 +603,7 @@ export const TablaEditarPaciente = ({ IdPaciente }) => {
               </label>
               <Field
                 type='text'
+                autocomplete='off'
                 id='NombrePediatra'
                 name='NombrePediatra'
                 className={
