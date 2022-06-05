@@ -6,7 +6,7 @@ const GetPaciente = (id) => {
 
     axios.get(`http://localhost:3001/api/v1/obtener-paciente-completo/${id}`)
         .then((response) => {
-            paciente = {... paciente, infoPaciente : response.data.paciente[0]}
+            paciente = {...paciente, infoPaciente : response.data.paciente[0]}
         })
 
    return paciente;
