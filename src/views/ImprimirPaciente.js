@@ -3,11 +3,10 @@ import React from 'react'
 import { useParams } from 'react-router-dom';
 import { useGetInfo } from '../hooks/useGetInfo';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import jsPDF from "jspdf";
-import html2canvas from 'html2canvas';
 import {
   faFaceSadTear
 } from '@fortawesome/free-solid-svg-icons';
+import { PDFPaciente } from '../functions/PDFPaciente';
 
 export const ImprimirPaciente = () => {
   const { id } = useParams();
@@ -16,31 +15,7 @@ export const ImprimirPaciente = () => {
   const {ok, loading, data} = dataState
   
   const print = () => {
-    html2canvas(document.body, {
-      scale: 0.5,
-      scrollX: 0,
-      scrollY: 0
-    }).then(function(canvas) {
-      var imgData = canvas.toDataURL('image/png');
-      var imgWidth = 210; 
-      var pageHeight = 295;  
-      var imgHeight = canvas.height * imgWidth / canvas.width;
-      var heightLeft = imgHeight;
-
-      var doc = new jsPDF('p', 'mm', undefined, 'FAST');
-      var position = 0;
-
-      doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-      heightLeft -= pageHeight;
-
-      while (heightLeft >= 0) {
-        position = heightLeft - imgHeight;
-        doc.addPage();
-        doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-        heightLeft -= pageHeight;
-      }
-      doc.save('prueba.pdf');
-    })
+    PDFPaciente(data)
   };
 
   return (
