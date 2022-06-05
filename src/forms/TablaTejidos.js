@@ -172,6 +172,7 @@ export const TablaTejidos = ({ IdPaciente }) => {
               </label>
               <Field
                 type='text'
+                autocomplete='off'
                 id='Lengua'
                 name='Lengua'
                 className={
@@ -202,6 +203,7 @@ export const TablaTejidos = ({ IdPaciente }) => {
               </label>
               <Field
                 type='text'
+                autocomplete='off'
                 id='FrenilloLingual'
                 name='FrenilloLingual'
                 className={
@@ -237,6 +239,7 @@ export const TablaTejidos = ({ IdPaciente }) => {
               </label>
               <Field
                 type='text'
+                autocomplete='off'
                 id='Labios'
                 name='Labios'
                 className={
@@ -270,6 +273,7 @@ export const TablaTejidos = ({ IdPaciente }) => {
               </label>
               <Field
                 type='text'
+                autocomplete='off'
                 id='FrenilloLabial'
                 name='FrenilloLabial'
                 className={
@@ -305,6 +309,7 @@ export const TablaTejidos = ({ IdPaciente }) => {
               </label>
               <Field
                 type='text'
+                autocomplete='off'
                 id='PaladarDuro'
                 name='PaladarDuro'
                 className={
@@ -338,6 +343,7 @@ export const TablaTejidos = ({ IdPaciente }) => {
               </label>
               <Field
                 type='text'
+                autocomplete='off'
                 id='PaladarBlando'
                 name='PaladarBlando'
                 className={
@@ -371,6 +377,7 @@ export const TablaTejidos = ({ IdPaciente }) => {
               </label>
               <Field
                 type='text'
+                autocomplete='off'
                 id='PisoBoca'
                 name='PisoBoca'
                 className={
@@ -404,6 +411,7 @@ export const TablaTejidos = ({ IdPaciente }) => {
               </label>
               <Field
                 type='text'
+                autocomplete='off'
                 id='MucosaYugal'
                 name='MucosaYugal'
                 className={
@@ -437,6 +445,7 @@ export const TablaTejidos = ({ IdPaciente }) => {
               </label>
               <Field
                 type='text'
+                autocomplete='off'
                 id='MucosaMasticatoria'
                 name='MucosaMasticatoria'
                 className={
@@ -469,6 +478,7 @@ export const TablaTejidos = ({ IdPaciente }) => {
               </label>
               <Field
                 type='text'
+                autocomplete='off'
                 id='Otros'
                 name='Otros'
                 className={

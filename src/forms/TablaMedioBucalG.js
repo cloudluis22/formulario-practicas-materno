@@ -238,6 +238,7 @@ export const TablaMedioBucalG = ({ IdPaciente }) => {
             </label>
             <Field
               type='text'
+              autocomplete='off'
               id='PHSaliva'
               name='PHSaliva'
               className={

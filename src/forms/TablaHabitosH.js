@@ -154,6 +154,7 @@ export const TablaHabitos = ({ IdPaciente }) => {
               </label>
               <Field
                 type='Text'
+                autocomplete='off'
                 id='EncargadoCepillado'
                 name='EncargadoCepillado'
                 className={
@@ -183,6 +184,7 @@ export const TablaHabitos = ({ IdPaciente }) => {
               ¿Cuántas veces al día se cepilla los dientes?
             </label>
             <Field
+              autocomplete='off'
               type='text'
               id='CepilladosDiarios'
               name='CepilladosDiarios'
@@ -214,6 +216,7 @@ export const TablaHabitos = ({ IdPaciente }) => {
               ¿Cómo se llama la marca de pasta que utilizan?
             </label>
             <Field
+              autocomplete='off'
               type='text'
               id='MarcaPastaDental'
               name='MarcaPastaDental'
