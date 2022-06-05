@@ -12,7 +12,9 @@ export const PDFPaciente = (info) => {
     // TITULO DE LA TABLA:
     doc.setFontSize(18); // Fuente tamaño 16
     doc.text(20, 20, 'Datos Generales del Paciente'); // Nombre de la tabla
-    doc.line(20, 22, 200, 21); // Linea.
+    doc.line(20, 22, 200, 22); // Linea.
+
+    // CONTENIDO DE LA TABLA
 
     doc.setFontSize(14);
     doc.text(20, 32, 'Nombre del Paciente'); // Titulo de la información.
@@ -185,7 +187,10 @@ export const PDFPaciente = (info) => {
     doc.setFontSize(14);
     doc.text(20, 265, 'Chicle'); 
     doc.setFontSize(12);
-    doc.text(20, 270, `${info[1].Chicles} veces x semana.` || 'N/A'); 
+    doc.text(20, 270, `${info[1].Chicle} veces x semana.` || 'N/A'); 
+
+    // PÁGINA #3
+    doc.addPage();
 
     doc.save('xd.pdf');
 }
