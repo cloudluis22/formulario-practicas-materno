@@ -22,7 +22,7 @@ export const TablaAmamantacion = ({ IdPaciente }) => {
   });
 
   const [edit, setEdit] = useState(false);
-
+  
   let formValues = {
     TomaPechoEdad: '',
         LblTomaPechoEdad: '',
@@ -59,22 +59,9 @@ export const TablaAmamantacion = ({ IdPaciente }) => {
       .then((response) => {
         setData({
           loading: false,
-          data: {...response.data.alimentacionbebe[0],
-            CBLecheMaterna:!!response.data.alimentacionbebe[0].CBLecheMaterna,
-            CBLecheFormula:!!response.data.alimentacionbebe[0].CBLecheFormula,
-            CBChocolate:!!response.data.alimentacionbebe[0].CBChocolate,
-            CBAzucar:!!response.data.alimentacionbebe[0].CBAzucar,
-            CBTe:!!response.data.alimentacionbebe[0].CBTe,
-            CCNada:!!response.data.alimentacionbebe[0].CCNada,
-            CCMiel:!!response.data.alimentacionbebe[0].CCMiel,
-            ANPecho:!!response.data.alimentacionbebe[0].ANPecho,
-            ANPecho:!!response.data.alimentacionbebe[0].ANPecho,
-            ANBiberon:!!response.data.alimentacionbebe[0].ANBiberon,
-            ANVasoEntrenador:!!response.data.alimentacionbebe[0].ANVasoEntrenador,
-          },
+          data: response.data.alimentacionbebe,
           ok: true,
         });
-          console.log(Data.data)
         
         if (Data.data.length === 0) {
           setEdit(false);
@@ -83,6 +70,7 @@ export const TablaAmamantacion = ({ IdPaciente }) => {
         }
       })
       .catch((error) => {
+        console.log(error);
         setData({
           loading: false,
           data: [],
