@@ -19,10 +19,11 @@ export const TablaAmamantacion = ({ IdPaciente }) => {
     loading: true,
     data: [],
     ok: false,
+    edit: false
   });
 
   const [edit, setEdit] = useState(false);
-  
+
   let formValues = {
     TomaPechoEdad: '',
         LblTomaPechoEdad: '',
@@ -54,30 +55,68 @@ export const TablaAmamantacion = ({ IdPaciente }) => {
   };
 
   useEffect(() => {
+
     axios
       .get(`http://localhost:3001/api/v1/alimentacion-bebe/${IdPaciente}`)
       .then((response) => {
-        setData({
-          loading: false,
-          data: response.data.alimentacionbebe,
-          ok: true,
-        });
+        if(response.data.alimentacionbebe.length > 0) {
+          setData({
+            loading: false,
+            data: {...response.data.alimentacionbebe[0],
+              CBLecheMaterna:response.data.alimentacionbebe[0] ? response.data.alimentacionbebe[0].CBLecheMaterna : "",
+              CBLecheFormula:response.data.alimentacionbebe[0] ? response.data.alimentacionbebe[0].CBLecheFormula : "",
+              CBChocolate:response.data.alimentacionbebe[0] ? response.data.alimentacionbebe[0].CBChocolate : "",
+              CBAzucar:response.data.alimentacionbebe[0] ? response.data.alimentacionbebe[0].CBAzucar : "",
+              CBTe:response.data.alimentacionbebe[0] ? response.data.alimentacionbebe[0].CBTe : "",
+              CCNada:response.data.alimentacionbebe[0] ? response.data.alimentacionbebe[0].CCNada : "",
+              CCMiel:response.data.alimentacionbebe[0] ? response.data.alimentacionbebe[0].CCMiel : "",
+              ANPecho:response.data.alimentacionbebe[0] ? response.data.alimentacionbebe[0].ANPecho : "",
+              ANPecho:response.data.alimentacionbebe[0] ? response.data.alimentacionbebe[0].ANPecho : "",
+              ANBiberon:response.data.alimentacionbebe[0] ? response.data.alimentacionbebe[0].ANBiberon : "",
+              ANVasoEntrenador:response.data.alimentacionbebe[0] ? response.data.alimentacionbebe[0].ANVasoEntrenador : "",
+            },
+            ok: true,
+            edit: true
+          });
+        }else{
+          setData({
+            loading: false,
+            data: {...response.data.alimentacionbebe[0],
+              CBLecheMaterna:response.data.alimentacionbebe[0] ? response.data.alimentacionbebe[0].CBLecheMaterna : "",
+              CBLecheFormula:response.data.alimentacionbebe[0] ? response.data.alimentacionbebe[0].CBLecheFormula : "",
+              CBChocolate:response.data.alimentacionbebe[0] ? response.data.alimentacionbebe[0].CBChocolate : "",
+              CBAzucar:response.data.alimentacionbebe[0] ? response.data.alimentacionbebe[0].CBAzucar : "",
+              CBTe:response.data.alimentacionbebe[0] ? response.data.alimentacionbebe[0].CBTe : "",
+              CCNada:response.data.alimentacionbebe[0] ? response.data.alimentacionbebe[0].CCNada : "",
+              CCMiel:response.data.alimentacionbebe[0] ? response.data.alimentacionbebe[0].CCMiel : "",
+              ANPecho:response.data.alimentacionbebe[0] ? response.data.alimentacionbebe[0].ANPecho : "",
+              ANPecho:response.data.alimentacionbebe[0] ? response.data.alimentacionbebe[0].ANPecho : "",
+              ANBiberon:response.data.alimentacionbebe[0] ? response.data.alimentacionbebe[0].ANBiberon : "",
+              ANVasoEntrenador:response.data.alimentacionbebe[0] ? response.data.alimentacionbebe[0].ANVasoEntrenador : "",
+            },
+            ok: true,
+            edit: false
+          });
+        }
+        
         
         if (Data.data.length === 0) {
           setEdit(false);
         } else {
           setEdit(true);
         }
+
       })
       .catch((error) => {
-        console.log(error);
         setData({
           loading: false,
           data: [],
           ok: false,
+          edit: false,
         });
       });
-  }, [IdPaciente, Data.data]);
+
+    }, [IdPaciente, Data.data]);
 
   if (Data.data) {
     formValues = Data.data;
@@ -200,7 +239,7 @@ export const TablaAmamantacion = ({ IdPaciente }) => {
            
           };
           
-          if (!edit) {
+          if (!Data.edit) {
             await axios
               .post(
                 `http://localhost:3001/api/v1/alimentacion-bebe/${IdPaciente}`,
@@ -213,6 +252,7 @@ export const TablaAmamantacion = ({ IdPaciente }) => {
                   'success'
                 );
               })
+              
               .catch((error) => {
                 
                 Swal.fire(
@@ -233,6 +273,7 @@ export const TablaAmamantacion = ({ IdPaciente }) => {
                   'Informacion Actualizada Correctamente.',
                   'success'
                 );
+                console.log(submitValues)
               })
               .catch((error) => {
                 
@@ -476,6 +517,7 @@ export const TablaAmamantacion = ({ IdPaciente }) => {
             </label>
             <Field
               type='text'
+              autocomplete='off'
               id='ContenidoBiberonOtro'
               name='ContenidoBiberonOtro'
               className={
@@ -510,6 +552,7 @@ export const TablaAmamantacion = ({ IdPaciente }) => {
               type='text'
               id='EdadYaNoTomaBiberon'
               name='EdadYaNoTomaBiberon'
+              autocomplete = 'off'
               className={
                 !touched.EdadYaNoTomaBiberon
                   ? 'form-control'

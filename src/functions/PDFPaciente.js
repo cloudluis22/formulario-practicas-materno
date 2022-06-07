@@ -403,11 +403,7 @@ export const PDFPaciente = (info) => {
     doc.text(20, 185, 'Amamantación / Alimentación en bebés'); 
     doc.line(20, 187, 200, 187); // Linea. 
 
-<<<<<<< HEAD
-    
-=======
     /*
->>>>>>> 8bbf40b14aae013f5d50c96cff84c31060a05f94
     doc.setFontSize(14);
     doc.text(20,197, 'Su bebé toma / tomó pecho?')
     doc.setFontSize(12);
@@ -431,14 +427,6 @@ export const PDFPaciente = (info) => {
     doc.setFontSize(14);
     doc.text(20,242, '¿Cuál es/era el contenido de su biberón?')
     doc.setFontSize(12);
-<<<<<<< HEAD
-    doc.line(20, 247, info[2].CBLecheMaterna ? '• USO leche materna' : '• NO USO leche materna' );
-    doc.line(20, 252, info[2].CBLecheFormula ? '• USO formula' : '• NO USO formula' );
-    doc.line(20, 257, info[2].CBChocolate ? '• USO chocolate' : '• NO USO chocolate' );
-    doc.line(20, 262, info[2].CBAzucar ? '• USO azucar' : '• NO USO azucar'  );
-    doc.line(20, 262, info[3].CBTe ? '• USO Té' : '• NO USO azucar');
-
-=======
     doc.line(20, 247,`${info[2].CBLecheMaterna}`|| 'N/A' )
     doc.line(20, 252,`${info[2].CBLecheFormula}`|| 'N/A' )
     doc.line(20, 257,`${info[2].CBChocolate}`|| 'N/A' )
@@ -447,7 +435,6 @@ export const PDFPaciente = (info) => {
 
 
 */    
->>>>>>> 8bbf40b14aae013f5d50c96cff84c31060a05f94
 
     doc.save('xd.pdf');
 }
