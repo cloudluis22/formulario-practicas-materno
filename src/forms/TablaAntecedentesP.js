@@ -406,6 +406,7 @@ export const TablaAntecedentes = ({ IdPaciente }) => {
                 </label>
                 <Field
                   type='text'
+                  autocomplete='off'
                   id='LblRealizaDeporte'
                   name='LblRealizaDeporte'
                   className={
@@ -466,6 +467,7 @@ export const TablaAntecedentes = ({ IdPaciente }) => {
                 </label>
                 <Field
                   type='text'
+                  autocomplete='off'
                   id='LblAlergiasMedAlim'
                   name='LblAlergiasMedAlim'
                   className={
@@ -528,6 +530,7 @@ export const TablaAntecedentes = ({ IdPaciente }) => {
                 </label>
                 <Field
                   type='text'
+                  autocomplete='off'
                   id='LblTrastornoMentalEmocional'
                   name='LblTrastornoMentalEmocional'
                   className={
@@ -672,6 +675,7 @@ export const TablaAntecedentes = ({ IdPaciente }) => {
                 </label>
                 <Field
                   type='text'
+                  autocomplete='off'
                   id='LblChupaLabioDedos'
                   name='LblChupaLabioDedos'
                   className={
@@ -1272,6 +1276,7 @@ export const TablaAntecedentes = ({ IdPaciente }) => {
               </label>
               <Field
                 type='text'
+                autocomplete='off'
                 id='Otros'
                 name='Otros'
                 className={
@@ -1361,6 +1366,7 @@ export const TablaAntecedentes = ({ IdPaciente }) => {
                 </label>
                 <Field
                   type='text'
+                  autocomplete='off'
                   id='LblTomaMedicamentos'
                   name='LblTomaMedicamentos'
                   className={
@@ -1422,6 +1428,7 @@ export const TablaAntecedentes = ({ IdPaciente }) => {
                 </label>
                 <Field
                   type='text'
+                  autocomplete='off'
                   id='LblMadreMedicamentoEmbarazo'
                   name='LblMadreMedicamentoEmbarazo'
                   className={
@@ -1560,6 +1567,7 @@ export const TablaAntecedentes = ({ IdPaciente }) => {
                 </label>
                 <Field
                   type='text'
+                  autocomplete='off'
                   id='LblDificultadNacimiento'
                   name='LblDificultadNacimiento'
                   className={
@@ -1620,6 +1628,7 @@ export const TablaAntecedentes = ({ IdPaciente }) => {
                 </label>
                 <Field
                   type='text'
+                  autocomplete='off'
                   id='LblAnomaliaCongenitaNacimiento'
                   name='LblAnomaliaCongenitaNacimiento'
                   className={
@@ -1706,6 +1715,7 @@ export const TablaAntecedentes = ({ IdPaciente }) => {
                 </label>
                 <Field
                   type='text'
+                  autocomplete='off'
                   id='LblReaccionAnestesia'
                   name='LblReaccionAnestesia'
                   className={

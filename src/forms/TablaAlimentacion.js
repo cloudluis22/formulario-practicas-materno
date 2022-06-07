@@ -240,7 +240,8 @@ export const TablaAlimentacion = ({ IdPaciente }) => {
                 Comidas Diarias del paciente
               </label>
               <Field
-                type='tel'
+                type='number'
+                autocomplete="off"
                 id='ComidasDiarias'
                 name='ComidasDiarias'
                 className={
@@ -271,6 +272,7 @@ export const TablaAlimentacion = ({ IdPaciente }) => {
               </label>
               <Field
                 type='number'
+                autocomplete="off"
                 id='Carne'
                 name='Carne'
                 className={
@@ -299,6 +301,7 @@ export const TablaAlimentacion = ({ IdPaciente }) => {
               </label>
               <Field
                 type='number'
+                autocomplete="off"
                 id='Leche'
                 name='Leche'
                 className={
@@ -327,6 +330,7 @@ export const TablaAlimentacion = ({ IdPaciente }) => {
               </label>
               <Field
                 type='number'
+                autocomplete="off"
                 id='Pan'
                 name='Pan'
                 className={
@@ -355,6 +359,7 @@ export const TablaAlimentacion = ({ IdPaciente }) => {
               </label>
               <Field
                 type='number'
+                autocomplete="off"
                 id='Frutas'
                 name='Frutas'
                 className={
@@ -383,6 +388,7 @@ export const TablaAlimentacion = ({ IdPaciente }) => {
               </label>
               <Field
                 type='number'
+                autocomplete="off"
                 id='Yoghurt'
                 name='Yoghurt'
                 className={
@@ -411,6 +417,7 @@ export const TablaAlimentacion = ({ IdPaciente }) => {
               </label>
               <Field
                 type='number'
+                autocomplete="off"
                 id='Jugos'
                 name='Jugos'
                 className={
@@ -439,6 +446,7 @@ export const TablaAlimentacion = ({ IdPaciente }) => {
               </label>
               <Field
                 type='number'
+                autocomplete="off"
                 id='Vegetales'
                 name='Vegetales'
                 className={
@@ -467,6 +475,7 @@ export const TablaAlimentacion = ({ IdPaciente }) => {
               </label>
               <Field
                 type='number'
+                autocomplete="off"
                 id='Dulces'
                 name='Dulces'
                 className={
@@ -495,6 +504,7 @@ export const TablaAlimentacion = ({ IdPaciente }) => {
               </label>
               <Field
                 type='number'
+                autocomplete="off"
                 id='Gomitas'
                 name='Gomitas'
                 className={
@@ -523,6 +533,7 @@ export const TablaAlimentacion = ({ IdPaciente }) => {
               </label>
               <Field
                 type='number'
+                autocomplete="off"
                 id='Huevo'
                 name='Huevo'
                 className={
@@ -551,6 +562,7 @@ export const TablaAlimentacion = ({ IdPaciente }) => {
               </label>
               <Field
                 type='number'
+                autocomplete="off"
                 id='Galletas'
                 name='Galletas'
                 className={
@@ -579,6 +591,7 @@ export const TablaAlimentacion = ({ IdPaciente }) => {
               </label>
               <Field
                 type='number'
+                autocomplete="off"
                 id='Chocolate'
                 name='Chocolate'
                 className={
@@ -607,6 +620,7 @@ export const TablaAlimentacion = ({ IdPaciente }) => {
               </label>
               <Field
                 type='number'
+                autocomplete="off"
                 id='Pescado'
                 name='Pescado'
                 className={
@@ -635,6 +649,7 @@ export const TablaAlimentacion = ({ IdPaciente }) => {
               </label>
               <Field
                 type='number'
+                autocomplete="off"
                 id='Mermelada'
                 name='Mermelada'
                 className={
@@ -663,6 +678,7 @@ export const TablaAlimentacion = ({ IdPaciente }) => {
               </label>
               <Field
                 type='number'
+                autocomplete="off"
                 id='Chicle'
                 name='Chicle'
                 className={
@@ -691,6 +707,7 @@ export const TablaAlimentacion = ({ IdPaciente }) => {
               </label>
               <Field
                 type='number'
+                autocomplete="off"
                 id='Agua'
                 name='Agua'
                 className={
@@ -719,6 +736,7 @@ export const TablaAlimentacion = ({ IdPaciente }) => {
               </label>
               <Field
                 type='number'
+                autocomplete="off"
                 id='Yakult'
                 name='Yakult'
                 className={
@@ -747,6 +765,7 @@ export const TablaAlimentacion = ({ IdPaciente }) => {
               </label>
               <Field
                 type='number'
+                autocomplete="off"
                 id='Te'
                 name='Te'
                 className={

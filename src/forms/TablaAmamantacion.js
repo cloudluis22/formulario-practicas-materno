@@ -282,6 +282,7 @@ export const TablaAmamantacion = ({ IdPaciente }) => {
                 </label>
                 <Field
                   type='text'
+                  autocomplete='off'
                   id='LblTomaPechoEdad'
                   name='LblTomaPechoEdad'
                   className={
@@ -313,6 +314,7 @@ export const TablaAmamantacion = ({ IdPaciente }) => {
                 </label>
                 <Field
                   type='text'
+                  autocomplete='off'
                   id='LblFrecuenciaAlimentacionPecho'
                   name='LblFrecuenciaAlimentacionPecho'
                   className={
@@ -411,6 +413,7 @@ export const TablaAmamantacion = ({ IdPaciente }) => {
                 </label>
                 <Field
                   type='text'
+                  autocomplete='off'
                   id='LblUsabaBiberon'
                   name='LblUsabaBiberon'
                   className={
@@ -562,6 +565,7 @@ export const TablaAmamantacion = ({ IdPaciente }) => {
                 </label>
                 <Field
                   type='text'
+                  autocomplete='off'
                   id='LblUsabaChupon'
                   name='LblUsabaChupon'
                   className={
@@ -718,6 +722,7 @@ export const TablaAmamantacion = ({ IdPaciente }) => {
                 </label>
                 <Field
                   type='text'
+                  autocomplete='off'
                   id='LblAlimentacionNocturna'
                   name='LblAlimentacionNocturna'
                   className={
@@ -808,6 +813,7 @@ export const TablaAmamantacion = ({ IdPaciente }) => {
                 </label>
                 <Field
                   type='text'
+                  autocomplete='off'
                   id='LblBebeConsumeSolidos'
                   name='LblBebeConsumeSolidos'
                   className={

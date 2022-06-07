@@ -167,6 +167,7 @@ export const TablaErupcion = ({ IdPaciente }) => {
               </label>
               <Field
                 type='text'
+                autocomplete='off'
                 id='EdadDental'
                 name='EdadDental'
                 className={
@@ -195,6 +196,7 @@ export const TablaErupcion = ({ IdPaciente }) => {
               </label>
               <Field
                 type='text'
+                autocomplete='off'
                 id='SecuenciaAnormal'
                 name='SecuenciaAnormal'
                 className={
@@ -224,6 +226,7 @@ export const TablaErupcion = ({ IdPaciente }) => {
               </label>
               <Field
                 type='text'
+                autocomplete='off'
                 id='PerdidaPrematura'
                 name='PerdidaPrematura'
                 className={
@@ -254,6 +257,7 @@ export const TablaErupcion = ({ IdPaciente }) => {
               </label>
               <Field
                 type='text'
+                autocomplete='off'
                 id='RetencionProlongada'
                 name='RetencionProlongada'
                 className={
@@ -284,6 +288,7 @@ export const TablaErupcion = ({ IdPaciente }) => {
               </label>
               <Field
                 type='text'
+                autocomplete='off'
                 id='ErupcionRetardada'
                 name='ErupcionRetardada'
                 className={
@@ -314,6 +319,7 @@ export const TablaErupcion = ({ IdPaciente }) => {
               </label>
               <Field
                 type='text'
+                autocomplete='off'
                 id='FaltaContactoProximal'
                 name='FaltaContactoProximal'
                 className={
@@ -344,6 +350,7 @@ export const TablaErupcion = ({ IdPaciente }) => {
               </label>
               <Field
                 type='text'
+                autocomplete='off'
                 id='HipoplasiaIncisivo'
                 name='HipoplasiaIncisivo'
                 className={
@@ -374,6 +381,7 @@ export const TablaErupcion = ({ IdPaciente }) => {
               </label>
               <Field
                 type='text'
+                autocomplete='off'
                 id='HipoplasiaEnDeciduos'
                 name='HipoplasiaEnDeciduos'
                 className={
@@ -406,6 +414,7 @@ export const TablaErupcion = ({ IdPaciente }) => {
               </label>
               <Field
                 type='text'
+                autocomplete='off'
                 id='AmeloDentinogenesisImperfecta'
                 name='AmeloDentinogenesisImperfecta'
                 className={
@@ -436,6 +445,7 @@ export const TablaErupcion = ({ IdPaciente }) => {
               </label>
               <Field
                 type='text'
+                autocomplete='off'
                 id='Fluorosis'
                 name='Fluorosis'
                 className={
@@ -464,6 +474,7 @@ export const TablaErupcion = ({ IdPaciente }) => {
               </label>
               <Field
                 type='text'
+                autocomplete='off'
                 id='Otros'
                 name='Otros'
                 className={
