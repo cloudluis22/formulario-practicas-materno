@@ -7,6 +7,8 @@ export const PDFPaciente = (info) => {
         return;
     }
 
+    console.log(info);
+
     // Creando el PDF
     const doc = new jsPDF();
 
@@ -407,31 +409,44 @@ export const PDFPaciente = (info) => {
     doc.setFontSize(14);
     doc.text(20,197, 'Su bebé toma / tomó pecho?')
     doc.setFontSize(12);
-    doc.line(20, 202,`${info[2].ANPecho}`|| 'N/A' )
+    doc.text(20, 202,`${info[2].ANPecho}`|| 'N/A' )
 
     doc.setFontSize(14);
-    doc.text(20,212, '¿Hasta qué edad?')
+    doc.text(20,212, '¿Hasta qué edad tomó pecho?')
     doc.setFontSize(12);
-    doc.line(20, 217,`${info[2].LblTomaPechoEdad}`|| 'N/A' )
-
-    doc.setFontSize(14);
-    doc.text(20,227, 'Frecuencia:')
-    doc.setFontSize(12);
-    doc.line(20, 232,`${info[2].LblFrecuenciaAlimentacionPecho}`|| 'N/A' )
+    doc.text(20, 217,`${info[2].LblTomaPechoEdad}`|| 'N/A' )
 
     doc.setFontSize(14);
     doc.text(20,227, 'Frecuencia:')
     doc.setFontSize(12);
-    doc.line(20, 232,`${info[2].LblFrecuenciaAlimentacionPecho}`|| 'N/A' )
-   
+    doc.text(20, 232,`${info[2].LblFrecuenciaAlimentacionPecho}`|| 'N/A' )
+
     doc.setFontSize(14);
     doc.text(20,242, '¿Cuál es/era el contenido de su biberón?')
     doc.setFontSize(12);
-    doc.line(20, 247, info[2].CBLecheMaterna ? '• USO leche materna' : '• NO USO leche materna' );
-    doc.line(20, 252, info[2].CBLecheFormula ? '• USO formula' : '• NO USO formula' );
-    doc.line(20, 257, info[2].CBChocolate ? '• USO chocolate' : '• NO USO chocolate' );
-    doc.line(20, 262, info[2].CBAzucar ? '• USO azucar' : '• NO USO azucar'  );
-    doc.line(20, 262, info[3].CBTe ? '• USO Té' : '• NO USO azucar');
+    doc.text(20, 247, info[2].CBLecheMaterna ? '• USO leche materna' : '• NO USO leche materna' );
+    doc.text(20, 252, info[2].CBLecheFormula ? '• USO formula' : '• NO USO formula' );
+    doc.text(20, 257, info[2].CBChocolate ? '• USO chocolate' : '• NO USO chocolate' );
+    doc.text(20, 262, info[2].CBAzucar ? '• USO azucar' : '• NO USO azucar'  );
+    doc.text(20, 267, info[3].CBTe ? '• USO Té' : '• NO USO té');
+
+    doc.setFontSize(14);
+    doc.text(20,277, '¿Hasta qué edad uso el chupón?')
+    doc.setFontSize(12);
+    doc.text(20, 282,`${info[2].LblUsabaBiberon}`|| 'N/A' )
+
+    doc.addPage();
+
+    doc.setFontSize(14);
+    doc.text(20, 20, '¿Su bebé sigue teniendo alimentación nocturna?'); 
+    doc.setFontSize(12);
+    doc.text(20, 25, `${info[2].AlimentacionNocturna || 'N/A'}`); 
+
+    doc.setFontSize(12);
+    doc.text(20, 35, info[2].ANBiberon ? '• USO biberón' : '• NO USO biberón' );
+    doc.text(20, 40, info[2].ANPecho ? '• USO formula' : '• NO USO formula' );
+    doc.text(20, 45, info[2].ANVasoEntrenador ? '• USO chocolate' : '• NO USO chocolate' );
+    doc.text(20, 50, `OTRO: ${info[2].LblAlimentacionNocturna}` );
 
 
     doc.save('xd.pdf');
