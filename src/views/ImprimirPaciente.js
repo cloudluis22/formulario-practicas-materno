@@ -15,7 +15,7 @@ export const ImprimirPaciente = () => {
   const {ok, loading, data} = dataState
   
   const print = () => {
-    PDFPaciente(data)
+    PDFPaciente(data, id, data[0].NombrePaciente)
   };
 
   return (

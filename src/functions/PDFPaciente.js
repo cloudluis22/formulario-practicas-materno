@@ -1,6 +1,6 @@
 import jsPDF from "jspdf";
 
-export const PDFPaciente = (info) => {
+export const PDFPaciente = (info, id, nombre) => {
 
     if( !info[0] || !info[1] || !info[2] || !info[3] || !info[4] || !info[5] || !info[6] || !info[7] || !info[8] || !info[9] || !info[10] ) {
         alert('El formulario tiene que estar completo para poder generar PDF.');
@@ -236,7 +236,7 @@ export const PDFPaciente = (info) => {
     // ------------- Antecedentes personales -------------------------
 
     doc.setFontSize(18); 
-    doc.text(20, 122, 'Antecedentes personales (del niño)'); 
+    doc.text(20, 122, 'Antecedentes Personales (del Niño)'); 
     doc.line(20, 124, 200, 124); // Linea. 
 
     doc.setFontSize(14);
@@ -447,7 +447,121 @@ export const PDFPaciente = (info) => {
     doc.text(20, 40, info[2].ANPecho ? '• USO formula' : '• NO USO formula' );
     doc.text(20, 45, info[2].ANVasoEntrenador ? '• USO chocolate' : '• NO USO chocolate' );
     doc.text(20, 50, `OTRO: ${info[2].LblAlimentacionNocturna}` );
+    
+    doc.setFontSize(14);
+    doc.text(20, 60, '¿Limpia su boquita antes de la alimentación nocturna?'); 
+    doc.setFontSize(12);
+    doc.text(20, 65, `${info[2].LimpiaSuBoquita || 'N/A'}`); 
 
+    doc.setFontSize(14);
+    doc.text(20, 75, '¿Su bebé come alimentos solidos?'); 
+    doc.setFontSize(12);
+    doc.text(20, 80, `${info[2].BebeConsumeSolidos || 'N/A'}`); 
 
-    doc.save('xd.pdf');
+    doc.setFontSize(14);
+    doc.text(20, 90, '¿Mastica o tienen que ser molidos?'); 
+    doc.setFontSize(12);
+    doc.text(20, 95, `${info[2].LblBebeConsumeSolidos || 'N/A'}`); 
+
+    doc.setFontSize(18); 
+    doc.text(20, 105, 'Antecedentes Familiares'); 
+    doc.line(20, 107, 200, 107);
+
+    doc.setFontSize(14);
+    doc.text(20, 117, '¿Algún familiar de su hijo padece de las siguientes condiciones?'); 
+    doc.setFontSize(12);
+    doc.text(20, 122, info[3].Cancer === 'Si' ? '• Cancer POSITIVO' : '• Cancer NEGATIVO' );
+    doc.text(20, 127, info[3].Diabetes === 'Si' ? '• Diabetes POSITIVO' : '• Diabetes NEGATIVO' );
+    doc.text(20, 132, info[3].EnfermedadDegenerativa === 'Si' ? '• Enfermedad Degenerativa POSITIVO' : '• Enfermedad Degenerativa ✘' );
+    doc.text(20, 137, info[3].EnfermedadMental === 'Si' ? '• Enfermedad Mental POSITIVO' : '• Enfermedad Mental NEGATIVO' );
+    doc.text(20, 142, info[3].Hipertension === 'Si' ? '• Hipertension POSITIVO' : '• Hipertension NEGATIVO' );
+    doc.text(20, 147, info[3].VIH === 'Si' ? '• VIH POSITIVO' : '• VIH NEGATIVO' );
+
+    doc.setFontSize(18); 
+    doc.text(20, 157, 'Oclusión y Alineamiento'); 
+    doc.line(20, 162, 200, 162);
+
+    doc.setFontSize(12); 
+    doc.text(20, 172, `Línea media: ${info[9].LineaMedia}`); 
+
+    doc.setFontSize(12); 
+    doc.text(20, 177, `Plano Terminal: ${info[9].PlanoTerminal}`); 
+
+    doc.setFontSize(12); 
+    doc.text(20, 182, `Clase Molar: ${info[9].ClaseMolar}`); 
+
+    doc.setFontSize(12); 
+    doc.text(20, 187, `Espacios Primates: ${info[9].EspaciosPrimates}`); 
+
+    doc.setFontSize(12); 
+    doc.text(20, 192, `Espacios Fisiológicos: ${info[9].EspaciosFisiologicos}`); 
+
+    doc.setFontSize(12); 
+    doc.text(20, 197, `Espacios Fisiológicos: ${info[9].EspaciosFisiologicos}`); 
+    
+    doc.setFontSize(12); 
+    doc.text(20, 202, `Traslape: ${info[9].Traslape}`); 
+
+    doc.setFontSize(12); 
+    doc.text(20, 207, `Sobremordida: ${info[9].Sobremordida}`); 
+
+    doc.setFontSize(12); 
+    doc.text(20, 212, `Mordida Abierta: ${info[9].MordidaAbierta}`); 
+
+    doc.setFontSize(12); 
+    doc.text(20, 217, `Mordida Profunda: ${info[9].MordidaProfunda}`); 
+
+    doc.setFontSize(12); 
+    doc.text(20, 222, `Malposición Dentaria: ${info[9].MalposicionDentaria}`); 
+
+    doc.setFontSize(12); 
+    doc.text(20, 227, `Diastema: ${info[9].Diastema}`); 
+
+    doc.setFontSize(18); 
+    doc.text(20, 237, 'TEJIDOS BLANDOS'); 
+    doc.line(20, 239, 200, 239);
+
+    doc.setFontSize(12); 
+    doc.text(20, 249, `Lengua: ${info[10].Lengua}`); 
+    doc.text(20, 254, `Frenillo Lingual: ${info[10].FrenilloLingual}`); 
+    doc.text(20, 259, `Labios: ${info[10].Labios}`); 
+    doc.text(20, 264, `Frenillo Labial: ${info[10].FrenilloLabial}`); 
+    doc.text(20, 269, `Paladar Duro: ${info[10].PaladarDuro}`); 
+    doc.text(20, 274, `Paladar Blando: ${info[10].PaladarBlando}`); 
+
+    doc.addPage();
+
+    doc.text(20, 20, `Piso de Boca: ${info[10].PisoBoca}`); 
+    doc.text(20, 25, `Mucosa Yugal: ${info[10].MucosaYugal}`); 
+    doc.text(20, 30, `Mucosa: Masticatoria ${info[10].MucosaMasticatoria}`); 
+    doc.text(20, 35, `Otros: ${info[10].Otros}`); 
+
+    doc.setFontSize(18); 
+    doc.text(20, 45, 'Habitos Perniciosos'); 
+    doc.line(20, 47, 200, 47);
+
+    doc.setFontSize(12); 
+    doc.text(20, 57, `Edad Dental: ${info[5].EdadDental}`);
+    doc.text(20, 62, `Secuencia Anormal: ${info[5].SecuenciaAnormal}`); 
+    doc.text(20, 67, `Perdida Prematura: ${info[5].PerdidaPrematura}`); 
+    doc.text(20, 72, `Retención Prolongada: ${info[5].RetencionProlongada}`); 
+    doc.text(20, 77, `Erupción Retardada: ${info[5].ErupcionRetardada}`); 
+    doc.text(20, 82, `Falta de Contacto Proximal: ${info[5].FaltaContactoProximal}`); 
+    doc.text(20, 87, `Hipoplasia Incisivo Molar: ${info[5].HipoplasiaIncisivo}`); 
+    doc.text(20, 92, `Hipoplasia en Deciduos: ${info[5].HipoplasiaEnDeciduos}`); 
+    doc.text(20, 97, `Amelo/Dentinoogénesis Imperfecta: ${info[5].AmeloDentinogenesisImperfecta}`); 
+    doc.text(20, 102, `Fluorosis: ${info[5].Fluorosis}`); 
+    doc.text(20, 107, `Otros: ${info[5].Otros}`); 
+
+    doc.setFontSize(18); 
+    doc.text(20, 117, 'Medio Bucal General'); 
+    doc.line(20, 119, 200, 119);
+
+    doc.setFontSize(14);
+    doc.text(20, 129, `Higiene: ${info[8].Higiene}`); 
+    doc.text(20, 134, `Placa Dentobacteriana: ${info[8].PlacaDentobacteriana}`); 
+    doc.text(20, 139, `Localización: ${info[8].Localizacion}`); 
+    doc.text(20, 144, `Cálculo Dental: ${info[8].CalculoDental}`); 
+
+    doc.save(`Expediente ${nombre} ${id}`);
 }
