@@ -13,6 +13,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
+import config from '../config.json';
 
 export const AdministrarConsultas = () => {
   moment.locale('es');
@@ -51,7 +52,7 @@ export const AdministrarConsultas = () => {
 
   const obtenerPacientes = () => {
     axios
-    .get(`http://localhost:3001/api/v1/consultas/${id}`)
+    .get(`${config.server_adress}/api/v1/consultas/${id}`)
     .then((response) => {
       setConsultas(response.data.consultas);
     })
@@ -62,7 +63,7 @@ export const AdministrarConsultas = () => {
     try {
 
       axios
-      .get(`http://localhost:3001/api/v1/obtener-paciente/${id}`)
+      .get(`${config.server_adress}/api/v1/obtener-paciente/${id}`)
       .then((response) => {
         setData({
           loading: false,
@@ -72,7 +73,7 @@ export const AdministrarConsultas = () => {
       })
 
       axios
-      .get(`http://localhost:3001/api/v1/consultas/${id}`)
+      .get(`${config.server_adress}/api/v1/consultas/${id}`)
       .then((response) => {
         setConsultas(response.data.consultas);
       })
@@ -105,7 +106,7 @@ export const AdministrarConsultas = () => {
       return;
     }
 
-    axios.post(`http://localhost:3001/api/v1/consultas/${id}`, {
+    axios.post(`${config.server_adress}/api/v1/consultas/${id}`, {
       IdConsulta,
       IdPaciente: id,
       Fecha: moment(Fecha).format('DD/MM/YYYY'),
@@ -143,7 +144,7 @@ export const AdministrarConsultas = () => {
     }).then((result) => {
       if (result.isConfirmed) {
 
-        axios.delete(`http://localhost:3001/api/v1/consultas/${id}/${consultaActual.IdConsulta}`)
+        axios.delete(`${config.server_adress}/api/v1/consultas/${id}/${consultaActual.IdConsulta}`)
         .then(() => {
           Swal.fire({
             icon: 'success',
@@ -214,7 +215,7 @@ export const AdministrarConsultas = () => {
     }).then((result) => {
       if (result.isConfirmed) {
 
-        axios.put(`http://localhost:3001/api/v1/consultas/${id}`, {
+        axios.put(`${config.server_adress}/api/v1/consultas/${id}`, {
           IdConsulta: consultaActual.IdConsulta,
           Fecha: moment(Fecha).format('DD/MM/YYYY'),
           Area,

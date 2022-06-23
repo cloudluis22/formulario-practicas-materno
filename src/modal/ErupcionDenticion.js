@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import config from '../config.json';
 
 export const ErupcionDenticion = ({ idPaciente }) => {
   const [Data, setData] = useState({
@@ -10,7 +11,7 @@ export const ErupcionDenticion = ({ idPaciente }) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/api/v1/erupcion-y-denticion/${idPaciente}`)
+      .get(`${config.server_adress}/api/v1/erupcion-y-denticion/${idPaciente}`)
       .then((response) => {
         setData({
           loading: false,

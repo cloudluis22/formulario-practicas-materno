@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import config from '../config.json';
 
 export const TablaErupcion = ({ IdPaciente }) => {
   let formValues = {
@@ -28,7 +29,7 @@ export const TablaErupcion = ({ IdPaciente }) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/api/v1/erupcion-y-denticion/${IdPaciente}`)
+      .get(`${config.server_adress}/api/v1/erupcion-y-denticion/${IdPaciente}`)
       .then((response) => {
         setData({
           loading: false,
@@ -116,7 +117,7 @@ export const TablaErupcion = ({ IdPaciente }) => {
           if (!edit) {
             await axios
               .post(
-                `http://localhost:3001/api/v1/erupcion-y-denticion/${IdPaciente}`,
+                `${config.server_adress}/api/v1/erupcion-y-denticion/${IdPaciente}`,
                 submitValues
               )
               .then((response) => {
@@ -137,7 +138,7 @@ export const TablaErupcion = ({ IdPaciente }) => {
           } else {
             await axios
               .put(
-                `http://localhost:3001/api/v1/erupcion-y-denticion/${IdPaciente}`,
+                `${config.server_adress}/api/v1/erupcion-y-denticion/${IdPaciente}`,
                 submitValues
               )
               .then((response) => {

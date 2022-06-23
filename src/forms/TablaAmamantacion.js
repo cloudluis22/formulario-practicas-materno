@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import config from '../config.json';
 
 export const TablaAmamantacion = ({ IdPaciente }) => {
   const [LblTomaPechoEdad, setLblTomaPechoEdad] = useState(true);
@@ -57,7 +58,7 @@ export const TablaAmamantacion = ({ IdPaciente }) => {
   useEffect(() => {
 
     axios
-      .get(`http://localhost:3001/api/v1/alimentacion-bebe/${IdPaciente}`)
+      .get(`${config.server_adress}/api/v1/alimentacion-bebe/${IdPaciente}`)
       .then((response) => {
         if(response.data.alimentacionbebe.length > 0) {
           setData({
@@ -242,7 +243,7 @@ export const TablaAmamantacion = ({ IdPaciente }) => {
           if (!Data.edit) {
             await axios
               .post(
-                `http://localhost:3001/api/v1/alimentacion-bebe/${IdPaciente}`,
+                `${config.server_adress}/api/v1/alimentacion-bebe/${IdPaciente}`,
                 submitValues
               )
               .then((response) => {
@@ -264,7 +265,7 @@ export const TablaAmamantacion = ({ IdPaciente }) => {
           } else {
             await axios
               .put(
-                `http://localhost:3001/api/v1/alimentacion-bebe/${IdPaciente}`,
+                `${config.server_adress}/api/v1/alimentacion-bebe/${IdPaciente}`,
                 submitValues
               )
               .then((response) => {

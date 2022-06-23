@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import config from '../config.json';
 
 export const TablaAntecedentes = ({ IdPaciente }) => {
   const [LblRealizaDeporte, setLblRealizaDeporte] = useState(true);
@@ -81,7 +82,7 @@ export const TablaAntecedentes = ({ IdPaciente }) => {
     setTimeout(() => {
       axios
         .get(
-          `http://localhost:3001/api/v1/antecedentes-personales/${IdPaciente}`
+          `${config.server_adress}/api/v1/antecedentes-personales/${IdPaciente}`
         )
         .then((response) => {
           setData({
@@ -271,7 +272,7 @@ export const TablaAntecedentes = ({ IdPaciente }) => {
           if (!edit) {
             await axios
               .post(
-                `http://localhost:3001/api/v1/antecedentes-personales/${IdPaciente}`,
+                `${config.server_adress}/api/v1/antecedentes-personales/${IdPaciente}`,
                 submitValues
               )
               .then((response) => {
@@ -292,7 +293,7 @@ export const TablaAntecedentes = ({ IdPaciente }) => {
           } else {
             await axios
               .put(
-                `http://localhost:3001/api/v1/antecedentes-personales/${IdPaciente}`,
+                `${config.server_adress}/api/v1/antecedentes-personales/${IdPaciente}`,
                 submitValues
               )
               .then((response) => {

@@ -19,6 +19,7 @@ import {
   faPrint, faArrowLeft,
 } from '@fortawesome/free-solid-svg-icons';
 import moment from 'moment';
+import config from '../config.json';
 
 export const Formulario = () => {
 
@@ -41,7 +42,7 @@ export const Formulario = () => {
 
     const obtenerPaciente = async () => {
       await axios
-        .get(`http://localhost:3001/api/v1/obtener-paciente/${id}`)
+        .get(`${config.server_adress}/api/v1/obtener-paciente/${id}`)
         .then((response) => {
           setData({
             loading: false,

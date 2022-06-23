@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import config from '../config.json';
 
 export const TablaAntecedentesFamiliares = ({ IdPaciente }) => {
   
@@ -28,7 +29,7 @@ export const TablaAntecedentesFamiliares = ({ IdPaciente }) => {
     
       axios
         .get(
-          `http://localhost:3001/api/v1/antecedentes-familiares/${IdPaciente}`
+          `${config.server_adress}/api/v1/antecedentes-familiares/${IdPaciente}`
         )
         .then((response) => {
           setData({
@@ -51,7 +52,7 @@ export const TablaAntecedentesFamiliares = ({ IdPaciente }) => {
             ok: false,
           });
         });
-        axios.get(`http://localhost:3001/api/v1/obtener-paciente/${IdPaciente}`)
+        axios.get(`${config.server_adress}/api/v1/obtener-paciente/${IdPaciente}`)
         .then((response) => {
           setNombreTutor(
             response.data.paciente[0].TutorEncargado
@@ -89,7 +90,7 @@ export const TablaAntecedentesFamiliares = ({ IdPaciente }) => {
           if (!edit) {
             await axios
               .post(
-                `http://localhost:3001/api/v1/antecedentes-familiares/${IdPaciente}`,
+                `${config.server_adress}/api/v1/antecedentes-familiares/${IdPaciente}`,
                 submitValues
               )
               .then((response) => {
@@ -110,7 +111,7 @@ export const TablaAntecedentesFamiliares = ({ IdPaciente }) => {
           } else {
             await axios
               .put(
-                `http://localhost:3001/api/v1/antecedentes-familiares/${IdPaciente}`,
+                `${config.server_adress}/api/v1/antecedentes-familiares/${IdPaciente}`,
                 submitValues
               )
               .then((response) => {

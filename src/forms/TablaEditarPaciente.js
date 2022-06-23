@@ -3,6 +3,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import config from '../config.json';
 
 export const TablaEditarPaciente = ({ IdPaciente }) => {
   let navigate = useNavigate();
@@ -32,7 +33,7 @@ export const TablaEditarPaciente = ({ IdPaciente }) => {
    
       axios
         .get(
-          `http://localhost:3001/api/v1/obtener-paciente-completo/${IdPaciente}`
+          `${config.server_adress}/api/v1/obtener-paciente-completo/${IdPaciente}`
         )
         .then((response) => {
           setData({
@@ -136,7 +137,7 @@ export const TablaEditarPaciente = ({ IdPaciente }) => {
         }}
         onSubmit={async (values, { resetForm }) => {
           await axios
-            .put('http://localhost:3001/api/v1/actualizar-paciente', {
+            .put(`${config.server_adress}/api/v1/actualizar-paciente`, {
               id: IdPaciente,
               NombrePaciente: values.NombrePaciente,
               NombrePreferido: values.NombrePreferido,

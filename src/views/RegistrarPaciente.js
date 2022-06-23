@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faArrowLeft
 } from '@fortawesome/free-solid-svg-icons';
+import config from '../config.json';
 
 export const RegistrarPaciente = () => {
   
@@ -119,7 +120,7 @@ export const RegistrarPaciente = () => {
           const edad = now.diff(nacimiento, 'years');
 
           await axios
-            .post('http://localhost:3001/api/v1/registrar-paciente', {
+            .post(`${config.server_adress}/api/v1/registrar-paciente`, {
               id: IdPaciente,
               Mydate: now,
               NombrePaciente: values.NombrePaciente,

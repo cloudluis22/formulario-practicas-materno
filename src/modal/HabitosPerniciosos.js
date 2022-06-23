@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import config from '../config.json';
 
 export const HabitosPerniciosos = ({ idPaciente }) => {
   const [Data, setData] = useState({
@@ -10,7 +11,7 @@ export const HabitosPerniciosos = ({ idPaciente }) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/api/v1/habitos-perniciosos/${idPaciente}`)
+      .get(`${config.server_adress}/api/v1/habitos-perniciosos/${idPaciente}`)
       .then((response) => {
         setData({
           loading: false,

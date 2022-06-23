@@ -13,6 +13,7 @@ import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { useForm } from '../hooks/useForm';
 import Select from 'react-select';
+import config from '../config.json';
 
 export const Pacientes = React.memo(() => {
   let navigate = useNavigate();
@@ -39,7 +40,7 @@ export const Pacientes = React.memo(() => {
 
   const traerPacientes = async (filtro, orden) => {
     await axios
-      .get('http://localhost:3001/api/v1/obtener-pacientes')
+      .get(config.server_adress + '/api/v1/obtener-pacientes')
       .then((response) => {
 
         if(!!filtro) {
@@ -159,7 +160,7 @@ export const Pacientes = React.memo(() => {
       if (result.isConfirmed) {
         axios
           .delete(
-            `http://localhost:3001/api/v1/eliminar-paciente/${IdPaciente}`,
+            `${config.server_adress}/api/v1/eliminar-paciente/${IdPaciente}`,
             {
               id: IdPaciente,
             }
