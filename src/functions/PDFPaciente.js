@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-concat */
 import jsPDF from "jspdf";
 
 export const PDFPaciente = (info, id, nombre) => {
@@ -259,7 +260,7 @@ export const PDFPaciente = (info, id, nombre) => {
     doc.setFontSize(12);
     doc.text(20,184,`${info[4].LblRealizaDeporte}` || 'N/A' )
 
-    doc.setFontSize(14);
+    doc.setFontSize(14);                                                                                                                                                                                                                                                                   
     doc.text(20,194,'¿Es alérgico a algún medicamento ó alimento?')
     doc.setFontSize(12);
     doc.text(20,199,`${info[4].AlergiasMedAlim}` || 'N/A' )
