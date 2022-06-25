@@ -9,7 +9,9 @@ import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faArrowLeft
+  faArrowLeft,
+  faPrint,
+  faTooth
 } from '@fortawesome/free-solid-svg-icons';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
@@ -41,6 +43,10 @@ export const AdministrarConsultas = () => {
 
   const volverMenuPacientes = () => {
     navigate('/pacientes')
+  }
+
+  const irMenuTratamientoDental = () => {
+    navigate(`/tratamiento-dental/${id}`)
   }
 
   const { Fecha, Area, Progreso } = values;
@@ -245,10 +251,10 @@ export const AdministrarConsultas = () => {
    
 
   return (
-    <div className='bcg-administrar-consultas '>
+    <div className='bcg-administrar-consultas'>
       
       <h1 className='text-center mt-3 animate__animated animate__fadeIn'>
-        Administrador de Consultas
+        Evolución del Paciente
       </h1>
       <h2 className='text-center animate__animated animate__fadeIn'> Paciente: {Data.data.NombrePaciente} </h2>
 
@@ -304,7 +310,8 @@ export const AdministrarConsultas = () => {
 
                     </form>
                 </div>
-                <button className='btn btn-primary mt-3 align-self-center' onClick={imprimirConsultas}> Imprimir Consultas </button>
+                <button className='btn btn-primary mt-3 align-self-center' onClick={imprimirConsultas}> Imprimir Consultas <FontAwesomeIcon icon={faPrint} /> </button>
+                <button className='btn btn-primary mt-1 align-self-center' onClick={irMenuTratamientoDental}> Tratamiento de Dientes <FontAwesomeIcon icon={faTooth} /> </button>
             </div>
         </div>  
       </div>

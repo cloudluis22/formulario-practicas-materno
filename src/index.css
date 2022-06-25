@@ -108,6 +108,15 @@
   width: 480px;
 }
 
+.bcg-tratamiento-dental {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background-color: #FBDA61;
+  background-image: linear-gradient(45deg, #FBDA61 0%, #FF5ACD 100%);  
+}
+
 .fila {
   cursor: pointer;
 }

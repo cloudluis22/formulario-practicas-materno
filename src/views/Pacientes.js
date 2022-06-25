@@ -293,9 +293,9 @@ export const Pacientes = React.memo(() => {
                         <button
                           className='btn btn-sm btn-primary'
                           onClick={() => {
-                            navigate(`/administrar-consultas/${paciente.IdPaciente}`);
+                            navigate(`/evolucion-paciente/${paciente.IdPaciente}`);
                           }}>
-                          Administrar Consultas 
+                          Evolución del Paciente
                           <FontAwesomeIcon icon={faUserDoctor} className='ms-1' />
                         </button>
                       </td>
