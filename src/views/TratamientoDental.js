@@ -3,6 +3,9 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import config from '../config.json';
 import { Diente } from '../components/Diente';
+import { useForm } from '../hooks/useForm';
+import Swal from 'sweetalert2';
+import uniqid from 'uniqid';
 
 export const TratamientoDental = () => {
 
@@ -14,9 +17,70 @@ export const TratamientoDental = () => {
 
     const [infoDienteActual, setInfoDienteActual] = useState({})
     const [dienteSeleccionado, setDienteSeleccionado] = useState(0);
+    const [editMode, setEditMode] = useState(false);
+
+    const [values, handleInputChange, reset, setForm] = useForm({
+      EstadoDiente: '',
+    });
+
+    const { EstadoDiente} = values;
 
 
   const { id } = useParams();
+
+  const handleSubmit = (evt) => {
+
+    const idEstado = uniqid();
+
+    evt.preventDefault();
+    axios.post(`${config.server_adress}/api/v1/tratamiento-dental/${id}/${infoDienteActual.NumeroDiente}`, {
+      EstadoDiente: EstadoDiente,
+      IdEstado: idEstado
+    })
+    .then(() => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Operación Exitosa',
+        text: 'Estado de Diente agregada exitosamente.',
+      })
+      .then(() => {
+        window.location.reload();
+      })
+    })
+    .catch((error) => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Operación Fallida',
+        text: 'Algo salió mal, intenta más tarde o contacta un administrador.',
+      })
+      console.log(error);
+    })
+  }
+
+  const handleEdit = (evt) => {
+    evt.preventDefault();
+    axios.put(`${config.server_adress}/api/v1/tratamiento-dental/${id}/${infoDienteActual.NumeroDiente}`, {
+      EstadoDiente: EstadoDiente,
+      IdEstado: infoDienteActual.IdEstado
+    })
+    .then(() => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Operación Exitosa',
+        text: 'Estado de Diente editado exitosamente.',
+      })
+      .then(() => {
+        window.location.reload();
+      })
+    })
+    .catch(() => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Operación Fallida',
+        text: 'Algo salió mal, intenta más tarde o contacta un administrador.',
+      })
+    })
+  }
 
   useEffect(() => {
     
@@ -32,32 +96,39 @@ export const TratamientoDental = () => {
         });
       })
 
+      axios
+      .get(`${config.server_adress}/api/v1/tratamiento-dental/${id}/${infoDienteActual.NumeroDiente}`)
+      .then((response) => {
 
-      // ADAPTAR A TRATAMIENTO DENTAL
-    //   axios
-    //   .get(`${config.server_adress}/api/v1/consultas/${id}`)
-    //   .then((response) => {
-    //     setConsultas(response.data.consultas);
-    //   })
+        if(response.data.odontograma.length > 0) {
+          setEditMode(true);
+          setForm({
+            EstadoDiente: response.data.odontograma[0].EstadoDiente
+          })
 
-      
+          setInfoDienteActual({
+            NumeroDiente: dienteSeleccionado,
+            IdEstado: response.data.odontograma[0].IdEstado
+          })
+          
+        } else {
+          setEditMode(false);
+          setInfoDienteActual({
+            NumeroDiente: dienteSeleccionado,
+          })
+          reset();
+        }
+      })
+
     } catch (error) {
       setData({
         loading: false,
         data: [],
         ok: false,
       });
-
-      console.log(error);
-
     }
 
-    setInfoDienteActual({
-      NumeroDiente: dienteSeleccionado,
-      Estado: ''
-    })
-
-  }, [id, dienteSeleccionado]);
+  }, [id, dienteSeleccionado, infoDienteActual.NumeroDiente]);
 
   return (
     <div className='bcg-tratamiento-dental'>
@@ -193,9 +264,10 @@ export const TratamientoDental = () => {
                     <h4 className='text-center mt-3'> Odontograma </h4>
                     <form className='px-4 pb-3 d-flex flex-column align-items-center'>
 
-                        <label htmlFor="Estado" className="form-label"> Estado del Diente: </label>
-                        <textarea name='Estado' className='form-control' rows='6' />
-
+                        <label htmlFor="EstadoDiente" className="form-label"> Estado del Diente: </label>
+                        <textarea name='EstadoDiente' className='form-control' rows='6' onChange={handleInputChange} value={EstadoDiente} />
+                        {!editMode && <button className='btn me-2 btn-success mt-3' onClick={handleSubmit}> Agregar Estado del Diente </button>}
+                        { editMode && <button className='btn me-2 btn-success mt-3' onClick={handleEdit}> Editar Estado del Diente </button>}
                     </form>
                 </div>
         </div>
