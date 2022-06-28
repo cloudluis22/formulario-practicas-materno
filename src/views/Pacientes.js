@@ -306,13 +306,16 @@ export const Pacientes = React.memo(() => {
                               icon: 'info',
                               title: 'Declaración de Consentimiento',
                               text: `Yo ${paciente.TutorEncargado} declaro que la información que aquí se expresa es verídica, estoy enterad@ de que es información confidencial y solamente la Dra. Alicia Díaz Magdaleno tendrá acceso a este documento; en caso de requerirlo yo puedo solicitar un resumen de mi historial clínico y evolución.`,
-                              confirmButtonText: 'Imprimir Declaración de Consentimiento',
+                              confirmButtonText: 'Imprimir Declaración de Consentimiento completa',
                               showCancelButton: true,
                               cancelButtonText: 'Cerrar Ventana'
                             })
-                            .then(() => {
-                              PDFConsentimiento(paciente.TutorEncargado, paciente.NombrePaciente);
+                            .then((result) => {
+                              if(result.isConfirmed) {
+                                PDFConsentimiento(paciente.TutorEncargado, paciente.NombrePaciente);
+                              }
                             })
+
                           }}>
                           Declaración de Consentimiento
                           <FontAwesomeIcon icon={faUserDoctor} className='ms-1' />

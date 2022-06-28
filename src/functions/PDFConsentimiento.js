@@ -1,8 +1,9 @@
 import jsPDF from "jspdf";
 import moment from "moment";
-const mom = moment().format('MMMM Do YYYY, h:mm:ss a');
 
 export const PDFConsentimiento = (NombreTutor, NombrePaciente) => {
+
+  const now = moment();
 
     // Creando el PDF
     const doc = new jsPDF();
@@ -372,11 +373,6 @@ export const PDFConsentimiento = (NombreTutor, NombrePaciente) => {
   doc.text(20,255, 'DECLARACIONES Y FIRMAS DEL REPRESENTANTE LEGAL');
   doc.text(20,260, 'Y ODONTOPEDIATRA');
   
-  
-  
-  
-  //doc.text(20,20,'Irapuato, Guanajuato a: '.fechaCastellano ($fechaActual).'');
-  
   doc.text(20,265,`Yo:${NombreTutor}`);
   
   doc.text(20,270,'(parentesco)_______________________________________________, declaro');
@@ -407,7 +403,7 @@ export const PDFConsentimiento = (NombreTutor, NombrePaciente) => {
   
   doc.text(20,55,'Nombre y firma del padre/tutor');
   
-  doc.text(20,60,'');
+  doc.text(20,65,`Irapuato, Guanajuato, a ${moment(now).format('LLLL')} hrs`);
   
   doc.text(20,65,'');
   
@@ -421,5 +417,8 @@ export const PDFConsentimiento = (NombreTutor, NombrePaciente) => {
   
   doc.text(20,90,'');
 
-    doc.save(`Expediente ${NombrePaciente} ${NombreTutor}`);
+    doc.save(`Declaración de consentimiento ${NombrePaciente} - ${NombreTutor}`);
+
+
+  
 }
