@@ -14,6 +14,7 @@ import Swal from 'sweetalert2';
 import { useForm } from '../hooks/useForm';
 import Select from 'react-select';
 import config from '../config.json';
+import { PDFConsentimiento } from '../functions/PDFConsentimiento';
 
 export const Pacientes = React.memo(() => {
   let navigate = useNavigate();
@@ -42,7 +43,6 @@ export const Pacientes = React.memo(() => {
     await axios
       .get(config.server_adress + '/api/v1/obtener-pacientes')
       .then((response) => {
-
         if(!!filtro) {
           if(filtro !== 'Ninguno') {
             setData({
@@ -291,11 +291,30 @@ export const Pacientes = React.memo(() => {
                         </button>
 
                         <button
-                          className='btn btn-sm btn-primary'
+                          className='btn btn-sm btn-primary me-2'
                           onClick={() => {
                             navigate(`/evolucion-paciente/${paciente.IdPaciente}`);
                           }}>
                           Evolución del Paciente
+                          <FontAwesomeIcon icon={faUserDoctor} className='ms-1' />
+                        </button>
+
+                        <button
+                          className='btn btn-sm btn-secondary'
+                          onClick={() => {
+                            Swal.fire({
+                              icon: 'info',
+                              title: 'Declaración de Consentimiento',
+                              text: `Yo ${paciente.TutorEncargado} declaro que la información que aquí se expresa es verídica, estoy enterad@ de que es información confidencial y solamente la Dra. Alicia Díaz Magdaleno tendrá acceso a este documento; en caso de requerirlo yo puedo solicitar un resumen de mi historial clínico y evolución.`,
+                              confirmButtonText: 'Imprimir Declaración de Consentimiento',
+                              showCancelButton: true,
+                              cancelButtonText: 'Cerrar Ventana'
+                            })
+                            .then(() => {
+                              PDFConsentimiento(paciente.TutorEncargado, paciente.NombrePaciente);
+                            })
+                          }}>
+                          Declaración de Consentimiento
                           <FontAwesomeIcon icon={faUserDoctor} className='ms-1' />
                         </button>
                       </td>

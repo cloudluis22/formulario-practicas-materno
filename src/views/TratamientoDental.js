@@ -6,8 +6,15 @@ import { Diente } from '../components/Diente';
 import { useForm } from '../hooks/useForm';
 import Swal from 'sweetalert2';
 import uniqid from 'uniqid';
+import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faArrowLeft,
+} from '@fortawesome/free-solid-svg-icons';
 
 export const TratamientoDental = () => {
+
+  const navigate = useNavigate();
 
     const [Data, setData] = useState({
         loading: true,
@@ -27,6 +34,10 @@ export const TratamientoDental = () => {
 
 
   const { id } = useParams();
+
+  const volverMenuEvolucion = () => {
+    navigate(`/evolucion-paciente/${id}`)
+  }
 
   const handleSubmit = (evt) => {
 
@@ -137,6 +148,8 @@ export const TratamientoDental = () => {
       </h1>
       <h2 className='text-center animate__animated animate__fadeIn'> Paciente: {Data.data.NombrePaciente} </h2>
       <h3 className='text-center animate__animated animate__fadeIn'> Seleccione un diente para editar su estado actual </h3>
+
+      <button className='btn btn-primary btn-regresar-consultas animate__animated animate__fadeIn' onClick={volverMenuEvolucion}> <FontAwesomeIcon icon={faArrowLeft} /> Regresar a Menu Evolución </button>
 
       <div className='row px-5'>
 
