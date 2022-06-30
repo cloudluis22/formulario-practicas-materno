@@ -4,6 +4,7 @@ import {
   Routes,
   Route,
   Navigate,
+  HashRouter,
 } from 'react-router-dom';
 import { Formulario } from './views/Formulario';
 import { RegistrarPaciente } from './views/RegistrarPaciente';
@@ -14,7 +15,7 @@ import { TratamientoDental } from './views/TratamientoDental';
 
 export const App = () => {
   return (
-    <Router>
+    <HashRouter>
       <Routes>
         <Route path='/pacientes' element={<Pacientes />} />
         <Route path='/edicion/:id' element={<Formulario />} />
@@ -25,6 +26,6 @@ export const App = () => {
         <Route path='/tratamiento-dental/:id' element={<TratamientoDental />} />
         <Route path='*' element={<Navigate to='/pacientes' replace />} />
       </Routes>
-    </Router>
+    </HashRouter>
   );
 };
