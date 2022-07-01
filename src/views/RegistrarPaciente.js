@@ -19,7 +19,7 @@ export const RegistrarPaciente = () => {
   }
 
   return (
-    <div className='bcg-color d-flex justify-content-center flex-column align-items-center overflow-hidden'>
+    <div className='bcg-color d-flex justify-content-center flex-column align-items-center overflow-auto'>
       <h1 className='display-2 text-light animate__animated animate__fadeIn'>
         Registro de Pacientes
       </h1>

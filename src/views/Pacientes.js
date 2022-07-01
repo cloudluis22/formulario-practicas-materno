@@ -212,7 +212,7 @@ export const Pacientes = React.memo(() => {
       )}
 
       {!Data.loading && Data.ok && (
-        <div>
+        <div className='overflow-auto'>
             <button
               className='btn btn-primary ms-5 mb-3 animate__animated animate__fadeIn'
               onClick={() => navigate('/registro')}>
@@ -250,7 +250,7 @@ export const Pacientes = React.memo(() => {
             </div>
 
             
-            <table className='table table-striped table-responsive animate__animated animate__fadeInUp'>
+            <table className='table table-striped table-responsive animate__animated animate__fadeInUp table-sm'>
               <thead>
                 <tr>
                   <th className='col'> ID del Paciente </th>
@@ -295,7 +295,7 @@ export const Pacientes = React.memo(() => {
                           onClick={() => {
                             navigate(`/evolucion-paciente/${paciente.IdPaciente}`);
                           }}>
-                          Evolución del Paciente
+                          Evolución
                           <FontAwesomeIcon icon={faUserDoctor} className='ms-1' />
                         </button>
 
@@ -317,7 +317,7 @@ export const Pacientes = React.memo(() => {
                             })
 
                           }}>
-                          Declaración de Consentimiento
+                          Consentimiento
                           <FontAwesomeIcon icon={faUserDoctor} className='ms-1' />
                         </button>
                       </td>

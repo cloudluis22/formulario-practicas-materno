@@ -251,7 +251,7 @@ export const AdministrarConsultas = () => {
    
 
   return (
-    <div className='bcg-administrar-consultas'>
+    <div className='bcg-administrar-consultas overflow-auto'>
       
       <h1 className='text-center mt-3 animate__animated animate__fadeIn'>
         Evolución del Paciente

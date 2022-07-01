@@ -142,7 +142,7 @@ export const TratamientoDental = () => {
   }, [id, dienteSeleccionado, infoDienteActual.NumeroDiente]);
 
   return (
-    <div className='bcg-tratamiento-dental'>
+    <div className='bcg-tratamiento-dental overflow-auto'>
       <h1 className='text-white text-center mt-3 animate__animated animate__fadeIn'>
         Tratamiento Dental
       </h1>

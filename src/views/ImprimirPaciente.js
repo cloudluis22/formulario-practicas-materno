@@ -19,7 +19,7 @@ export const ImprimirPaciente = () => {
   };
 
   return (
-    <div className='bcg-imprimir-color'>
+    <div className='bcg-imprimir-color overflow-auto'>
 
      {loading && (
         

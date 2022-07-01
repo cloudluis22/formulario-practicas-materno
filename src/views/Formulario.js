@@ -73,7 +73,7 @@ export const Formulario = () => {
   }, [id]);
 
   return (
-    <div className='bcg-color overflow-hidden'>
+    <div className='bcg-color overflow-auto'>
       {openModal && (
         <Modal
           setOpen={setOpenModal}
